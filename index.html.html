@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Grimório Tec</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@600;700&display=swap">
+<style>
+:root{--bg:#EEF1F4;--card:#fff;--ink:#12202E;--mute:#5B6B7A;--line:#D5DCE3;--acc:#FFC400;--accInk:#12202E;--ok:#1F9D55;--warn:#FFF4CC;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1822;--card:#172433;--ink:#EAF0F5;--mute:#9FB0BF;--line:#2A3B4C;--ok:#3DCB7B;--warn:#3A3216}}
+:root[data-theme="dark"]{--bg:#0F1822;--card:#172433;--ink:#EAF0F5;--mute:#9FB0BF;--line:#2A3B4C;--ok:#3DCB7B;--warn:#3A3216}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.45 Barlow,system-ui,sans-serif}
+main{max-width:480px;margin:0 auto;padding:16px}
+h1,h2{font-family:"Barlow Semi Condensed",Barlow,sans-serif;margin:0;line-height:1.1}
+h1{font-size:34px}
+h2{font-size:26px}
+.brand{display:inline-block;font:700 15px "Barlow Semi Condensed",sans-serif;background:var(--ink);color:var(--bg);padding:5px 10px;border-radius:6px;margin-bottom:18px}
+p.sub{color:var(--mute);margin:8px 0 22px}
+.big{display:flex;width:100%;align-items:center;gap:14px;text-align:left;min-height:68px;padding:14px 16px;background:var(--card);border:2px solid var(--line);border-radius:12px;color:var(--ink);font:600 20px "Barlow Semi Condensed",sans-serif;cursor:pointer}
+.big small{display:block;font:400 14px Barlow,sans-serif;color:var(--mute)}
+.big:active,.big:hover{border-color:var(--acc)}
+.ico{font-size:28px}
+button:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.ov{position:fixed;inset:0;background:rgba(8,14,20,.6);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.ov.on{display:flex}
+.sheet{width:100%;max-width:480px;max-height:92%;display:flex;flex-direction:column;background:var(--card);border-radius:18px 18px 0 0;border:2px solid var(--ink);border-bottom:0}
+.hd{display:flex;justify-content:space-between;align-items:center;padding:14px 16px 8px}
+.x{width:44px;height:44px;border:0;border-radius:10px;background:var(--bg);color:var(--ink);font-size:22px;cursor:pointer}
+.bar{display:flex;gap:6px;padding:0 16px 10px}
+.bar i{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.bar i.on{background:var(--acc)}
+.bd{padding:6px 16px 16px;overflow:auto}
+.chip{display:inline-block;font:600 13px "Barlow Semi Condensed",sans-serif;background:var(--acc);color:var(--accInk);padding:3px 9px;border-radius:5px;margin-bottom:10px}
+.bd p{margin:10px 0 0}
+.lbl{margin:16px 0 6px;font:600 15px Barlow,sans-serif;color:var(--mute)}
+pre{margin:0;padding:12px 14px;background:#0E1620;color:#EAF0F5;border-radius:10px;font:500 16px/1.5 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
+pre.out{color:#5BE08F;font-size:13.5px}
+.note{margin-top:14px;padding:10px 12px;background:var(--warn);border-radius:8px;font-size:15px}
+ul.chk{list-style:none;padding:0;margin:12px 0 0}
+ul.chk li{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
+.ft{display:grid;grid-template-columns:1fr 2fr;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.btn{min-height:56px;border-radius:10px;border:2px solid var(--ink);background:var(--card);color:var(--ink);font:700 19px "Barlow Semi Condensed",sans-serif;cursor:pointer}
+.btn.y{background:var(--acc);border-color:var(--acc);color:var(--accInk)}
+.btn:disabled{opacity:.4;cursor:default}
+.big+.big{margin-top:12px}
+.fl{display:block;width:100%;height:auto;color:var(--mute)}
+.nd{cursor:pointer}
+.nd:focus{outline:none}
+.nd rect{fill:var(--card);stroke:var(--line);stroke-width:2}
+.nd.ok rect{stroke:var(--acc);stroke-width:3}
+.nd:hover rect,.nd:focus-visible rect{stroke:var(--ink)}
+.nd text{fill:var(--ink);font:600 13px Barlow Semi Condensed,Barlow,sans-serif;text-anchor:middle;pointer-events:none}
+.nd text.s{font:400 11px Barlow,sans-serif;fill:var(--mute)}
+.lg{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;color:var(--mute)}
+.lg i{width:18px;height:12px;border:3px solid var(--acc);border-radius:4px}
+#ovd{z-index:30}
+#bdf,#bdd{padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+.pt rect{fill:var(--card);stroke:var(--mute);stroke-width:2}
+.pt.on rect{fill:var(--acc);stroke:var(--ink)}
+.pt text{font:700 15px Barlow Semi Condensed,sans-serif;text-anchor:middle;fill:var(--ink)}
+.pt.on text{fill:#12202E}
+.pt.cm rect{fill:var(--acc);fill-opacity:.4;stroke:var(--ink)}
+.cb{list-style:none;padding:0;margin:12px 0 0}
+.cb li{padding:10px 0;border-bottom:1px solid var(--line)}
+.cb .chip{margin:0 8px 0 0}
+.bc{font-size:13px;color:var(--mute);margin-bottom:6px}
+.fld{display:block;width:100%;text-align:left;background:var(--card);border:3px solid var(--acc);border-radius:10px;padding:10px 12px;margin-top:10px;color:var(--ink);cursor:pointer;font:inherit}
+.fld small{display:block;font-size:14px;color:var(--mute)}
+.fld b{display:flex;justify-content:space-between;align-items:center;font:600 21px ui-monospace,Menlo,Consolas,monospace}
+.fld b i{font:normal 18px Barlow,sans-serif;color:var(--mute)}
+.fld:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.say{margin:12px 0 0;padding:12px;background:var(--warn);border-radius:8px;font-weight:600}
+.bk{background:none;border:0;color:var(--mute);font:500 16px Barlow,sans-serif;padding:6px 0 12px;cursor:pointer}
+.bxs{border:2px solid var(--line);border-radius:12px;padding:14px;margin-top:12px}
+.bxs.ok{border-color:var(--ok)}
+.bxs p{margin:8px 0 0}
+.ta{width:100%;margin-top:10px;padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
+.dgo{display:none;white-space:pre-wrap;margin-top:14px;padding:12px;background:var(--bg);border-radius:10px;font-size:16px}
+</style>
+</head>
+<body>
+<main>
+  <span class="brand">Grimório Tec</span>
+  <h1>Escolha o procedimento</h1>
+  <p class="sub">Toque no botão para abrir o passo a passo.</p>
+  <button class="big" id="open"><span class="ico">🔁</span><span>Virada de Link<small>Resetar o switch via console</small></span></button>
+  <button class='big' id='openf'><span class='ico'>🌐</span><span>Rede Unificada<small>Fluxograma e conexões</small></span></button>
+  <button class='big' id='opennvr'><span class='ico'>⚙️</span><span>Manutenção do NVR<small>Rede, bateria e reset</small></span></button>
+</main>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="ttl">
+  <div class="sheet">
+    <div class="hd"><h2 id="ttl">Virada de Link</h2><button class="x" id="cl" aria-label="Fechar">✕</button></div>
+    <div class="bar" id="bar"></div>
+    <div class="bd" id="bd"></div>
+    <div class="ft"><button class="btn" id="bk">Voltar</button><button class="btn y" id="nx">Próximo</button></div>
+  </div>
+</div>
+
+<div class='ov' id='ovf' role='dialog' aria-modal='true' aria-labelledby='ttf'><div class='sheet'><div class='hd'><h2 id='ttf'>Rede Unificada</h2><button class='x' id='clf' aria-label='Fechar'>✕</button></div><div class='bd' id='bdf'></div></div></div>
+<div class='ov' id='ovd' role='dialog' aria-modal='true' aria-labelledby='ttd'><div class='sheet'><div class='hd'><h2 id='ttd'></h2><button class='x' id='cld' aria-label='Fechar'>✕</button></div><div class='bd' id='bdd'></div></div></div>
+<div class='ov' id='ovn' role='dialog' aria-modal='true' aria-labelledby='ttn'><div class='sheet'><div class='hd'><h2 id='ttn'>Manutenção do NVR</h2><button class='x' id='cln' aria-label='Fechar'>✕</button></div><div class='bd' id='bdn'></div></div></div>
+
+<script>
+var S=[
+{c:"Antes de começar",t:"Separe o que você vai usar",h:'<ul class="chk"><li>Cabo console ligado do notebook ao switch</li><li>Programa de terminal aberto (PuTTY)</li><li>Usuário e senha de administrador do switch</li></ul><div class="note">Depois do reset o switch reinicia e a conexão cai por um tempo.</div>'},
+{c:"Passo 1 de 5",t:"Configure o PuTTY",h:'<p>Com o PuTTY aberto, preencha os campos de conexão.</p><ol style="padding-left:22px;margin:12px 0 0"><li style="margin-bottom:10px">Em <b>Connection type</b>, selecione <b>Serial</b>.</li><li style="margin-bottom:10px">Em <b>Serial line</b>, digite a porta COM em que o cabo console está conectado (ex.: COM3).</li><li style="margin-bottom:10px">Em <b>Speed</b>, digite <b>38400</b>.</li><li>Clique em <b>Open</b>.</li></ol>'},
+{c:"Passo 2 de 5",t:"Entre no sistema",h:'<p>Acesse o switch pelo console com o usuário administrador.</p><div class="lbl">Digite</div><pre>User: admin\nPassword: ********</pre><div class="lbl">Você deve ver</div><pre class="out">#2006-02-27 02:45:09,[User]/5/Login the CLI by admin on console.</pre>'},
+{c:"Passo 3 de 5",t:"Habilite o comando de reset",h:'<p>Execute o comando de reset.</p><div class="lbl">Digite</div><pre>reset</pre>'},
+{c:"Passo 4 de 5",t:"Confirme o reset",h:'<p>O switch pergunta se você tem certeza. Digite <b>y</b> e confirme.</p><div class="lbl">O switch mostra</div><pre class="out">System software reset, are you sure? (Y/N):</pre><div class="lbl">Digite</div><pre>y</pre><div class="lbl">Resposta esperada</div><pre class="out">Operation OK! Now rebooting system...</pre>'},
+{c:"Passo 5 de 5",t:"Aguarde a reinicialização",h:'<p>O switch reinicia sozinho. Espere até ele voltar.</p><div class="lbl">Sinais no registro</div><pre class="out">The system is going down NOW!\nRequesting system reboot\nreboot: Restarting system</pre><div class="note">Para interromper o reboot, pressione qualquer tecla.</div>'}
+];
+var i=0,ov=document.getElementById("ov"),bd=document.getElementById("bd"),bar=document.getElementById("bar"),bk=document.getElementById("bk"),nx=document.getElementById("nx");
+function show(){var s=S[i];
+bar.innerHTML=S.map(function(_,k){return'<i class="'+(k<=i?"on":"")+'"></i>'}).join("");
+bd.innerHTML='<span class="chip">'+s.c+'</span><h2>'+s.t+'</h2>'+s.h;bd.scrollTop=0;
+bk.disabled=i==0;nx.textContent=i==S.length-1?"Concluir":i==0?"Começar":"Próximo"}
+function openSheet(){i=0;show();ov.classList.add("on");nx.focus()}
+function closeSheet(){ov.classList.remove("on")}
+document.getElementById("open").onclick=openSheet;
+document.getElementById("cl").onclick=closeSheet;
+bk.onclick=function(){if(i>0){i--;show()}};
+nx.onclick=function(){if(i<S.length-1){i++;show()}else closeSheet()};
+ov.onclick=function(e){if(e.target==ov)closeSheet()};
+document.addEventListener("keydown",function(e){if(e.key=="Escape")closeSheet()});
+var ND=[{id:'onu',l:['ONU'],x:127.5,r:0,ok:1},{id:'mk',l:['Mikrotik'],x:127.5,r:1,ok:1},{id:'fw',l:['Firewall'],x:0,r:1,ok:1},{id:'sw8',l:['Switch 8 portas','(Aluno Presente)'],x:0,r:2,ok:1},{id:'cam1',l:['Câmeras','(Aluno Presente)'],x:0,r:3},{id:'swc',l:['Switch CFTV'],x:127.5,r:2,ok:1},{id:'nvr',l:['NVR Gravador'],x:127.5,r:3,ok:1},{id:'cam2',l:['Câmeras'],x:127.5,r:4},{id:'al',l:['Alarme'],x:255,r:2},{id:'wf',l:['Wi-Fi','(Unidades em VG)'],x:255,r:3}];
+var LN=[[180,62,180,100],[127.5,126,105,126],[52.5,152,52.5,190],[52.5,242,52.5,280],[180,152,180,190],[232.5,216,255,216],[307.5,242,307.5,280],[180,242,180,280],[180,332,180,370]];
+function E(i){return document.getElementById(i)}
+function flow(){var s=`<svg class='fl' viewBox='0 0 360 430' role='img' aria-label='Fluxograma da rede unificada'><defs><marker id='ar' viewBox='0 0 8 8' refX='7' refY='4' markerWidth='8' markerHeight='8' markerUnits='userSpaceOnUse' orient='auto'><path d='M0 0L8 4L0 8z' fill='currentColor'/></marker></defs>`;
+LN.forEach(function(l){s+=`<line x1='${l[0]}' y1='${l[1]}' x2='${l[2]}' y2='${l[3]}' stroke='currentColor' stroke-width='2' marker-end='url(#ar)'/>`});
+ND.forEach(function(n){var y=10+90*n.r,t=n.l.length>1;s+=`<g class='nd${n.ok?' ok':''}' tabindex='0' role='button' data-id='${n.id}' aria-label='${n.l.join(' ')}'><rect x='${n.x}' y='${y}' width='105' height='52' rx='10'/><text x='${n.x+52.5}' y='${y+(t?23:31)}'>${n.l[0]}</text>${t?`<text class='s' x='${n.x+52.5}' y='${y+40}'>${n.l[1]}</text>`:''}</g>`});
+return s+'</svg>'}
+function mk(){var P=[['Internet','(PoE IN)'],['LAN 2'],['LAN 3'],['LAN 4'],['LAN 5']],C=['Firewall','Switch CFTV','ONU'];
+var s=`<svg class='fl' viewBox='0 0 360 195' role='img' aria-label='Portas do Mikrotik'><rect x='10' y='62' width='340' height='88' rx='12' fill='var(--bg)' stroke='var(--ink)' stroke-width='2'/><text x='22' y='80' font-size='11' fill='var(--mute)'>MikroTik hEX</text>`;
+P.forEach(function(p,k){var x=28+k*62,c=x+26,on=k>1;s+=`<g class='pt${on?' on':''}'><rect x='${x}' y='88' width='52' height='42' rx='6'/><text x='${c}' y='116'>${k+1}</text></g><text x='${c}' y='170' text-anchor='middle' font-size='11.5' fill='var(--mute)'>${p[0]}</text>`+(p[1]?`<text x='${c}' y='183' text-anchor='middle' font-size='11.5' fill='var(--mute)'>${p[1]}</text>`:'');
+if(on)s+=`<line x1='${c}' y1='88' x2='${c}' y2='54' stroke='var(--ink)' stroke-width='2'/><text x='${c}' y='46' text-anchor='middle' font-size='13' font-weight='700' fill='var(--ink)'>${C[k-2]}</text>`});
+return `<span class='chip'>Conexões</span><p style='margin:0 0 8px'>Ligue cada cabo na porta destacada em amarelo.</p>`+s+`</svg><ul class='cb'><li><span class='chip'>LAN 3</span>Cabo do <b>Firewall</b></li><li><span class='chip'>LAN 4</span>Cabo do <b>Switch CFTV</b></li><li><span class='chip'>LAN 5</span>Cabo da <b>ONU</b></li></ul>`}
+function pt(x,y,w,h,t,c){return `<g class='pt ${c||''}'><rect x='${x}' y='${y}' width='${w}' height='${h}' rx='5'/><text x='${x+w/2}' y='${y+h/2+5}'>${t}</text></g>`}
+function co(x,y0,ty,t,a){var s=a=='s';return `<line x1='${x}' y1='${y0}' x2='${x}' y2='${s?ty-8:ty+6}' stroke='var(--ink)' stroke-width='2'/><text x='${s?x+5:x}' y='${ty}' text-anchor='${s?'start':'middle'}' font-size='13' font-weight='700' fill='var(--ink)'>${t}</text>`}
+function lb(x,y,t){return `<text x='${x}' y='${y}' text-anchor='middle' font-size='11.5' fill='var(--mute)'>${t}</text>`}
+function bx(y,h){return `<rect x='6' y='${y}' width='348' height='${h}' rx='12' fill='var(--bg)' stroke='var(--ink)' stroke-width='2'/>`}
+function sv(h,s,a){return `<svg class='fl' viewBox='0 0 360 ${h}' role='img' aria-label='${a}'>${s}</svg>`}
+function pg(m,s,l){return `<span class='chip'>Conexões</span><p style='margin:0 0 8px'>${m}</p>${s}<ul class='cb'>${l.map(function(i){return `<li><span class='chip'>${i[0]}</span>${i[1]}</li>`}).join('')}</ul>`}
+var DV={
+onu:function(){return pg('Ligue o cabo na porta destacada em amarelo.',sv(160,`<rect x='100' y='56' width='160' height='72' rx='12' fill='var(--bg)' stroke='var(--ink)' stroke-width='2'/><text x='114' y='76' font-size='11' fill='var(--mute)'>ONU</text>`+pt(152,86,56,34,'LAN','on')+co(180,86,26,'Porta 5 do Mikrotik')+lb(180,148,'Porta LAN'),'Porta LAN da ONU'),[['LAN','Cabo para a <b>porta 5 do Mikrotik</b>']])},
+sw8:function(){var s=bx(52,96),k;for(k=0;k<8;k++)s+=pt(14+k*33,84,28,40,k+1,k<6?'cm':'');for(k=0;k<2;k++)s+=pt(285+k*33,84,28,40,k+1,k==1?'on':'');s+=co(110,84,26,'6 câmeras')+co(332,84,26,'Firewall')+lb(143,168,'PoE 1 a 8')+lb(316,168,'UPLINK 1 e 2');return pg('Ligue cada cabo nas portas destacadas. Amarelo claro: câmeras.',sv(180,s,'Portas do Switch 8 portas'),[['UPLINK 2','Cabo do <b>Firewall</b>'],['PoE','<b>6 câmeras</b> nas portas PoE']])},
+fw:function(){var s=bx(62,88),k;for(k=0;k<5;k++)s+=pt(28+k*62,90,52,42,k+1,k==0||k==4?'on':'');s+=co(54,90,46,'Switch 8 Portas')+co(302,90,46,'Mikrotik');return pg('Ligue cada cabo na porta destacada em amarelo.',sv(160,s,'Portas do Firewall'),[['Porta 1','Cabo do <b>Switch 8 Portas</b>'],['Porta 5','Cabo do <b>Mikrotik</b>']])},
+swc:function(){var s=bx(72,80),k;for(k=0;k<12;k++)s+=pt(14+k*28,84,24,26,2*k+1,k<3?'on':'')+pt(14+k*28,116,24,26,2*k+2,'');s+=co(26,84,24,'Mikrotik','s')+co(54,84,46,'NVR Gravador','s')+co(82,84,66,'Alarme','s')+lb(180,172,'Portas 1 a 24');return pg('Ligue cada cabo na porta destacada em amarelo.',sv(185,s,'Portas do Switch CFTV'),[['Porta 1','Cabo do <b>Mikrotik</b>'],['Porta 3','Cabo do <b>NVR Gravador</b>'],['Porta 5','Cabo do <b>Alarme</b>']])},
+nvr:function(){var s=bx(44,126),k;s+=pt(14,92,44,40,'LAN','on');for(k=0;k<16;k++)s+=pt(70+(k%8)*34,76+(k>7?36:0),28,30,k+1,'cm');s+=co(36,92,24,'Switch CFTV','s')+co(203,76,24,'16 câmeras')+lb(36,188,'LAN')+lb(203,188,'16 portas PoE');return pg('Ligue cada cabo nas portas destacadas. Amarelo claro: câmeras.',sv(200,s,'Portas do NVR'),[['LAN','Cabo do <b>Switch CFTV</b>'],['PoE 1 a 16','As <b>16 portas</b> são para as câmeras']])}
+};
+function det(id){var n=ND.filter(function(d){return d.id==id})[0];E('ttd').textContent=n.l.join(' ');
+E('bdd').innerHTML=(id=='mk'?mk():DV[id]?DV[id]():`<span class='chip'>Em breve</span><p>As conexões deste equipamento ainda não foram preenchidas.</p>`)+`<button class='btn y' id='bkd' style='width:100%;margin-top:16px'>Voltar ao fluxograma</button>`;
+E('bkd').onclick=function(){E('ovd').classList.remove('on')};E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
+E('bdf').innerHTML=`<p style='margin:0 0 12px;color:var(--mute)'>Toque em um equipamento para ver onde ligar os cabos.</p>`+flow()+`<div class='lg'><i></i>Guia de conexões pronto</div>`;
+E('bdf').onclick=function(e){var g=e.target.closest('.nd');if(g)det(g.dataset.id)};
+E('bdf').onkeydown=function(e){var g=e.target.closest('.nd');if(g&&(e.key=='Enter'||e.key==' ')){e.preventDefault();det(g.dataset.id)}};
+var NV=[
+{k:'ip',l:'Endereço IPv4',v:'xxx.xxx.xxx.100',h:`<p class='say'>Este é o endereço IP que a rede atribuiu ao NVR.</p><p>O final <b>.100</b> é padrão para todos os NVR do nosso sistema CFTV. Os três primeiros blocos (xxx.xxx.xxx) seguem a rede do local.</p>`},
+{k:'mask',l:'Máscara de sub-rede',v:'255.255.255.x',h:`<p class='say'>O IP da Máscara deve seguir o mesmo da rede.</p><p>A máscara de sub-rede diz ao equipamento quais dispositivos estão na mesma rede local e quais estão fora dela. Ela deve ser igual à da rede do local, para o NVR conversar com os outros equipamentos.</p>`},
+{k:'gw',l:'Gateway padrão',v:'xxx.xxx.xxx.xxx',h:`<p class='say'>O IP do Gateway Padrão deve seguir o mesmo da rede.</p><p>O gateway padrão é a saída da rede: o equipamento para onde o NVR envia tudo o que vai para fora da rede local, como a internet. Sem ele, o NVR só enxerga a própria rede.</p>`},
+{k:'dns',l:'Servidor DNS',v:'8.8.8.8',h:`<p class='say'>DNS padrão do Google.</p><p>O DNS funciona como uma lista telefônica da internet: ele traduz nomes (como google.com) em endereços IP. O NVR usa o DNS para encontrar servidores na internet pelo nome.</p>`}];
+function dlg(t,h,b){E('ttd').textContent=t;E('bdd').innerHTML=h+`<button class='btn y' id='bkd' style='width:100%;margin-top:16px'>${b}</button>`;E('bkd').onclick=function(){E('ovd').classList.remove('on')};E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
+var NETH=`<p style='margin:0 0 4px;color:var(--mute)'>Toque em cada campo para entender o que preencher.</p><div class='bc'>Configuration › Network › Basic Settings › TCP/IP</div>`+NV.map(function(f){return `<button class='fld' data-k='${f.k}'><small>${f.l}</small><b>${f.v}<i>ⓘ</i></b></button>`}).join('')+`<button class='btn' id='ipb' style='width:100%;margin-top:18px'>Como descobrir o IP da rede</button>`;
+function netClick(e){var b=e.target.closest('.fld');if(b){var f=NV.filter(function(d){return d.k==b.dataset.k})[0];dlg(f.l+' '+f.v,`<span class='chip'>Explicação</span>`+f.h,'Entendi')}else if(e.target.closest('#ipb'))dlg('Como descobrir o IP da rede',`<span class='chip'>Passo a passo</span><p>1. No notebook conectado à rede do local, tecle <b>Windows</b>, digite <b>cmd</b> e aperte Enter.</p><p>2. Na janela preta, digite o comando abaixo e aperte Enter:</p><pre style='margin-top:8px'>ipconfig</pre><p>3. Na resposta, veja os campos <b>Endereço IPv4</b>, <b>Máscara de Sub-rede</b> e <b>Gateway Padrão</b>. Eles mostram a rede do local, que o NVR deve seguir.</p>`,'Entendi')};
+var BQ={a:[]};
+var KB=`Base de conhecimento (relatos técnicos e manual Hikvision encontrados na internet):
+- A placa do NVR tem uma bateria de botão (CR2032 ou CR1220, conforme o modelo) que mantém o relógio.
+- Relatos de técnicos: NVR/DVR Hikvision que voltava ao padrão de fábrica a cada queda de energia ou reinício tinha a bateria da placa totalmente descarregada, e a troca resolveu.
+- Sintomas ligados à bateria: data e hora erradas ou zeradas após ficar sem energia; configurações perdidas; NVR inativo pedindo nova senha; rede voltando ao DHCP; câmeras sumindo.
+- Cuidado: nem sempre a bateria é a causa. Outras causas: falha de hardware ou memória do NVR, fonte instável, firmware, senha do NVR diferente da senha das câmeras, canais fora do modo plug and play.
+- Depois de um reset de fábrica o NVR fica inativo e precisa ser ativado com senha de administrador.`;
+var FB=`Não foi possível gerar a análise por IA agora. Checklist de bateria em NVR:
+1. Depois de uma queda de energia, a data e a hora voltam erradas ou zeradas?
+2. O NVR volta ao padrão de fábrica ou pede nova senha ao reiniciar?
+3. Se sim, a bateria de botão da placa (CR2032 ou CR1220, conforme o modelo) pode estar descarregada. Troque por uma de mesmo modelo e refaça a configuração.
+4. Se nada mudar, pode ser outra falha (hardware, fonte ou firmware).`;
+function bn(t,b,back){E('ttn').textContent=t;E('bdn').innerHTML=(back?`<button class='bk' data-go='menu'>← Manutenção do NVR</button>`:'')+b;E('bdn').scrollTop=0}
+function menuN(){bn('Manutenção do NVR',`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-go='net'><span class='ico'>🌐</span><span>Configuração de Rede<small>IP, máscara, gateway e DNS</small></span></button><button class='big' data-go='bat'><span class='ico'>🔋</span><span>Problemas na Bateria<small>Perguntas para o diagnóstico</small></span></button><button class='big' data-go='rst'><span class='ico'>♻️</span><span>Como resetar o NVR padrão<small>Restauração simples e padrão de fábrica</small></span></button>`,0)}
+function reg(){return BQ.a.length?`<ul class='cb' style='margin:0 0 6px'>${BQ.a.map(function(x){return `<li><span class='chip'>Registrado</span>${x}</li>`}).join('')}</ul>`:''}
+function qz(n,q,k){bn('Problemas na Bateria',`${reg()}<span class='chip'>Pergunta ${n} de 2</span><h2>${q}</h2><div style='display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px'><button class='btn y' data-q='${k}y'>Sim</button><button class='btn' data-q='${k}n'>Não</button></div>`,1)}
+function aiv(){bn('Problemas na Bateria',`${reg()}<span class='chip'>Diagnóstico</span><h2>Conte o que está acontecendo</h2><p>Descreva os sintomas do NVR. O app cruza o relato com as respostas registradas e com relatos técnicos sobre bateria em NVR.</p><textarea class='ta' id='sy' rows='4' placeholder='Ex.: depois da queda de energia a hora voltou errada...'></textarea><button class='btn y' id='gen' style='width:100%;margin-top:12px'>Gerar diagnóstico</button><div class='dgo' id='dgo' aria-live='polite'></div>`,1)}
+function dg(){bn('Problemas na Bateria',`${reg()}<div class='bxs ok'><span class='chip'>Diagnóstico</span><h2>Problema na bateria</h2><p>As respostas apontam para a bateria da placa do NVR: ele perdeu a configuração (voltou para DHCP ou desativado) e deixou de reconhecer as câmeras. Relatos de técnicos mostram que bateria de botão descarregada faz o NVR voltar ao padrão quando perde energia.</p></div><p class='lbl' style='margin:16px 0 4px;font-weight:600'>O que fazer</p><ol style='padding-left:22px;margin:0'><li style='margin-bottom:8px'>Desligue o NVR e tire da tomada.</li><li style='margin-bottom:8px'>Abra a tampa e localize a bateria de botão na placa.</li><li style='margin-bottom:8px'>Troque por uma nova do mesmo modelo escrito na bateria (por exemplo CR2032 ou CR1220).</li><li style='margin-bottom:8px'>Religue, ative o NVR se ele pedir senha e acerte data e hora.</li><li>Refaça a Configuração de Rede e confira se as câmeras voltaram.</li></ol><div class='note'>Este é um diagnóstico por sintomas. Se a troca não resolver, pode ser outra falha.</div><button class='btn' data-q='q1' style='width:100%;margin-top:14px'>Refazer perguntas</button>`,1)}
+function bat(s){var a=BQ.a;if(s=='q1'){BQ.a=[];qz(1,'O NVR está em DHCP ou Desativado?','q1')}else if(s=='q1y'){a[0]='O NVR está em DHCP ou Desativado: Sim';qz(2,'O NVR parou de reconhecer as câmeras?','q2')}else if(s=='q1n'){a[0]='O NVR está em DHCP ou Desativado: Não';aiv()}else if(s=='q2y'){a[1]='O NVR parou de reconhecer as câmeras: Sim';dg()}else if(s=='q2n'){a[1]='O NVR parou de reconhecer as câmeras: Não';aiv()}}
+async function gen(){var o=E('dgo'),t=E('sy').value.trim();if(!t){E('sy').focus();return}o.style.display='block';o.textContent='Analisando o relato e os dados técnicos...';var s=null;try{s=await claude.use('sample')}catch(x){}
+if(!s){o.textContent=FB;return}
+try{var r=await s(`Você ajuda técnicos iniciantes de CFTV (NVR Hikvision). Responda em português, em texto simples sem markdown, com no máximo 150 palavras: 1) chance de ser a bateria (baixa, média ou alta) e por quê; 2) até 3 testes para confirmar, em ordem; 3) o que fazer a seguir. Use só a base abaixo e o que o técnico informou. Se faltar informação, diga qual.
+
+${KB}
+
+Respostas registradas: ${BQ.a.join('; ')}
+
+Relato do técnico: ${t}`,{modelTier:'quick',onText:function(x){o.textContent=x.text}});o.textContent=r.text}catch(x){o.textContent=(x&&x.code=='not_granted'?'Sem permissão para a análise por IA. ':'')+FB}}
+function rst(){bn('Como resetar o NVR padrão',`<span class='chip'>Hikvision</span><p style='margin:0 0 8px'>No próprio NVR, com mouse e monitor, abra:</p><pre>Menu &gt; Maintenance &gt; Default</pre><p>Escolha o tipo de restauração e confirme com <b>OK</b>. O NVR reinicia sozinho.</p><div class='bxs'><b>Restauração simples</b> (Restore Defaults)<p>Volta os parâmetros ao padrão, exceto a rede (IP, máscara, gateway etc.) e as contas de usuário. Boa para limpar ajustes sem perder IP e senha.</p></div><div class='bxs'><b>Padrão de fábrica</b> (Factory Defaults)<p>Volta todos os parâmetros ao padrão de fábrica, inclusive rede e usuários. O NVR perde o IP e sai da rede.</p><div class='note'>Anote os dados de rede antes. Depois, ative o NVR criando a senha de administrador e refaça a Configuração de Rede.</div></div><p style='color:var(--mute);font-size:15px'>Existe ainda a opção Restore to Inactive, que deixa o NVR inativo até ser ativado de novo com uma senha.</p>`,1)}
+E('bdn').onclick=function(e){var g=e.target.closest('[data-go]');if(g){var v=g.dataset.go;if(v=='menu')menuN();else if(v=='net')bn('Configuração de Rede',NETH,1);else if(v=='bat')bat('q1');else if(v=='rst')rst();return}var q=e.target.closest('[data-q]');if(q){bat(q.dataset.q);return}if(e.target.closest('#gen'))gen();else netClick(e)};
+E('opennvr').onclick=function(){menuN();E('bdn').scrollTop=0;E('ovn').classList.add('on');E('cln').focus()};
+E('cln').onclick=function(){E('ovn').classList.remove('on')};
+E('ovn').onclick=function(e){if(e.target==E('ovn'))E('ovn').classList.remove('on')};
+E('openf').onclick=function(){E('bdf').scrollTop=0;E('ovf').classList.add('on');E('clf').focus()};
+E('clf').onclick=function(){E('ovf').classList.remove('on')};
+E('cld').onclick=function(){E('ovd').classList.remove('on')};
+E('ovf').onclick=function(e){if(e.target==E('ovf'))E('ovf').classList.remove('on')};
+E('ovd').onclick=function(e){if(e.target==E('ovd'))E('ovd').classList.remove('on')};
+document.addEventListener('keydown',function(e){if(e.key=='Escape'){if(E('ovd').classList.contains('on'))E('ovd').classList.remove('on');else{E('ovn').classList.remove('on');E('ovf').classList.remove('on')}}});
+</script>
+</body>
+</html>
