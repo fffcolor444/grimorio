@@ -48,11 +48,12 @@ ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
 .btn:disabled{opacity:.4;cursor:default}
 .big+.big{margin-top:12px}
 .fl{display:block;width:100%;height:auto;color:var(--mute)}
-.nd{cursor:pointer}
+.nd.ok{cursor:pointer}
+.nd:not(.ok){opacity:.6}
 .nd:focus{outline:none}
 .nd rect{fill:var(--card);stroke:var(--line);stroke-width:2}
 .nd.ok rect{stroke:var(--acc);stroke-width:3}
-.nd:hover rect,.nd:focus-visible rect{stroke:var(--ink)}
+.nd.ok:hover rect,.nd.ok:focus-visible rect{stroke:var(--ink)}
 .nd text{fill:var(--ink);font:600 13px Barlow Semi Condensed,Barlow,sans-serif;text-anchor:middle;pointer-events:none}
 .nd text.s{font:400 11px Barlow,sans-serif;fill:var(--mute)}
 .lg{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:14px;color:var(--mute)}
@@ -113,7 +114,7 @@ h1{font-size:42px}
   <h1>Escolha o procedimento</h1>
   <p class="sub">Toque no botão para abrir o passo a passo.</p>
   <button class="big" id="open"><span class="ico">🔁</span><span>Virada de Link<small>Resetar o switch via console</small></span></button>
-  <button class='big' id='openf'><span class='ico'>🌐</span><span>Rede Unificada<small>Fluxograma e conexões</small></span></button>
+  <button class='big' id='openf'><span class='ico'>🌐</span><span>Guia de Conexões<small>Fluxograma e conexões</small></span></button>
   <button class='big' id='opennvr'><span class='ico'>⚙️</span><span>Manutenção do NVR<small>Rede, bateria e reset</small></span></button>
   <button class='big' id='opencam'><span class='ico'>📷</span><span>Câmeras<small>Problemas mais comuns</small></span></button>
 </main>
@@ -127,7 +128,7 @@ h1{font-size:42px}
   </div>
 </div>
 
-<div class='ov' id='ovf' role='dialog' aria-modal='true' aria-labelledby='ttf'><div class='sheet'><div class='hd'><h2 id='ttf'>Rede Unificada</h2><button class='x' id='clf' aria-label='Fechar'>✕</button></div><div class='bd' id='bdf'></div></div></div>
+<div class='ov' id='ovf' role='dialog' aria-modal='true' aria-labelledby='ttf'><div class='sheet'><div class='hd'><h2 id='ttf'>Guia de Conexões</h2><button class='x' id='clf' aria-label='Fechar'>✕</button></div><div class='bd' id='bdf'></div></div></div>
 <div class='ov' id='ovd' role='dialog' aria-modal='true' aria-labelledby='ttd'><div class='sheet'><div class='hd'><h2 id='ttd'></h2><button class='x' id='cld' aria-label='Fechar'>✕</button></div><div class='bd' id='bdd'></div></div></div>
 <div class='ov' id='ovn' role='dialog' aria-modal='true' aria-labelledby='ttn'><div class='sheet'><div class='hd'><h2 id='ttn'>Manutenção do NVR</h2><button class='x' id='cln' aria-label='Fechar'>✕</button></div><div class='bd' id='bdn'></div></div></div>
 
@@ -161,7 +162,7 @@ var LN=[[180,62,180,100],[127.5,126,105,126],[52.5,152,52.5,190],[52.5,242,52.5,
 function E(i){return document.getElementById(i)}
 function flow(){var s=`<svg class='fl' viewBox='0 0 360 430' role='img' aria-label='Fluxograma da rede unificada'><defs><marker id='ar' viewBox='0 0 8 8' refX='7' refY='4' markerWidth='8' markerHeight='8' markerUnits='userSpaceOnUse' orient='auto'><path d='M0 0L8 4L0 8z' fill='currentColor'/></marker></defs>`;
 LN.forEach(function(l){s+=`<line x1='${l[0]}' y1='${l[1]}' x2='${l[2]}' y2='${l[3]}' stroke='currentColor' stroke-width='2' marker-end='url(#ar)'/>`});
-ND.forEach(function(n){var y=10+90*n.r,t=n.l.length>1;s+=`<g class='nd${n.ok?' ok':''}' tabindex='0' role='button' data-id='${n.id}' aria-label='${n.l.join(' ')}'><rect x='${n.x}' y='${y}' width='105' height='52' rx='10'/><text x='${n.x+52.5}' y='${y+(t?23:31)}'>${n.l[0]}</text>${t?`<text class='s' x='${n.x+52.5}' y='${y+40}'>${n.l[1]}</text>`:''}</g>`});
+ND.forEach(function(n){var y=10+90*n.r,t=n.l.length>1;s+=`<g class='nd${n.ok?' ok':''}'${n.ok?` tabindex='0' role='button'`:''} data-id='${n.id}' aria-label='${n.l.join(' ')}'><rect x='${n.x}' y='${y}' width='105' height='52' rx='10'/><text x='${n.x+52.5}' y='${y+(t?23:31)}'>${n.l[0]}</text>${t?`<text class='s' x='${n.x+52.5}' y='${y+40}'>${n.l[1]}</text>`:''}</g>`});
 return s+'</svg>'}
 function mk(){var P=[['Internet','(PoE IN)'],['LAN 2'],['LAN 3'],['LAN 4'],['LAN 5']],C=['Firewall','Switch CFTV','ONU'];
 var s=`<svg class='fl' viewBox='0 0 360 195' role='img' aria-label='Portas do Mikrotik'><rect x='10' y='62' width='340' height='88' rx='12' fill='var(--bg)' stroke='var(--ink)' stroke-width='2'/><text x='22' y='80' font-size='11' fill='var(--mute)'>MikroTik hEX</text>`;
@@ -184,9 +185,9 @@ nvr:function(){var s=bx(44,126),k;s+=pt(14,92,44,40,'LAN','on');for(k=0;k<16;k++
 function det(id){var n=ND.filter(function(d){return d.id==id})[0];E('ttd').textContent=n.l.join(' ');
 E('bdd').innerHTML=(id=='mk'?mk():DV[id]?DV[id]():`<span class='chip'>Em breve</span><p>As conexões deste equipamento ainda não foram preenchidas.</p>`)+`<button class='btn y' id='bkd' style='width:100%;margin-top:16px'>Voltar ao fluxograma</button>`;
 E('bkd').onclick=function(){E('ovd').classList.remove('on')};E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
-E('bdf').innerHTML=`<p style='margin:0 0 12px;color:var(--mute)'>Toque em um equipamento para ver onde ligar os cabos.</p>`+flow()+`<div class='lg'><i></i>Guia de conexões pronto</div>`;
-E('bdf').onclick=function(e){var g=e.target.closest('.nd');if(g)det(g.dataset.id)};
-E('bdf').onkeydown=function(e){var g=e.target.closest('.nd');if(g&&(e.key=='Enter'||e.key==' ')){e.preventDefault();det(g.dataset.id)}};
+E('bdf').innerHTML=`<p style='margin:0 0 12px;color:var(--mute)'>Toque em um equipamento para ver onde ligar os cabos.</p>`+flow()+`<div class='lg'>Esse fluxograma só é válido para as unidades de Cuiabá</div>`;
+E('bdf').onclick=function(e){var g=e.target.closest('.nd.ok');if(g)det(g.dataset.id)};
+E('bdf').onkeydown=function(e){var g=e.target.closest('.nd.ok');if(g&&(e.key=='Enter'||e.key==' ')){e.preventDefault();det(g.dataset.id)}};
 var NV=[
 {k:'ip',l:'Endereço IPv4',v:'xxx.xxx.xxx.100',h:`<p class='say'>Este é o endereço IP que a rede atribuiu ao NVR.</p><p>O final <b>.100</b> é padrão para todos os NVR do nosso sistema CFTV. Os três primeiros blocos (xxx.xxx.xxx) seguem a rede do local.</p>`},
 {k:'mask',l:'Máscara de sub-rede',v:'255.255.255.x',h:`<p class='say'>O IP da Máscara deve seguir o mesmo da rede.</p><p>A máscara de sub-rede diz ao equipamento quais dispositivos estão na mesma rede local e quais estão fora dela. Ela deve ser igual à da rede do local, para o NVR conversar com os outros equipamentos.</p>`},
