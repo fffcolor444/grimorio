@@ -120,6 +120,9 @@ ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
 .pill.o{background:var(--card);color:var(--rd);box-shadow:inset 0 0 0 1.5px var(--rd)}
 .pill.ic{background:none;font-size:20px;height:auto}
 .ipe{color:var(--rd)}
+.kv{margin-top:10px;padding:10px 12px;border:2px solid var(--acc);border-radius:10px;background:var(--card)}
+.kv small{display:block;font-size:13px;color:var(--mute)}
+.kv b{display:block;font:600 19px ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
 @media (min-width:700px){
 main{max-width:640px;padding:56px 24px}
 h1{font-size:42px}
@@ -142,6 +145,7 @@ h1{font-size:42px}
   <button class='big' id='opencam'><span class='ico'>📷</span><span>Câmeras<small>Problemas mais comuns</small></span></button>
   <button class='big' id='openmk'><span class='ico'>📡</span><span>Mikrotik<small>Acesso remoto e backup</small></span></button>
   <button class='big' id='openap'><span class='ico'>🏫</span><span>Aluno Presente<small>Planta e posição das câmeras</small></span></button>
+  <button class='big' id='openapp'><span class='ico'>📲</span><span>Aplicativo de Monitoramento<small>Instalar e configurar o Moni Mobile</small></span></button>
 </main>
 
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="ttl">
@@ -163,6 +167,8 @@ h1{font-size:42px}
 <div class='ov' id='ovm' role='dialog' aria-modal='true' aria-labelledby='ttm'><div class='sheet'><div class='hd'><h2 id='ttm'>Mikrotik</h2><button class='x' id='clm' aria-label='Fechar'>✕</button></div><div class='bd' id='bdm'></div></div></div>
 
 <div class='ov' id='ovp' role='dialog' aria-modal='true' aria-labelledby='ttp'><div class='sheet'><div class='hd'><h2 id='ttp'>Aluno Presente</h2><button class='x' id='clp' aria-label='Fechar'>✕</button></div><div class='bd' id='bdp'></div></div></div>
+
+<div class='ov' id='ovg' role='dialog' aria-modal='true' aria-labelledby='ttg'><div class='sheet'><div class='hd'><h2 id='ttg'>Aplicativo de Monitoramento</h2><button class='x' id='clg' aria-label='Fechar'>✕</button></div><div class='bd' id='bdg'></div></div></div>
 
 <script>
 var S=[
@@ -227,7 +233,7 @@ var NETH=`<p style='margin:0 0 4px;color:var(--mute)'>Toque em cada campo para e
 function netClick(e){var b=e.target.closest('.fld');if(b){var f=NV.filter(function(d){return d.k==b.dataset.k})[0];dlg(f.l+' '+f.v,`<span class='chip'>Explicação</span>`+f.h,'Entendi')}else if(e.target.closest('#ipb'))dlg('Como descobrir o IP da rede',`<span class='chip'>Passo a passo</span><p>1. No notebook conectado à rede do local, tecle <b>Windows</b>, digite <b>cmd</b> e aperte Enter.</p><p>2. Na janela preta, digite o comando abaixo e aperte Enter:</p><pre style='margin-top:8px'>ipconfig</pre><p>3. Na resposta, veja os campos <b>Endereço IPv4</b>, <b>Máscara de Sub-rede</b> e <b>Gateway Padrão</b>. Eles mostram a rede do local, que o NVR deve seguir.</p>`,'Entendi')};
 function bn(t,b,back){E('ttn').textContent=t;E('bdn').innerHTML=(back?`<button class='bk' data-go='menu'>← Manutenção do NVR</button>`:'')+b;E('bdn').scrollTop=0}
 function menuN(){bn('Manutenção do NVR',`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-go='net'><span class='ico'>🌐</span><span>Configuração de Rede<small>IP, máscara, gateway e DNS</small></span></button><button class='big' data-go='bat'><span class='ico'>🔋</span><span>Problemas na Bateria<small>Principais sintomas</small></span></button><button class='big' data-go='rst'><span class='ico'>♻️</span><span>Como resetar o NVR<small>Restauração simples e de fábrica</small></span></button><button class='big' data-go='hdmi'><span class='ico'>🖥️</span><span>HDMI sem Vídeo<small>Sem imagem na tela do NVR</small></span></button>`,0)}
-function closeAll(){['ove','ovd','ovc','ovm','ovp','ovn','ovf'].forEach(function(i){E(i).classList.remove('on')})}
+function closeAll(){['ove','ovd','ovc','ovm','ovp','ovg','ovn','ovf'].forEach(function(i){E(i).classList.remove('on')})}
 function dlgc(t,h,b,cb){E('ttd').textContent=t;E('bdd').innerHTML=h+`<button class='btn y' id='bkd' style='width:100%;margin-top:16px'>${b}</button>`;E('bkd').onclick=function(){E('ovd').classList.remove('on');if(cb)cb()};E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
 var SY=[['1. Data e hora ficam erradas','O gravador perde a data ou volta para uma data antiga após ser desligado.'],['2. Perda de configurações da BIOS','Podem ocorrer avisos durante a inicialização ou perda de ajustes.']],SI=0;
 function bats(){var n=SY.length,s=SY[SI];bn('Problemas na Bateria',`<h2 style='margin-bottom:16px'>Principais sintomas de bateria fraca ou descarregada</h2><button class='syc' data-sy='1'><span class='chip'>Sintoma ${SI+1} de ${n}</span><h3>${s[0]}</h3><p>${s[1]}</p><span class='hint'>${SI==n-1?'Toque no cartão para voltar ao primeiro':'Toque no cartão para ver o próximo ›'}</span></button><div class='dots'>${SY.map(function(_,k){return `<i class='${k==SI?'on':''}'></i>`}).join('')}</div>`,1)}
@@ -284,6 +290,18 @@ E('bdp').onkeydown=function(e){var c=e.target.closest('.cam');if(c&&(e.key=='Ent
 E('openap').onclick=function(){E('bdp').scrollTop=0;E('ovp').classList.add('on');E('clp').focus()};
 E('clp').onclick=function(){E('ovp').classList.remove('on')};
 E('ovp').onclick=function(e){if(e.target==E('ovp'))E('ovp').classList.remove('on')};
+var AS=0,AP=[
+{i:'📲',t:'Download do Aplicativo',h:`<p style='color:var(--mute)'>Este guia detalha o processo de configuração do sistema de monitoramento <b>Stelseg</b> em seu dispositivo móvel.</p><p>Acesse a loja de aplicativos do seu smartphone: <b>Google Play Store</b> (Android) ou <b>App Store</b> (iOS).</p><p>Pesquise e realize o download do aplicativo <b>Moni Mobile</b>.</p>`},
+{i:'⚙️',t:'Configuração do Servidor',h:`<p>Após concluir a instalação, abra o aplicativo e toque no ícone de <b>+</b> no canto inferior da tela para realizar o <b>Cadastro de Endereço</b>.</p><p>No formulário que aparecer, insira os dados técnicos exatamente como descritos abaixo:</p><div class='kv'><small>Digite o IP</small><b>monitor.stelseg.com.br</b></div><div class='kv'><small>Digite a porta</small><b>5784</b></div><p>Toque no ícone de <b>Check (✓)</b> no topo para salvar.</p>`},
+{i:'🔐',t:'Acesso ao Sistema (Login)',h:`<p>Retorne à tela inicial do aplicativo e realize o seu login com as seguintes credenciais:</p><div class='kv'><small>Usuário</small><b>Número de telefone da Diretora</b></div><div class='kv'><small>Senha padrão</small><b>123456</b></div><p>Toque no botão <b>Login</b>.</p>`},
+{i:'🔑',t:'Segurança e Troca de Senha',h:`<p>Por medidas de segurança, após o primeiro acesso, o aplicativo solicitará obrigatoriamente a troca da senha.</p><ol class='cl'><li>Peça a diretora para digitar uma nova senha pessoal.</li><li>Confirme a nova senha no campo abaixo.</li><li>Toque em <b>Alterar</b>.</li></ol>`},
+{i:'📹',t:'Visualização das Câmeras',h:`<p>Com o login concluído, siga as etapas finais para visualizar as imagens:</p><ol class='cl'><li>Toque na opção <b>Selecione um DVR</b> (ou NVR).</li><li>O sistema apresentará <b>02 (duas) opções</b>, que representam as câmeras <b>Internas</b> e as câmeras <b>Externas</b>.</li><li>Selecione a opção desejada.</li></ol>`},
+{i:'✅',t:'Monitoramento Ativo',h:`<p>Após a seleção, as imagens serão carregadas e você já estará monitorando o local em tempo real.</p><div class='note'>Qualquer dúvida estamos à disposição em nosso suporte técnico através do número <b>3051-5720</b>.</div>`}];
+function asr(){var n=AP.length,s=AP[AS];E('bdg').innerHTML=`<div class='bar' style='padding:0 0 14px'>${AP.map(function(_,k){return `<i class='${k<=AS?'on':''}'></i>`}).join('')}</div><span class='chip'>Passo ${AS+1} de ${n}</span><h2>${s.i} ${s.t}</h2>${s.h}<div style='display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:18px'><button class='btn' data-ag='prev' ${AS?'':'disabled'}>Voltar</button><button class='btn y' data-ag='next'>${AS==n-1?'Concluir':'Próximo'}</button></div>`;E('bdg').scrollTop=0}
+E('bdg').onclick=function(e){var b=e.target.closest('[data-ag]');if(!b)return;if(b.dataset.ag=='prev'){AS--;asr()}else if(AS==AP.length-1)E('ovg').classList.remove('on');else{AS++;asr()}};
+E('openapp').onclick=function(){AS=0;asr();E('ovg').classList.add('on');E('clg').focus()};
+E('clg').onclick=function(){E('ovg').classList.remove('on')};
+E('ovg').onclick=function(e){if(e.target==E('ovg'))E('ovg').classList.remove('on')};
 E('opennvr').onclick=function(){menuN();E('bdn').scrollTop=0;E('ovn').classList.add('on');E('cln').focus()};
 E('cln').onclick=function(){E('ovn').classList.remove('on')};
 E('ovn').onclick=function(e){if(e.target==E('ovn'))E('ovn').classList.remove('on')};
@@ -292,7 +310,7 @@ E('clf').onclick=function(){E('ovf').classList.remove('on')};
 E('cld').onclick=function(){E('ovd').classList.remove('on')};
 E('ovf').onclick=function(e){if(e.target==E('ovf'))E('ovf').classList.remove('on')};
 E('ovd').onclick=function(e){if(e.target==E('ovd'))E('ovd').classList.remove('on')};
-document.addEventListener('keydown',function(e){if(e.key=='Escape'){var o=['ove','ovd','ovc','ovm','ovp','ovn','ovf'].filter(function(i){return E(i).classList.contains('on')})[0];if(o)E(o).classList.remove('on')}});
+document.addEventListener('keydown',function(e){if(e.key=='Escape'){var o=['ove','ovd','ovc','ovm','ovp','ovg','ovn','ovf'].filter(function(i){return E(i).classList.contains('on')})[0];if(o)E(o).classList.remove('on')}});
 </script>
 </body>
 </html>
