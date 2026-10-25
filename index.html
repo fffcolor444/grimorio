@@ -97,6 +97,29 @@ ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
 .cl{margin:12px 0 0;padding-left:22px}
 .cl li{margin-bottom:10px}
 .lk{display:flex;align-items:center;justify-content:center;text-decoration:none;width:100%}
+:root{--rd:#D62828;--onrd:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme='light']){--rd:#FF6B6B;--onrd:#12202E}}
+:root[data-theme='dark']{--rd:#FF6B6B;--onrd:#12202E}
+.cam{cursor:pointer}
+.cam:focus{outline:none}
+.cam:focus-visible .cc{stroke:var(--ink);stroke-width:3}
+.cone{fill:var(--rd);fill-opacity:.25}
+.cc{fill:var(--rd);stroke:var(--card);stroke-width:2}
+.pl{fill:none;stroke:var(--rd);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:pl 2.4s ease-out infinite}
+@keyframes pl{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.3);opacity:0}}
+@media (prefers-reduced-motion:reduce){.pl{animation:none;opacity:0}}
+.ip{fill:var(--rd)}
+.ipt,.cpt,.lt,.pn{font-family:Barlow Semi Condensed,Barlow,sans-serif}
+.ipt{fill:var(--onrd);font-size:11px;font-weight:700;text-anchor:middle}
+.cp{fill:var(--card);stroke:var(--rd);stroke-width:1.5}
+.cpt{fill:var(--rd);font-size:11px;font-weight:700;text-anchor:middle}
+.lt{fill:var(--rd);font-size:11px;font-weight:700}
+.pn{fill:var(--mute);font-size:10px;font-weight:600;letter-spacing:1.5px}
+.lg2{display:flex;gap:12px;align-items:flex-start;padding:12px;border:2px solid var(--line);border-radius:12px;margin-top:10px;font-size:15px}
+.pill{flex:none;min-width:34px;height:22px;padding:0 8px;border-radius:11px;background:var(--rd);color:var(--onrd);font:700 13px Barlow Semi Condensed,sans-serif;display:grid;place-items:center}
+.pill.o{background:var(--card);color:var(--rd);box-shadow:inset 0 0 0 1.5px var(--rd)}
+.pill.ic{background:none;font-size:20px;height:auto}
+.ipe{color:var(--rd)}
 @media (min-width:700px){
 main{max-width:640px;padding:56px 24px}
 h1{font-size:42px}
@@ -118,6 +141,7 @@ h1{font-size:42px}
   <button class='big' id='opennvr'><span class='ico'>⚙️</span><span>Manutenção do NVR<small>Rede, bateria e reset</small></span></button>
   <button class='big' id='opencam'><span class='ico'>📷</span><span>Câmeras<small>Problemas mais comuns</small></span></button>
   <button class='big' id='openmk'><span class='ico'>📡</span><span>Mikrotik<small>Acesso remoto e backup</small></span></button>
+  <button class='big' id='openap'><span class='ico'>🏫</span><span>Aluno Presente<small>Planta e posição das câmeras</small></span></button>
 </main>
 
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="ttl">
@@ -137,6 +161,8 @@ h1{font-size:42px}
 <div class='ov' id='ove' role='dialog' aria-modal='true' aria-labelledby='tte'><div class='sheet'><div class='hd'><h2 id='tte'></h2><button class='x' id='cle' aria-label='Fechar'>✕</button></div><div class='bd' id='bde'></div></div></div>
 
 <div class='ov' id='ovm' role='dialog' aria-modal='true' aria-labelledby='ttm'><div class='sheet'><div class='hd'><h2 id='ttm'>Mikrotik</h2><button class='x' id='clm' aria-label='Fechar'>✕</button></div><div class='bd' id='bdm'></div></div></div>
+
+<div class='ov' id='ovp' role='dialog' aria-modal='true' aria-labelledby='ttp'><div class='sheet'><div class='hd'><h2 id='ttp'>Aluno Presente</h2><button class='x' id='clp' aria-label='Fechar'>✕</button></div><div class='bd' id='bdp'></div></div></div>
 
 <script>
 var S=[
@@ -201,7 +227,7 @@ var NETH=`<p style='margin:0 0 4px;color:var(--mute)'>Toque em cada campo para e
 function netClick(e){var b=e.target.closest('.fld');if(b){var f=NV.filter(function(d){return d.k==b.dataset.k})[0];dlg(f.l+' '+f.v,`<span class='chip'>Explicação</span>`+f.h,'Entendi')}else if(e.target.closest('#ipb'))dlg('Como descobrir o IP da rede',`<span class='chip'>Passo a passo</span><p>1. No notebook conectado à rede do local, tecle <b>Windows</b>, digite <b>cmd</b> e aperte Enter.</p><p>2. Na janela preta, digite o comando abaixo e aperte Enter:</p><pre style='margin-top:8px'>ipconfig</pre><p>3. Na resposta, veja os campos <b>Endereço IPv4</b>, <b>Máscara de Sub-rede</b> e <b>Gateway Padrão</b>. Eles mostram a rede do local, que o NVR deve seguir.</p>`,'Entendi')};
 function bn(t,b,back){E('ttn').textContent=t;E('bdn').innerHTML=(back?`<button class='bk' data-go='menu'>← Manutenção do NVR</button>`:'')+b;E('bdn').scrollTop=0}
 function menuN(){bn('Manutenção do NVR',`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-go='net'><span class='ico'>🌐</span><span>Configuração de Rede<small>IP, máscara, gateway e DNS</small></span></button><button class='big' data-go='bat'><span class='ico'>🔋</span><span>Problemas na Bateria<small>Principais sintomas</small></span></button><button class='big' data-go='rst'><span class='ico'>♻️</span><span>Como resetar o NVR<small>Restauração simples e de fábrica</small></span></button><button class='big' data-go='hdmi'><span class='ico'>🖥️</span><span>HDMI sem Vídeo<small>Sem imagem na tela do NVR</small></span></button>`,0)}
-function closeAll(){['ove','ovd','ovc','ovm','ovn','ovf'].forEach(function(i){E(i).classList.remove('on')})}
+function closeAll(){['ove','ovd','ovc','ovm','ovp','ovn','ovf'].forEach(function(i){E(i).classList.remove('on')})}
 function dlgc(t,h,b,cb){E('ttd').textContent=t;E('bdd').innerHTML=h+`<button class='btn y' id='bkd' style='width:100%;margin-top:16px'>${b}</button>`;E('bkd').onclick=function(){E('ovd').classList.remove('on');if(cb)cb()};E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
 var SY=[['1. Data e hora ficam erradas','O gravador perde a data ou volta para uma data antiga após ser desligado.'],['2. Perda de configurações da BIOS','Podem ocorrer avisos durante a inicialização ou perda de ajustes.']],SI=0;
 function bats(){var n=SY.length,s=SY[SI];bn('Problemas na Bateria',`<h2 style='margin-bottom:16px'>Principais sintomas de bateria fraca ou descarregada</h2><button class='syc' data-sy='1'><span class='chip'>Sintoma ${SI+1} de ${n}</span><h3>${s[0]}</h3><p>${s[1]}</p><span class='hint'>${SI==n-1?'Toque no cartão para voltar ao primeiro':'Toque no cartão para ver o próximo ›'}</span></button><div class='dots'>${SY.map(function(_,k){return `<i class='${k==SI?'on':''}'></i>`}).join('')}</div>`,1)}
@@ -247,6 +273,17 @@ else if(a=='next'){if(MS==1)atn();else{MS++;msr()}}else if(a=='prev'){MS--;msr()
 E('openmk').onclick=function(){mm();E('ovm').classList.add('on');E('clm').focus()};
 E('clm').onclick=function(){E('ovm').classList.remove('on')};
 E('ovm').onclick=function(e){if(e.target==E('ovm'))E('ovm').classList.remove('on')};
+var CP=[{id:16,x:32,y:34,a:30,b:[32,56],z:'Refeitório'},{id:15,x:178,y:34,a:150,b:[178,56],z:'Refeitório'},{id:11,x:320,y:172,a:140,b:[346,162],c:[346,182],cl:'02',z:'Entrada (IN)'},{id:12,x:240,y:172,a:40,b:[214,162],c:[214,182],cl:'02',z:'Área interna'},{id:13,x:240,y:224,a:-40,b:[214,208],c:[214,228],cl:'01',z:'Saída (OUT)'},{id:14,x:320,y:224,a:-140,b:[346,208],c:[346,228],cl:'01',z:'Área interna'}];
+function plan(){var s=`<svg class='fl' viewBox='0 0 396 252' role='img' aria-label='Planta da unidade Aluno Presente'><rect x='12' y='12' width='372' height='228' fill='var(--card)'/><rect x='12' y='12' width='186' height='88' fill='var(--acc)' fill-opacity='.2'/><rect x='52' y='43' width='110' height='26' rx='4' fill='var(--bg)' stroke='var(--mute)' stroke-width='1.5'/><text class='pn' x='107' y='30' text-anchor='middle'>REFEITÓRIO</text><path d='M12 100H118M166 100H198V12' fill='none' stroke='var(--ink)' stroke-width='5'/><path d='M248 240H12V12H384V240H317' fill='none' stroke='var(--ink)' stroke-width='5' stroke-linecap='square'/><text class='lt' x='26' y='146'>ENTRADA</text><text class='lt' x='26' y='166'>IN</text><text class='lt' x='26' y='206'>SAÍDA</text><text class='lt' x='26' y='226'>OUT</text>`;
+CP.forEach(function(c){s+=`<g class='cam' tabindex='0' role='button' data-cam='${c.id}' aria-label='Câmera ${c.id}'><g transform='translate(${c.x} ${c.y}) rotate(${c.a})'><path class='cone' d='M7 -3L26 -13V13L7 3Z'/></g><circle class='pl' cx='${c.x}' cy='${c.y}' r='9'/><circle class='cc' cx='${c.x}' cy='${c.y}' r='9'/><circle cx='${c.x}' cy='${c.y}' r='3.5' fill='#fff'/><rect class='ip' x='${c.b[0]-12}' y='${c.b[1]-8}' width='24' height='16' rx='8'/><text class='ipt' x='${c.b[0]}' y='${c.b[1]+4}'>${c.id}</text>${c.c?`<rect class='cp' x='${c.c[0]-12}' y='${c.c[1]-8}' width='24' height='16' rx='8'/><text class='cpt' x='${c.c[0]}' y='${c.c[1]+4}'>${c.cl}</text>`:''}</g>`});
+return s+'</svg>'}
+function camInfo(id){var c=CP.filter(function(d){return d.id==id})[0];dlgc('Câmera '+id,`<span class='chip'>Final do IP: .${id}</span><p>Cuiabá: 10.20.xx.<b>${id}</b><br>VG: 10.19.xx.<b>${id}</b></p><p>Local: <b>${c.z}</b></p>${c.cl?`<p>Número do cliente: <b>${c.cl}</b></p>`:''}${c.z=='Refeitório'?`<div class='note'>O refeitório normalmente não segue um padrão.</div>`:''}`,'Ok')}
+E('bdp').innerHTML=`<p style='margin:0 0 8px;color:var(--mute)'>Toque em uma câmera para ver os detalhes.</p>`+plan()+`<div class='lg2'><span class='pill'>11</span><span>Os números indicam o final do IP das câmeras.<br>Por exemplo: 10.20.xx.<b class='ipe'>11</b> (unidades em Cuiabá), 10.19.xx.<b class='ipe'>11</b> (unidades em VG).</span></div><div class='lg2'><span class='pill o'>02</span><span>A segunda coluna indica o número do cliente.</span></div><div class='lg2'><span class='pill ic'>🍽️</span><span>Normalmente, o refeitório não segue um padrão.</span></div>`;
+E('bdp').onclick=function(e){var c=e.target.closest('.cam');if(c)camInfo(+c.dataset.cam)};
+E('bdp').onkeydown=function(e){var c=e.target.closest('.cam');if(c&&(e.key=='Enter'||e.key==' ')){e.preventDefault();camInfo(+c.dataset.cam)}};
+E('openap').onclick=function(){E('bdp').scrollTop=0;E('ovp').classList.add('on');E('clp').focus()};
+E('clp').onclick=function(){E('ovp').classList.remove('on')};
+E('ovp').onclick=function(e){if(e.target==E('ovp'))E('ovp').classList.remove('on')};
 E('opennvr').onclick=function(){menuN();E('bdn').scrollTop=0;E('ovn').classList.add('on');E('cln').focus()};
 E('cln').onclick=function(){E('ovn').classList.remove('on')};
 E('ovn').onclick=function(e){if(e.target==E('ovn'))E('ovn').classList.remove('on')};
@@ -255,7 +292,7 @@ E('clf').onclick=function(){E('ovf').classList.remove('on')};
 E('cld').onclick=function(){E('ovd').classList.remove('on')};
 E('ovf').onclick=function(e){if(e.target==E('ovf'))E('ovf').classList.remove('on')};
 E('ovd').onclick=function(e){if(e.target==E('ovd'))E('ovd').classList.remove('on')};
-document.addEventListener('keydown',function(e){if(e.key=='Escape'){var o=['ove','ovd','ovc','ovm','ovn','ovf'].filter(function(i){return E(i).classList.contains('on')})[0];if(o)E(o).classList.remove('on')}});
+document.addEventListener('keydown',function(e){if(e.key=='Escape'){var o=['ove','ovd','ovc','ovm','ovp','ovn','ovf'].filter(function(i){return E(i).classList.contains('on')})[0];if(o)E(o).classList.remove('on')}});
 </script>
 </body>
 </html>
