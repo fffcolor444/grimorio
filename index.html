@@ -97,7 +97,7 @@ ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
 .cl{margin:12px 0 0;padding-left:22px}
 .cl li{margin-bottom:10px}
 .lk{display:flex;align-items:center;justify-content:center;text-decoration:none;width:100%}
-:root{--rd:#D62828;--onrd:#fff}
+:root{--rd:#FF6B6B;--onrd:#12202E}
 @media (prefers-color-scheme:dark){:root:not([data-theme='light']){--rd:#FF6B6B;--onrd:#12202E}}
 :root[data-theme='dark']{--rd:#FF6B6B;--onrd:#12202E}
 .cam{cursor:pointer}
@@ -133,7 +133,7 @@ h1{font-size:42px}
 .bd{padding:8px 24px 24px}
 .fl{max-width:460px;margin-left:auto;margin-right:auto}
 }
-:root{--bg:#EAF1FB;--card:#FFFFFF;--ink:#0B1F3A;--mute:#51657F;--line:#C9D8EC;--acc:#1D6BFF;--accInk:#FFFFFF;--warn:#E3EEFF;--tile:#E3EEFF}
+:root{color-scheme:dark;--bg:#050D1C;--card:#0C1A33;--ink:#E6EEFB;--mute:#8EA3C2;--line:#1C3358;--acc:#2E7CFF;--accInk:#FFFFFF;--warn:#122A52;--tile:#12305E;--ok:#3DCB7B}
 @media (prefers-color-scheme:dark){:root:not([data-theme='light']){--bg:#050D1C;--card:#0C1A33;--ink:#E6EEFB;--mute:#8EA3C2;--line:#1C3358;--acc:#2E7CFF;--accInk:#FFFFFF;--warn:#122A52;--tile:#12305E}}
 :root[data-theme='dark']{--bg:#050D1C;--card:#0C1A33;--ink:#E6EEFB;--mute:#8EA3C2;--line:#1C3358;--acc:#2E7CFF;--accInk:#FFFFFF;--warn:#122A52;--tile:#12305E}
 body{background:var(--bg)}
@@ -182,6 +182,7 @@ main{padding-top:0}
   <button class='big' id='openmk'><span class='ico'>📡</span><span>Mikrotik<small>Acesso remoto e backup</small></span></button>
   <button class='big' id='openap'><span class='ico'>🏫</span><span>Aluno Presente<small>Planta e posição das câmeras</small></span></button>
   <button class='big' id='openapp'><span class='ico'>📲</span><span>Aplicativo de Monitoramento<small>Instalar e configurar o Moni Mobile</small></span></button>
+  <button class='big' id='openvg'><span class='ico'>🛡️</span><span>Vigia Mais<small>Adicionar câmeras no NVR</small></span></button>
 </nav>
 </main>
 
@@ -206,6 +207,8 @@ main{padding-top:0}
 <div class='ov' id='ovp' role='dialog' aria-modal='true' aria-labelledby='ttp'><div class='sheet'><div class='hd'><h2 id='ttp'>Aluno Presente</h2><button class='x' id='clp' aria-label='Fechar'>✕</button></div><div class='bd' id='bdp'></div></div></div>
 
 <div class='ov' id='ovg' role='dialog' aria-modal='true' aria-labelledby='ttg'><div class='sheet'><div class='hd'><h2 id='ttg'>Aplicativo de Monitoramento</h2><button class='x' id='clg' aria-label='Fechar'>✕</button></div><div class='bd' id='bdg'></div></div></div>
+
+<div class='ov' id='ovv' role='dialog' aria-modal='true' aria-labelledby='ttv'><div class='sheet'><div class='hd'><h2 id='ttv'>Vigia Mais</h2><button class='x' id='clv' aria-label='Fechar'>✕</button></div><div class='bd' id='bdv'></div></div></div>
 
 <script>
 var S=[
@@ -270,7 +273,7 @@ var NETH=`<p style='margin:0 0 4px;color:var(--mute)'>Toque em cada campo para e
 function netClick(e){var b=e.target.closest('.fld');if(b){var f=NV.filter(function(d){return d.k==b.dataset.k})[0];dlg(f.l+' '+f.v,`<span class='chip'>Explicação</span>`+f.h,'Entendi')}else if(e.target.closest('#ipb'))dlg('Como descobrir o IP da rede',`<span class='chip'>Passo a passo</span><p>1. No notebook conectado à rede do local, tecle <b>Windows</b>, digite <b>cmd</b> e aperte Enter.</p><p>2. Na janela preta, digite o comando abaixo e aperte Enter:</p><pre style='margin-top:8px'>ipconfig</pre><p>3. Na resposta, veja os campos <b>Endereço IPv4</b>, <b>Máscara de Sub-rede</b> e <b>Gateway Padrão</b>. Eles mostram a rede do local, que o NVR deve seguir.</p>`,'Entendi')};
 function bn(t,b,back){E('ttn').textContent=t;E('bdn').innerHTML=(back?`<button class='bk' data-go='menu'>← Manutenção do NVR</button>`:'')+b;E('bdn').scrollTop=0}
 function menuN(){bn('Manutenção do NVR',`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-go='net'><span class='ico'>🌐</span><span>Configuração de Rede<small>IP, máscara, gateway e DNS</small></span></button><button class='big' data-go='bat'><span class='ico'>🔋</span><span>Problemas na Bateria<small>Principais sintomas</small></span></button><button class='big' data-go='rst'><span class='ico'>♻️</span><span>Como resetar o NVR<small>Restauração simples e de fábrica</small></span></button><button class='big' data-go='hdmi'><span class='ico'>🖥️</span><span>HDMI sem Vídeo<small>Sem imagem na tela do NVR</small></span></button>`,0)}
-function closeAll(){['ove','ovd','ovc','ovm','ovp','ovg','ovn','ovf'].forEach(function(i){E(i).classList.remove('on')})}
+function closeAll(){['ove','ovd','ovc','ovm','ovp','ovg','ovv','ovn','ovf'].forEach(function(i){E(i).classList.remove('on')})}
 function dlgc(t,h,b,cb){E('ttd').textContent=t;E('bdd').innerHTML=h+`<button class='btn y' id='bkd' style='width:100%;margin-top:16px'>${b}</button>`;E('bkd').onclick=function(){E('ovd').classList.remove('on');if(cb)cb()};E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
 var SY=[['1. Data e hora ficam erradas','O gravador perde a data ou volta para uma data antiga após ser desligado.'],['2. Perda de configurações da BIOS','Podem ocorrer avisos durante a inicialização ou perda de ajustes.']],SI=0;
 function bats(){var n=SY.length,s=SY[SI];bn('Problemas na Bateria',`<h2 style='margin-bottom:16px'>Principais sintomas de bateria fraca ou descarregada</h2><button class='syc' data-sy='1'><span class='chip'>Sintoma ${SI+1} de ${n}</span><h3>${s[0]}</h3><p>${s[1]}</p><span class='hint'>${SI==n-1?'Toque no cartão para voltar ao primeiro':'Toque no cartão para ver o próximo ›'}</span></button><div class='dots'>${SY.map(function(_,k){return `<i class='${k==SI?'on':''}'></i>`}).join('')}</div>`,1)}
@@ -286,16 +289,17 @@ E('bdn').onclick=function(e){var g=e.target.closest('[data-go]');if(g){var v=g.d
 var CM=[
 {t:'Offline ou desconectando sozinha',i:'📶',sh:'Possíveis soluções',c:['Conector RJ45 mal crimpado, oxidado ou com umidade.','Cabo de rede danificado.','Porta PoE do NVR ou switch com defeito.','Alimentação insuficiente.','Conflito de IP ou endereço alterado.','Falha na própria câmera.'],s:['Verifique no NVR a mensagem de erro do canal, quando disponível.','Confira os LEDs da porta PoE e se a câmera está recebendo alimentação.','Teste outro cabo de rede ou faça um teste de continuidade.','Troque a câmera de porta PoE para verificar se o problema acompanha a porta ou a câmera.','Utilize o SADP para verificar se ela continua sendo detectada e se o endereço IP está correto.','Se o problema persistir, teste a câmera diretamente em uma rede de bancada, com alimentação compatível.']},
 {t:'Não acessa pela rede ou pelo NVR',i:'🔎',sh:'Solução',c:['Computador e câmera em sub-redes diferentes.','Gateway ou máscara de sub-rede incorretos.','Endereço IP duplicado.','Senha incorreta no cadastro do NVR.','Porta de serviço ou protocolo incompatível.','Configuração de rede incorreta no próprio NVR.'],s:['Abra o SADP e identifique o IP atual da câmera.','Confira o IP e a máscara do computador com ipconfig, no Windows.','Compare os endereços e confirme se computador e câmera estão na mesma rede, quando essa for a topologia esperada.','Verifique se o IP já está sendo utilizado por outro dispositivo.','Confira as credenciais cadastradas no NVR e atualize-as, se necessário.','Se a câmera funcionar diretamente, mas não no NVR, investigue a configuração do canal, a rede interna do gravador e a compatibilidade.']},
-{t:'Esqueceu a senha ou não consegue ativar a câmera',i:'🔑',sh:'Solução',b:['Se estiver inativa, realize a ativação pelo SADP, criando uma senha conforme as regras do dispositivo.','Se estiver ativada e a senha tiver sido perdida, utilize o procedimento oficial de recuperação compatível com o modelo.','Dependendo do dispositivo, a Hikvision disponibiliza recuperação por conta vinculada ao Hik-Connect, e-mail reservado, perguntas de segurança ou arquivo de recuperação.'],link:'https://securitylab.hikvision.com/pt-br/support/how-to/faq/how-to-reset-password/'}];
+{t:'Esqueceu a senha ou não consegue ativar a câmera',i:'🔑',sh:'Solução',b:['Se estiver inativa, realize a ativação pelo SADP, criando uma senha conforme as regras do dispositivo.','Se estiver ativada e a senha tiver sido perdida, utilize o procedimento oficial de recuperação compatível com o modelo.','Dependendo do dispositivo, a Hikvision disponibiliza recuperação por conta vinculada ao Hik-Connect, e-mail reservado, perguntas de segurança ou arquivo de recuperação.'],link:'https://securitylab.hikvision.com/pt-br/support/how-to/faq/how-to-reset-password/'},
+{t:'Coleta de imagem',i:'💾',col:1}];
 function lis(a){return a.map(function(x){return `<li>${x}</li>`}).join('')}
 E('bdc').innerHTML=`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o problema que você está vendo.</p>`+CM.map(function(c,k){return `<button class='big' data-cm='${k}'><span class='ico'>${c.i}</span><span>${c.t}</span></button>`}).join('');
-function cmOpen(k){var c=CM[k],h;E('ttd').textContent=c.t;
+function cmOpen(k){var c=CM[k],h;if(c.col){cola();return}E('ttd').textContent=c.t;
 if(c.c)h=`<span class='chip'>Causas prováveis</span><ul class='cl'>${lis(c.c)}</ul><button class='btn y' data-cs='${k}' style='width:100%;margin-top:18px'>Como resolver</button>`;
 else h=`<span class='chip'>${c.sh}</span><ul class='cl'>${lis(c.b)}</ul><a class='btn y lk' href='${c.link}' target='_blank' rel='noopener noreferrer' style='margin-top:18px'>Como Redefinir Senha</a>`;
 E('bdd').innerHTML=h;E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
 function cmSol(k){var c=CM[k];E('tte').textContent=c.t;E('bde').innerHTML=`<span class='chip'>${c.sh}</span><ol class='cl'>${lis(c.s)}</ol>`;E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
 E('bdc').onclick=function(e){var b=e.target.closest('[data-cm]');if(b)cmOpen(+b.dataset.cm)};
-E('bdd').onclick=function(e){var b=e.target.closest('[data-cs]');if(b)cmSol(+b.dataset.cs)};
+E('bdd').onclick=function(e){var b=e.target.closest('[data-cs]');if(b)cmSol(+b.dataset.cs);if(e.target.closest('[data-col]'))colaPasta()};
 E('opencam').onclick=function(){E('bdc').scrollTop=0;E('ovc').classList.add('on');E('clc').focus()};
 E('clc').onclick=function(){E('ovc').classList.remove('on')};
 E('cle').onclick=function(){E('ove').classList.remove('on')};
@@ -353,6 +357,15 @@ var GS=0,GP=[
 {c:'Etapa 9',t:'Exportar o arquivo',h:`<ol class='cl'><li>Abra o <b>New Terminal</b>.</li><li>Escreva <span class='cd'>export file=</span> e copie o nome da escola, tirando os espaços e colocando <b>_</b> no lugar.</li><li>Aperte <b>Enter</b>.</li></ol><div class='note'>Exemplo: <span class='cd'>export file=CE_nome_escola</span></div>`},
 {c:'Etapa 10',t:'Colocar o arquivo salvo na pasta',h:`<p>Abra <b>Files</b> e arraste o arquivo para a pasta.</p>`}];
 function gsr(){var n=GP.length,s=GP[GS];bm('Configuração na Planilha de GPON',`<div class='bar' style='padding:0 0 14px'>${GP.map(function(_,k){return `<i class='${k<=GS?'on':''}'></i>`}).join('')}</div><span class='chip'>${s.c}</span><h2>${s.t}</h2>${s.h}<div style='display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:18px'><button class='btn' data-mk='gprev' ${GS?'':'disabled'}>Voltar</button><button class='btn y' data-mk='${GS==n-1?'gend':'gnext'}'>${GS==n-1?'Concluir':'Próximo'}</button></div>`,1)}
+function stp(a){return a.map(function(x,k){return `<div class='st'><span class='n'>${k+1}</span><span>${x}</span></div>`}).join('')}
+E('bdv').innerHTML=`<h2 style='margin-bottom:12px'>Como adicionar as câmeras do Vigia Mais no NVR</h2><div class='note' style='margin:0 0 6px'><b>Lembrete:</b> Para que as câmeras IP sejam adicionadas corretamente é necessário deixar as portas PoE disponíveis.</div>`+stp([`Entre na página web do NVR e vá em <b>Configurações</b> › <b>Gerenciamento de câmera</b> › <b>Canal IP</b> › <b>Adicionar automaticamente</b>.`,`Em seguida vai começar uma busca de câmeras IP na rede. Selecione as câmeras que aparecerem e clique em <b>Adicionar</b>.`,`Se aparecer erro de usuário e senha, selecione a câmera e clique em <b>Editar</b>. No formulário que aparecer, coloque e confirme a senha correta da câmera.<br><span style='color:var(--mute);font-size:15px'>As câmeras do Vigia têm senha diferente das câmeras do Escola Segura.</span>`])+`<div style='display:grid;grid-template-columns:3fr 2fr;gap:10px;margin-top:18px'><button class='btn y' data-vg='man'>Adicionar Manualmente</button><button class='btn' data-vg='close'>Fechar</button></div>`;
+function vgMan(){E('tte').textContent='Adicionar manualmente';E('bde').innerHTML=`<span class='chip'>Passo a passo</span>`+stp([`Abra o aplicativo da Intelbras <b>IP Utility</b> (também existe a possibilidade de achar câmeras IP Hikvision pelo <b>SADP</b>, se disponível na unidade). O aplicativo fará uma busca na rede por câmeras IP.`,`Selecione a câmera que deseja adicionar e clique em <b>Editar</b>. Copie as informações da câmera: <b>IP</b>, <b>Máscara de sub-rede</b> e <b>Gateway</b>.`,`Entre na página web do NVR e clique em <b>Configurações</b> › <b>Gerenciamento de câmeras</b> › <b>Canal IP</b> › <b>Adicionar</b>.`,`Troque a opção <b>Plug and play</b> por <b>Manual</b> e preencha o formulário com as informações da câmera.`,`Em <b>Protocolo</b>, coloque <b>ONVIF</b> (se for câmera da Intelbras) ou <b>HIKVISION</b> (se for câmera da Hikvision).`,`Coloque e confirme a senha da câmera, salve as informações e espere o NVR fazer a ligação com a câmera.`])+`<div class='note'>Você pode repetir esse processo para cada câmera IP que estiver disponível no local.</div>`;E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
+E('bdv').onclick=function(e){var b=e.target.closest('[data-vg]');if(!b)return;if(b.dataset.vg=='man')vgMan();else E('ovv').classList.remove('on')};
+E('openvg').onclick=function(){E('bdv').scrollTop=0;E('ovv').classList.add('on');E('clv').focus()};
+E('clv').onclick=function(){E('ovv').classList.remove('on')};
+E('ovv').onclick=function(e){if(e.target==E('ovv'))E('ovv').classList.remove('on')};
+function cola(){dlgc('Atenção',`<p class='say'>Atenção! É estritamente proibido o compartilhamento das imagens.</p>`,'Entendi',function(){E('ttd').textContent='Como fazer a coleta de imagens das câmeras';E('bdd').innerHTML=`<span class='chip'>Passo a passo</span>`+stp([`Abra a página web do NVR e clique em <b>Reprodução</b>.`,`No calendário, escolha a data do ocorrido e clique em <b>Pesquisar</b>.`,`Nas opções embaixo do player, clique no ícone de <b>download</b>.`,`Na página que abrir, preencha corretamente os campos <b>Hora de Início</b> e <b>Hora de fim</b> com os horários solicitados.`,`Selecione os arquivos de gravação que correspondem ao horário requerido e clique em <b>Baixar para PC</b>.`,`Assim que o download dos arquivos completar, vai aparecer a mensagem <b>Copiado</b> e você poderá ver as gravações na pasta que está configurada no NVR.`])+`<button class='btn y' data-col='1' style='width:100%;margin-top:18px'>Como descobrir a pasta onde está a gravação</button>`;E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()})}
+function colaPasta(){E('tte').textContent='Onde está a gravação';E('bde').innerHTML=`<span class='chip'>Passo a passo</span>`+stp([`Vá em <b>Configuração</b> › <b>Local</b>.`,`Arraste para baixo até <b>Configurações do arquivo de gravação</b>.`,`Lá você poderá ver o caminho da pasta onde foram salvas as gravações.`]);E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
 E('opennvr').onclick=function(){menuN();E('bdn').scrollTop=0;E('ovn').classList.add('on');E('cln').focus()};
 E('cln').onclick=function(){E('ovn').classList.remove('on')};
 E('ovn').onclick=function(e){if(e.target==E('ovn'))E('ovn').classList.remove('on')};
@@ -361,7 +374,7 @@ E('clf').onclick=function(){E('ovf').classList.remove('on')};
 E('cld').onclick=function(){E('ovd').classList.remove('on')};
 E('ovf').onclick=function(e){if(e.target==E('ovf'))E('ovf').classList.remove('on')};
 E('ovd').onclick=function(e){if(e.target==E('ovd'))E('ovd').classList.remove('on')};
-document.addEventListener('keydown',function(e){if(e.key=='Escape'){var o=['ove','ovd','ovc','ovm','ovp','ovg','ovn','ovf'].filter(function(i){return E(i).classList.contains('on')})[0];if(o)E(o).classList.remove('on')}});
+document.addEventListener('keydown',function(e){if(e.key=='Escape'){var o=['ove','ovd','ovc','ovm','ovp','ovg','ovv','ovn','ovf'].filter(function(i){return E(i).classList.contains('on')})[0];if(o)E(o).classList.remove('on')}});
 </script>
 </body>
 </html>
