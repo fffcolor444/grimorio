@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Grimório Tec</title>
+<title>SOC Central de Manutenção</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@600;700&display=swap">
 <style>
 :root{--bg:#EEF1F4;--card:#fff;--ink:#12202E;--mute:#5B6B7A;--line:#D5DCE3;--acc:#FFC400;--accInk:#12202E;--ok:#1F9D55;--warn:#FFF4CC;
@@ -63,7 +63,7 @@ ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
 .pt rect{fill:var(--card);stroke:var(--mute);stroke-width:2}
 .pt.on rect{fill:var(--acc);stroke:var(--ink)}
 .pt text{font:700 15px Barlow Semi Condensed,sans-serif;text-anchor:middle;fill:var(--ink)}
-.pt.on text{fill:#12202E}
+.pt.on text{fill:var(--accInk)}
 .pt.cm rect{fill:var(--acc);fill-opacity:.4;stroke:var(--ink)}
 .cb{list-style:none;padding:0;margin:12px 0 0}
 .cb li{padding:10px 0;border-bottom:1px solid var(--line)}
@@ -90,7 +90,7 @@ ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
 .dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
 .dots i.on{background:var(--acc)}
 .st{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
-.st .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--acc);color:#12202E;display:grid;place-items:center;font:700 16px Barlow Semi Condensed,sans-serif}
+.st .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--acc);color:var(--accInk);display:grid;place-items:center;font:700 16px Barlow Semi Condensed,sans-serif}
 .ov{align-items:center;padding:16px}
 .sheet{border-radius:18px;border-bottom:2px solid var(--ink);max-height:90%;box-shadow:0 24px 70px rgba(0,0,0,.4)}
 #ove{z-index:40}
@@ -123,6 +123,7 @@ ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
 .kv{margin-top:10px;padding:10px 12px;border:2px solid var(--acc);border-radius:10px;background:var(--card)}
 .kv small{display:block;font-size:13px;color:var(--mute)}
 .kv b{display:block;font:600 19px ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
+.cd{font:600 15px ui-monospace,Menlo,Consolas,monospace;background:var(--bg);padding:1px 6px;border-radius:5px;word-break:break-all}
 @media (min-width:700px){
 main{max-width:640px;padding:56px 24px}
 h1{font-size:42px}
@@ -132,13 +133,48 @@ h1{font-size:42px}
 .bd{padding:8px 24px 24px}
 .fl{max-width:460px;margin-left:auto;margin-right:auto}
 }
+:root{--bg:#EAF1FB;--card:#FFFFFF;--ink:#0B1F3A;--mute:#51657F;--line:#C9D8EC;--acc:#1D6BFF;--accInk:#FFFFFF;--warn:#E3EEFF;--tile:#E3EEFF}
+@media (prefers-color-scheme:dark){:root:not([data-theme='light']){--bg:#050D1C;--card:#0C1A33;--ink:#E6EEFB;--mute:#8EA3C2;--line:#1C3358;--acc:#2E7CFF;--accInk:#FFFFFF;--warn:#122A52;--tile:#12305E}}
+:root[data-theme='dark']{--bg:#050D1C;--card:#0C1A33;--ink:#E6EEFB;--mute:#8EA3C2;--line:#1C3358;--acc:#2E7CFF;--accInk:#FFFFFF;--warn:#122A52;--tile:#12305E}
+body{background:var(--bg)}
+.ov{background:rgba(3,10,24,.72)}
+.sheet{border:1px solid var(--acc);box-shadow:0 24px 70px rgba(0,0,0,.5),0 0 0 4px rgba(46,124,255,.12)}
+.btn:not(.y){border-color:var(--acc)}
+.big{border:1px solid var(--line);border-left:4px solid var(--acc)}
+.big:not(:disabled):hover,.big:not(:disabled):active{border-color:var(--acc);box-shadow:0 0 0 3px rgba(46,124,255,.18)}
+.big .ico{flex:none;width:46px;height:46px;display:grid;place-items:center;border-radius:12px;background:var(--tile);font-size:24px}
+.tag{display:inline-flex;align-items:center;gap:8px;font:600 12px Barlow,sans-serif;letter-spacing:.16em;color:#9CC4FF}
+.tag i{width:8px;height:8px;border-radius:50%;background:#3DA0FF;box-shadow:0 0 10px #3DA0FF;animation:bl 1.8s ease-in-out infinite}
+@keyframes bl{50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.tag i{animation:none}}
+.hs{margin:6px 0 0;font:600 17px Barlow Semi Condensed,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#CFE1FF}
+.hd2{margin:12px 0 0;color:#9FB6D9;font-size:15px}
+.sec{margin:0 0 10px;font:700 13px Barlow Semi Condensed,sans-serif;letter-spacing:.2em;color:var(--acc)}
+.grid{display:grid;gap:12px}
+.grid .big+.big{margin-top:0}
+.hero{background:#0C3F75 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='240' viewBox='0 0 360 240' fill='none' stroke='rgb(143,188,255)' stroke-opacity='.22' stroke-width='1.5'%3E%3Cpath d='M0 44H70L96 70H190M262 44H360M0 196H60L84 172H150V138M300 196H360'/%3E%3Ccircle cx='190' cy='70' r='4'/%3E%3Ccircle cx='262' cy='44' r='4'/%3E%3Ccircle cx='150' cy='138' r='4'/%3E%3Ccircle cx='300' cy='196' r='4'/%3E%3Cpath d='M36 116H44M40 112V120M226 120H234M230 116V124M326 96H334M330 92V100'/%3E%3Crect x='214' y='156' width='5' height='5'/%3E%3Crect x='34' y='214' width='5' height='5'/%3E%3C/svg%3E") repeat-x 50% 50%/360px 240px;color:#EAF2FF;padding:24px 0 22px;margin:0 0 22px}
+.hi{max-width:480px;margin:0 auto;padding:0 16px}
+.hr{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:6px}
+.dc-art{flex:1 1 0;min-width:0;max-width:170px;height:auto}
+.soc{flex:none;margin:0;font:700 clamp(76px,26vw,104px)/.95 Barlow Semi Condensed,Barlow,sans-serif;letter-spacing:.06em;background:linear-gradient(180deg,#FFFFFF 0%,#A9CCFF 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{font-size:14px;letter-spacing:.1em}
+main{padding-top:0}
+@media (min-width:700px){main{max-width:780px;padding-top:0}.hero{padding:48px 0 40px}.hi{max-width:780px;padding:0 24px}.soc{font-size:140px}.dc-art{max-width:300px}.hs{font-size:22px}.hd2{font-size:17px}}
 </style>
 </head>
 <body>
+<header class='hero'><div class='hi'>
+    <span class='tag'><i></i>Stelmat Tecnologia</span>
+    <div class='hr'>
+      <h1 class='soc'>SOC</h1>
+      <svg class='dc-art' viewBox='0 0 220 170' role='img' aria-label='Ilustração de data center'><path d='M42 40V28H96V18M178 62V28H124V18' fill='none' stroke='#8FBCFF' stroke-width='2' stroke-opacity='.75'/><circle cx='42' cy='28' r='3' fill='#8FBCFF'/><circle cx='178' cy='28' r='3' fill='#8FBCFF'/><rect x='14' y='40' width='56' height='116' rx='5' fill='#0F4A87' stroke='#CFE3FF' stroke-width='2.5'/><rect x='20' y='48' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='27' cy='55' r='2.2' fill='#5EE1FF'/><path d='M36 55H58' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='20' y='66' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='27' cy='73' r='2.2' fill='#5CE6A0'/><path d='M36 73H58' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='20' y='84' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='27' cy='91' r='2.2' fill='#5EE1FF'/><path d='M36 91H58' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='20' y='102' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='27' cy='109' r='2.2' fill='#BFDBFF'/><path d='M36 109H58' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='20' y='120' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='27' cy='127' r='2.2' fill='#5EE1FF'/><path d='M36 127H58' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='20' y='138' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='27' cy='145' r='2.2' fill='#5CE6A0'/><path d='M36 145H58' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='82' y='18' width='56' height='138' rx='5' fill='#0F4A87' stroke='#CFE3FF' stroke-width='2.5'/><rect x='88' y='26' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='95' cy='33' r='2.2' fill='#5CE6A0'/><path d='M104 33H126' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='88' y='44' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='95' cy='51' r='2.2' fill='#5EE1FF'/><path d='M104 51H126' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='88' y='62' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='95' cy='69' r='2.2' fill='#5EE1FF'/><path d='M104 69H126' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='88' y='80' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='95' cy='87' r='2.2' fill='#BFDBFF'/><path d='M104 87H126' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='88' y='98' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='95' cy='105' r='2.2' fill='#5CE6A0'/><path d='M104 105H126' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='88' y='116' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='95' cy='123' r='2.2' fill='#5EE1FF'/><path d='M104 123H126' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='88' y='134' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='95' cy='141' r='2.2' fill='#5EE1FF'/><path d='M104 141H126' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='150' y='62' width='56' height='94' rx='5' fill='#0F4A87' stroke='#CFE3FF' stroke-width='2.5'/><rect x='156' y='70' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='163' cy='77' r='2.2' fill='#5EE1FF'/><path d='M172 77H194' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='156' y='88' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='163' cy='95' r='2.2' fill='#BFDBFF'/><path d='M172 95H194' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='156' y='106' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='163' cy='113' r='2.2' fill='#5CE6A0'/><path d='M172 113H194' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='156' y='124' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='163' cy='131' r='2.2' fill='#5EE1FF'/><path d='M172 131H194' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><rect x='156' y='142' width='44' height='14' rx='2' fill='#0C3F75' stroke='#5F9BE0' stroke-width='1.5'/><circle cx='163' cy='149' r='2.2' fill='#5EE1FF'/><path d='M172 149H194' stroke='#5F9BE0' stroke-width='2' stroke-linecap='round'/><path d='M6 156H214' stroke='#8FBCFF' stroke-width='2' stroke-opacity='.6' stroke-linecap='round'/></svg>
+    </div>
+    <p class='hs'>Central de Manutenção</p>
+    <p class='hd2'>O manual do técnico na palma da mão</p>
+  </div></header>
 <main>
-  <span class="brand">Grimório Tec</span>
-  <h1>Escolha o procedimento</h1>
-  <p class="sub">Toque no botão para abrir o passo a passo.</p>
+  <p class='sec'>PROCEDIMENTOS</p>
+  <nav class='grid'>
   <button class="big" id="open"><span class="ico">🔁</span><span>Virada de Link<small>Resetar o switch via console</small></span></button>
   <button class='big' id='openf'><span class='ico'>🌐</span><span>Guia de Conexões<small>Fluxograma e conexões</small></span></button>
   <button class='big' id='opennvr'><span class='ico'>⚙️</span><span>Manutenção do NVR<small>Rede, bateria e reset</small></span></button>
@@ -146,6 +182,7 @@ h1{font-size:42px}
   <button class='big' id='openmk'><span class='ico'>📡</span><span>Mikrotik<small>Acesso remoto e backup</small></span></button>
   <button class='big' id='openap'><span class='ico'>🏫</span><span>Aluno Presente<small>Planta e posição das câmeras</small></span></button>
   <button class='big' id='openapp'><span class='ico'>📲</span><span>Aplicativo de Monitoramento<small>Instalar e configurar o Moni Mobile</small></span></button>
+</nav>
 </main>
 
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="ttl">
@@ -203,7 +240,7 @@ function mk(){var P=[['Internet','(PoE IN)'],['LAN 2'],['LAN 3'],['LAN 4'],['LAN
 var s=`<svg class='fl' viewBox='0 0 360 195' role='img' aria-label='Portas do Mikrotik'><rect x='10' y='62' width='340' height='88' rx='12' fill='var(--bg)' stroke='var(--ink)' stroke-width='2'/><text x='22' y='80' font-size='11' fill='var(--mute)'>MikroTik hEX</text>`;
 P.forEach(function(p,k){var x=28+k*62,c=x+26,on=k>1;s+=`<g class='pt${on?' on':''}'><rect x='${x}' y='88' width='52' height='42' rx='6'/><text x='${c}' y='116'>${k+1}</text></g><text x='${c}' y='170' text-anchor='middle' font-size='11.5' fill='var(--mute)'>${p[0]}</text>`+(p[1]?`<text x='${c}' y='183' text-anchor='middle' font-size='11.5' fill='var(--mute)'>${p[1]}</text>`:'');
 if(on)s+=`<line x1='${c}' y1='88' x2='${c}' y2='54' stroke='var(--ink)' stroke-width='2'/><text x='${c}' y='46' text-anchor='middle' font-size='13' font-weight='700' fill='var(--ink)'>${C[k-2]}</text>`});
-return `<span class='chip'>Conexões</span><p style='margin:0 0 8px'>Ligue cada cabo na porta destacada em amarelo.</p>`+s+`</svg><ul class='cb'><li><span class='chip'>LAN 3</span>Cabo do <b>Firewall</b></li><li><span class='chip'>LAN 4</span>Cabo do <b>Switch CFTV</b></li><li><span class='chip'>LAN 5</span>Cabo da <b>ONU</b></li></ul>`}
+return `<span class='chip'>Conexões</span><p style='margin:0 0 8px'>Ligue cada cabo na porta destacada em azul.</p>`+s+`</svg><ul class='cb'><li><span class='chip'>LAN 3</span>Cabo do <b>Firewall</b></li><li><span class='chip'>LAN 4</span>Cabo do <b>Switch CFTV</b></li><li><span class='chip'>LAN 5</span>Cabo da <b>ONU</b></li></ul>`}
 function pt(x,y,w,h,t,c){return `<g class='pt ${c||''}'><rect x='${x}' y='${y}' width='${w}' height='${h}' rx='5'/><text x='${x+w/2}' y='${y+h/2+5}'>${t}</text></g>`}
 function co(x,y0,ty,t,a){var s=a=='s';return `<line x1='${x}' y1='${y0}' x2='${x}' y2='${s?ty-8:ty+6}' stroke='var(--ink)' stroke-width='2'/><text x='${s?x+5:x}' y='${ty}' text-anchor='${s?'start':'middle'}' font-size='13' font-weight='700' fill='var(--ink)'>${t}</text>`}
 function lb(x,y,t){return `<text x='${x}' y='${y}' text-anchor='middle' font-size='11.5' fill='var(--mute)'>${t}</text>`}
@@ -211,11 +248,11 @@ function bx(y,h){return `<rect x='6' y='${y}' width='348' height='${h}' rx='12' 
 function sv(h,s,a){return `<svg class='fl' viewBox='0 0 360 ${h}' role='img' aria-label='${a}'>${s}</svg>`}
 function pg(m,s,l){return `<span class='chip'>Conexões</span><p style='margin:0 0 8px'>${m}</p>${s}<ul class='cb'>${l.map(function(i){return `<li><span class='chip'>${i[0]}</span>${i[1]}</li>`}).join('')}</ul>`}
 var DV={
-onu:function(){return pg('Ligue o cabo na porta destacada em amarelo.',sv(160,`<rect x='100' y='56' width='160' height='72' rx='12' fill='var(--bg)' stroke='var(--ink)' stroke-width='2'/><text x='114' y='76' font-size='11' fill='var(--mute)'>ONU</text>`+pt(152,86,56,34,'LAN','on')+co(180,86,26,'Porta 5 do Mikrotik')+lb(180,148,'Porta LAN'),'Porta LAN da ONU'),[['LAN','Cabo para a <b>porta 5 do Mikrotik</b>']])},
-sw8:function(){var s=bx(52,96),k;for(k=0;k<8;k++)s+=pt(14+k*33,84,28,40,k+1,k<6?'cm':'');for(k=0;k<2;k++)s+=pt(285+k*33,84,28,40,k+1,k==1?'on':'');s+=co(110,84,26,'6 câmeras')+co(332,84,26,'Firewall')+lb(143,168,'PoE 1 a 8')+lb(316,168,'UPLINK 1 e 2');return pg('Ligue cada cabo nas portas destacadas. Amarelo claro: câmeras.',sv(180,s,'Portas do Switch 8 portas'),[['UPLINK 2','Cabo do <b>Firewall</b>'],['PoE','<b>6 câmeras</b> nas portas PoE']])},
-fw:function(){var s=bx(62,88),k;for(k=0;k<5;k++)s+=pt(28+k*62,90,52,42,k+1,k==0||k==4?'on':'');s+=co(54,90,46,'Switch 8 Portas')+co(302,90,46,'Mikrotik');return pg('Ligue cada cabo na porta destacada em amarelo.',sv(160,s,'Portas do Firewall'),[['Porta 1','Cabo do <b>Switch 8 Portas</b>'],['Porta 5','Cabo do <b>Mikrotik</b>']])},
-swc:function(){var s=bx(72,80),k;for(k=0;k<12;k++)s+=pt(14+k*28,84,24,26,2*k+1,k<3?'on':'')+pt(14+k*28,116,24,26,2*k+2,'');s+=co(26,84,24,'Mikrotik','s')+co(54,84,46,'NVR Gravador','s')+co(82,84,66,'Alarme','s')+lb(180,172,'Portas 1 a 24');return pg('Ligue cada cabo na porta destacada em amarelo.',sv(185,s,'Portas do Switch CFTV'),[['Porta 1','Cabo do <b>Mikrotik</b>'],['Porta 3','Cabo do <b>NVR Gravador</b>'],['Porta 5','Cabo do <b>Alarme</b>']])},
-nvr:function(){var s=bx(44,126),k;s+=pt(14,92,44,40,'LAN','on');for(k=0;k<16;k++)s+=pt(70+(k%8)*34,76+(k>7?36:0),28,30,k+1,'cm');s+=co(36,92,24,'Switch CFTV','s')+co(203,76,24,'16 câmeras')+lb(36,188,'LAN')+lb(203,188,'16 portas PoE');return pg('Ligue cada cabo nas portas destacadas. Amarelo claro: câmeras.',sv(200,s,'Portas do NVR'),[['LAN','Cabo do <b>Switch CFTV</b>'],['PoE 1 a 16','As <b>16 portas</b> são para as câmeras']])}
+onu:function(){return pg('Ligue o cabo na porta destacada em azul.',sv(160,`<rect x='100' y='56' width='160' height='72' rx='12' fill='var(--bg)' stroke='var(--ink)' stroke-width='2'/><text x='114' y='76' font-size='11' fill='var(--mute)'>ONU</text>`+pt(152,86,56,34,'LAN','on')+co(180,86,26,'Porta 5 do Mikrotik')+lb(180,148,'Porta LAN'),'Porta LAN da ONU'),[['LAN','Cabo para a <b>porta 5 do Mikrotik</b>']])},
+sw8:function(){var s=bx(52,96),k;for(k=0;k<8;k++)s+=pt(14+k*33,84,28,40,k+1,k<6?'cm':'');for(k=0;k<2;k++)s+=pt(285+k*33,84,28,40,k+1,k==1?'on':'');s+=co(110,84,26,'6 câmeras')+co(332,84,26,'Firewall')+lb(143,168,'PoE 1 a 8')+lb(316,168,'UPLINK 1 e 2');return pg('Ligue cada cabo nas portas destacadas. Azul claro: câmeras.',sv(180,s,'Portas do Switch 8 portas'),[['UPLINK 2','Cabo do <b>Firewall</b>'],['PoE','<b>6 câmeras</b> nas portas PoE']])},
+fw:function(){var s=bx(62,88),k;for(k=0;k<5;k++)s+=pt(28+k*62,90,52,42,k+1,k==0||k==4?'on':'');s+=co(54,90,46,'Switch 8 Portas')+co(302,90,46,'Mikrotik');return pg('Ligue cada cabo na porta destacada em azul.',sv(160,s,'Portas do Firewall'),[['Porta 1','Cabo do <b>Switch 8 Portas</b>'],['Porta 5','Cabo do <b>Mikrotik</b>']])},
+swc:function(){var s=bx(72,80),k;for(k=0;k<12;k++)s+=pt(14+k*28,84,24,26,2*k+1,k<3?'on':'')+pt(14+k*28,116,24,26,2*k+2,'');s+=co(26,84,24,'Mikrotik','s')+co(54,84,46,'NVR Gravador','s')+co(82,84,66,'Alarme','s')+lb(180,172,'Portas 1 a 24');return pg('Ligue cada cabo na porta destacada em azul.',sv(185,s,'Portas do Switch CFTV'),[['Porta 1','Cabo do <b>Mikrotik</b>'],['Porta 3','Cabo do <b>NVR Gravador</b>'],['Porta 5','Cabo do <b>Alarme</b>']])},
+nvr:function(){var s=bx(44,126),k;s+=pt(14,92,44,40,'LAN','on');for(k=0;k<16;k++)s+=pt(70+(k%8)*34,76+(k>7?36:0),28,30,k+1,'cm');s+=co(36,92,24,'Switch CFTV','s')+co(203,76,24,'16 câmeras')+lb(36,188,'LAN')+lb(203,188,'16 portas PoE');return pg('Ligue cada cabo nas portas destacadas. Azul claro: câmeras.',sv(200,s,'Portas do NVR'),[['LAN','Cabo do <b>Switch CFTV</b>'],['PoE 1 a 16','As <b>16 portas</b> são para as câmeras']])}
 };
 function det(id){var n=ND.filter(function(d){return d.id==id})[0];E('ttd').textContent=n.l.join(' ');
 E('bdd').innerHTML=(id=='mk'?mk():DV[id]?DV[id]():`<span class='chip'>Em breve</span><p>As conexões deste equipamento ainda não foram preenchidas.</p>`)+`<button class='btn y' id='bkd' style='width:100%;margin-top:16px'>Voltar ao fluxograma</button>`;
@@ -266,7 +303,7 @@ E('ovc').onclick=function(e){if(e.target==E('ovc'))E('ovc').classList.remove('on
 E('ove').onclick=function(e){if(e.target==E('ove'))E('ove').classList.remove('on')};
 var MS=0,MST=[['Conecte o notebook','Conecte seu notebook ao Mikrotik.'],['Entre no WinBox','Abra o WinBox e faça o login na opção com o nome da unidade.','Consulte com o suporte o login e a senha.'],['Confira o loopback','Vá até <b>IP</b> › <b>Address List</b>. Em <b>loopback</b>, confira com o suporte se o IP que aparece é o mesmo configurado no sistema. Por último, faça um ping nesse IP no terminal e veja se recebe resposta.'],['Confira o OSPF','Clique em <b>Routing</b> e selecione <b>OSPF</b>. Em <b>Instances</b>, confira se o IP que aparece é o endereço loopback correto passado pelo suporte. Em seguida, ao lado, vá em <b>Networks</b> e confira se o último IP confere com o loopback correto passado pelo suporte.']];
 function bm(t,b,back){E('ttm').textContent=t;E('bdm').innerHTML=(back?`<button class='bk' data-mk='menu'>← Mikrotik</button>`:'')+b;E('bdm').scrollTop=0}
-function mm(){bm('Mikrotik',`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-mk='acc'><span class='ico'>📡</span><span>Mikrotik sem acesso remoto<small>Conferir loopback e OSPF</small></span></button><button class='big' data-mk='bkp'><span class='ico'>💾</span><span>Como fazer Backup<small>Exportar a configuração</small></span></button>`,0)}
+function mm(){bm('Mikrotik',`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-mk='gpon'><span class='ico'>📊</span><span>Configuração na Planilha de GPON<small>Passo a passo em 10 etapas</small></span></button><button class='big' data-mk='acc'><span class='ico'>📡</span><span>Mikrotik sem acesso remoto<small>Conferir loopback e OSPF</small></span></button><button class='big' data-mk='bkp'><span class='ico'>💾</span><span>Como fazer Backup<small>Exportar a configuração</small></span></button>`,0)}
 function bkp(){E('tte').textContent='Como fazer Backup';E('bde').innerHTML=`<span class='chip'>Passo a passo</span><div class='st'><span class='n'>1</span><span>Vá em <b>New Terminal</b>.</span></div><div class='st'><span class='n'>2</span><span>Digite <b>export</b> e tecle Enter.</span></div><div class='st'><span class='n'>3</span><span>Aperte <b>Ctrl + A</b> e depois <b>Ctrl + C</b>.</span></div><div class='st'><span class='n'>4</span><span>Abra o <b>Bloco de Notas</b> e aperte <b>Ctrl + V</b>.</span></div><div class='st'><span class='n'>5</span><span>Depois que todo o texto for colado, vá em <b>Salvar como</b> e confirme o salvamento do arquivo.</span></div>`;E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
 function atn(){E('ttd').textContent='Atenção';E('bdd').innerHTML=`<p class='say'>Antes de fazer qualquer mudança, faça o Backup para recuperar as configurações, se necessário.</p><div style='display:grid;gap:10px;margin-top:16px'><button class='btn y' id='ab1'>Já fiz o backup</button><button class='btn' id='ab2'>Como fazer o Backup</button></div>`;E('ab1').onclick=function(){E('ovd').classList.remove('on');MS=2;msr()};E('ab2').onclick=bkp;E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
 function msr(){var n=MST.length,s=MST[MS],f;
@@ -274,8 +311,8 @@ if(MS==2)f=`<p style='margin:20px 0 8px;font-weight:600'>Funcionou?</p><div styl
 else f=`<div style='display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:18px'><button class='btn' data-mk='prev' ${MS?'':'disabled'}>Voltar</button><button class='btn y' data-mk='${MS==n-1?'conf':'next'}'>${MS==n-1?'Confirmar':'Próximo'}</button></div>`;
 bm('Mikrotik sem acesso remoto',`<div class='bar' style='padding:0 0 14px'>${MST.map(function(_,k){return `<i class='${k<=MS?'on':''}'></i>`}).join('')}</div><span class='chip'>Passo ${MS+1} de ${n}</span><h2>${s[0]}</h2><p>${s[1]}</p>${s[2]?`<p style='color:var(--mute);font-size:15px'>${s[2]}</p>`:''}${f}`,1)}
 E('bdm').onclick=function(e){var b=e.target.closest('[data-mk]');if(!b)return;var a=b.dataset.mk;
-if(a=='menu')mm();else if(a=='bkp')bkp();else if(a=='acc')dlgc('Aviso',`<p class='say'>É recomendado que a configuração do Mikrotik seja feita em conjunto com o suporte.</p>`,'Entendi',function(){MS=0;msr()});
-else if(a=='next'){if(MS==1)atn();else{MS++;msr()}}else if(a=='prev'){MS--;msr()}else if(a=='yes')closeAll();else if(a=='no'){MS=3;msr()}else if(a=='conf')mm()};
+if(a=='menu')mm();else if(a=='bkp')bkp();else if(a=='gpon'){GS=0;gsr()}else if(a=='acc')dlgc('Aviso',`<p class='say'>É recomendado que a configuração do Mikrotik seja feita em conjunto com o suporte.</p>`,'Entendi',function(){MS=0;msr()});
+else if(a=='next'){if(MS==1)atn();else{MS++;msr()}}else if(a=='prev'){MS--;msr()}else if(a=='yes')closeAll();else if(a=='no'){MS=3;msr()}else if(a=='conf')mm();else if(a=='gnext'){GS++;gsr()}else if(a=='gprev'){GS--;gsr()}else if(a=='gend')mm()};
 E('openmk').onclick=function(){mm();E('ovm').classList.add('on');E('clm').focus()};
 E('clm').onclick=function(){E('ovm').classList.remove('on')};
 E('ovm').onclick=function(e){if(e.target==E('ovm'))E('ovm').classList.remove('on')};
@@ -302,6 +339,20 @@ E('bdg').onclick=function(e){var b=e.target.closest('[data-ag]');if(!b)return;if
 E('openapp').onclick=function(){AS=0;asr();E('ovg').classList.add('on');E('clg').focus()};
 E('clg').onclick=function(){E('ovg').classList.remove('on')};
 E('ovg').onclick=function(e){if(e.target==E('ovg'))E('ovg').classList.remove('on')};
+function P(){return [].slice.call(arguments).map(function(x){return `<b>${x}</b>`}).join(' › ')}
+var GS=0,GP=[
+{c:'Etapa 1',t:'Abrir o aplicativo WinBox',h:`<p style='color:var(--mute)'>Mikrotik configurado na mesma planilha de GPON.</p><p>Abra o aplicativo <b>WinBox</b>.</p>`},
+{c:'Etapa 2',t:'Apagar os IPs configurados',h:`<p>Apague as configurações antigas, nesta ordem:</p><ol class='cl'><li>${P('IP','Address','DHCP Server')}: apague os <b>dois DHCP ativos</b> (<b>Control + Delete</b>).</li><li>${P('IP','Address','Network')}: apague.</li><li>${P('IP','Address','Leases')}: apague e feche a janela.</li><li>${P('IP','Address','Pool')}: apague e feche a janela.</li></ol>`},
+{c:'Etapa 3',t:'Configurar os IPs da unidade conforme a planilha',h:`<ol class='cl'><li>Vá em ${P('IP','Address')}.</li><li>Olhe a <b>planilha de GPON</b>.</li><li>Dê dois cliques em cada IP para abrir e altere para os IPs da planilha.</li><li>Clique em ${P('Apply','OK')}.</li></ol><div class='note'><b>OBS:</b> tirando o loopback, todos os demais IPs precisam ter <b>/24</b> depois do número.</div>`},
+{c:'Etapa 4 · Passo 1',t:'Configurar o DHCP: bridge-local',h:`<ol class='cl'><li>Vá em ${P('IP','DHCP Server','DHCP','DHCP Setup')} e escolha <span class='cd'>bridge-local</span>.</li><li>Clique em <b>Next</b> até chegar em <b>Address to Give Out</b>.</li><li>Mude os números depois do último ponto para <b>199</b>.</li><li>Clique em <b>Next</b> até chegar em <b>Lease Time</b>.</li><li>Coloque <span class='cd'>7:00:00</span>.</li><li>Clique em ${P('Next','OK')}.</li></ol>`},
+{c:'Etapa 4 · Passo 2',t:'Configurar o DHCP: ether4_cftv',h:`<ol class='cl'><li>Vá em ${P('IP','DHCP Server','DHCP','DHCP Setup')} e escolha <span class='cd'>ether4_cftv</span>.</li><li>Clique em <b>Next</b> até chegar em <b>Address to Give Out</b>.</li><li>Mude os números depois do último ponto para <b>49</b>.</li><li>Clique em <b>Next</b> até chegar em <b>Lease Time</b>.</li><li>Coloque <span class='cd'>7:00:00</span>.</li><li>Clique em ${P('Next','OK')}.</li></ol>`},
+{c:'Etapa 5',t:'Configurar o Firewall (NAT)',h:`<ol class='cl'><li>Vá em ${P('IP','Firewall')} e abra a <b>primeira linha</b> (Nat rule).</li><li>Clique em <b>Advanced</b>.</li><li>Em <b>Src. Address List</b>, coloque o IP de rede da planilha do <b>ether4</b>, removendo o <b>.254</b> e colocando <b>.0</b>.</li><li>Clique em <b>OK</b>.</li></ol>`},
+{c:'Etapa 6',t:'Configurar o Firewall (IPsec)',h:`<ol class='cl'><li>Vá em ${P('IP','IPsec','Policy')} e clique na regra.</li><li>Em <b>Src. Address List</b>, coloque o IP de rede da planilha do <b>ether4</b>, removendo o <b>.254</b> e colocando <b>.0</b>.</li><li>Clique em ${P('Apply','OK')}.</li></ol>`},
+{c:'Etapa 7',t:'Configurar o Routing',h:`<ol class='cl'><li>Vá em ${P('Routing','OSPF','Instance','Router ID')} e coloque o <b>mesmo IP do loopback</b>. Clique em ${P('Apply','OK')}.</li><li>Vá em ${P('Routing','OSPF','Network')} e vá alterando conforme os IPs da <b>Address List</b>, mudando o final.</li><li>Vá em ${P('Routing','OSPF','Area')} e confirme se está na área correta.</li></ol>`},
+{c:'Etapa 8',t:'Colocar o nome do arquivo',h:`<p>Vá em ${P('System','Identity')} e coloque o nome da planilha:</p><p><span class='cd'>CE_nome escola</span></p><p>Depois, salve.</p>`},
+{c:'Etapa 9',t:'Exportar o arquivo',h:`<ol class='cl'><li>Abra o <b>New Terminal</b>.</li><li>Escreva <span class='cd'>export file=</span> e copie o nome da escola, tirando os espaços e colocando <b>_</b> no lugar.</li><li>Aperte <b>Enter</b>.</li></ol><div class='note'>Exemplo: <span class='cd'>export file=CE_nome_escola</span></div>`},
+{c:'Etapa 10',t:'Colocar o arquivo salvo na pasta',h:`<p>Abra <b>Files</b> e arraste o arquivo para a pasta.</p>`}];
+function gsr(){var n=GP.length,s=GP[GS];bm('Configuração na Planilha de GPON',`<div class='bar' style='padding:0 0 14px'>${GP.map(function(_,k){return `<i class='${k<=GS?'on':''}'></i>`}).join('')}</div><span class='chip'>${s.c}</span><h2>${s.t}</h2>${s.h}<div style='display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:18px'><button class='btn' data-mk='gprev' ${GS?'':'disabled'}>Voltar</button><button class='btn y' data-mk='${GS==n-1?'gend':'gnext'}'>${GS==n-1?'Concluir':'Próximo'}</button></div>`,1)}
 E('opennvr').onclick=function(){menuN();E('bdn').scrollTop=0;E('ovn').classList.add('on');E('cln').focus()};
 E('cln').onclick=function(){E('ovn').classList.remove('on')};
 E('ovn').onclick=function(e){if(e.target==E('ovn'))E('ovn').classList.remove('on')};
