@@ -169,6 +169,42 @@ main{padding-top:0}
 .lk2{background:none;border:0;padding:0;color:var(--acc);font:inherit;text-align:left;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .lk2:after{content:' ›'}
 .lk2:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+#ovs{z-index:35}
+#tts{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+#bds{padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+.gm{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--mute);margin-bottom:6px}
+.lnk3{background:none;border:0;color:var(--acc);font:500 14px Barlow,sans-serif;cursor:pointer;text-decoration:underline;padding:6px 0}
+.lbl2{margin:18px 0 6px;font:600 13px Barlow Semi Condensed,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.pth{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px;padding:12px;background:var(--bg);border:1px dashed var(--acc);border-radius:10px}
+.pth span{padding:4px 10px;border-radius:8px;background:var(--tile);color:var(--ink);border:1px solid var(--acc);font:600 15px Barlow Semi Condensed,sans-serif}
+.pth i{color:var(--acc);font-style:normal;font-weight:700}
+.dt{margin-top:14px;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.dt summary{cursor:pointer;color:var(--acc);font-weight:600}
+.gk{margin:0;padding:10px 12px;border-left:4px solid var(--ok);background:var(--bg);border-radius:0 8px 8px 0}
+.gb{width:100%;margin-top:10px}
+.gb:focus-visible,.lnk3:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+#ovf .sheet{height:100%;max-height:none}
+#bdf{flex:1}
+#bdf{display:flex;flex-direction:column;min-height:0}
+#fc{position:relative;flex:1;min-height:340px;margin-top:6px}
+#fc svg{position:absolute;inset:0;width:100%;height:100%;color:var(--mute)}
+.alm{display:block;width:100%;height:auto;max-width:460px;margin:0 auto}
+.hs{cursor:pointer}
+.hs:focus{outline:none}
+.hs .hl{fill:transparent;stroke:transparent;stroke-width:3}
+.hs:hover .hl,.hs:focus-visible .hl,.hs.sel .hl{stroke:var(--acc);fill:rgba(46,124,255,.2)}
+.led{animation:bk 1.4s ease-in-out infinite}
+@keyframes bk{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.led{animation:none}}
+.zw{overflow-x:auto;padding:8px 0}
+.tm{cursor:pointer}
+.tm:focus{outline:none}
+.tm rect.b{fill:#0A111D;stroke:#3a5478;stroke-width:2}
+.tm.nm rect.b{stroke:var(--acc)}
+.tm:hover rect.b,.tm:focus-visible rect.b,.tm.sel rect.b{stroke:var(--ink);fill:#16304f}
+.tm.use rect.b{stroke:var(--acc)}
+.tm:not(.use){opacity:.5}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:-1px;border:1px solid rgba(255,255,255,.55)}
 </style>
 </head>
 <body>
@@ -192,6 +228,7 @@ main{padding-top:0}
   <button class='big' id='openap'><span class='ico'>🏫</span><span>Aluno Presente<small>Planta e posição das câmeras</small></span></button>
   <button class='big' id='openapp'><span class='ico'>📲</span><span>Aplicativo de Monitoramento<small>Instalar e configurar o Moni Mobile</small></span></button>
   <button class='big' id='openvg'><span class='ico'>🛡️</span><span>Vigia Mais<small>Adicionar câmeras no NVR</small></span></button>
+  <button class='big' id='openal'><span class='ico'>🚨</span><span>Instalação e Configuração de Alarme<small>Instalação e configuração</small></span></button>
 </nav>
 </main>
 
@@ -219,6 +256,10 @@ main{padding-top:0}
 
 <div class='ov' id='ovv' role='dialog' aria-modal='true' aria-labelledby='ttv'><div class='sheet'><div class='hd'><h2 id='ttv'>Vigia Mais</h2><button class='x' id='clv' aria-label='Fechar'>✕</button></div><div class='bd' id='bdv'></div></div></div>
 
+<div class='ov' id='ovs' role='dialog' aria-modal='true' aria-labelledby='tts'><div class='sheet'><div class='hd'><h2 id='tts'>Guia</h2><button class='x' id='cls' aria-label='Fechar'>✕</button></div><div class='bd' id='bds'></div></div></div>
+
+<div class='ov' id='ova' role='dialog' aria-modal='true' aria-labelledby='tta'><div class='sheet'><div class='hd'><h2 id='tta'>Alarme</h2><button class='x' id='cla' aria-label='Fechar'>✕</button></div><div class='bd' id='bda'></div></div></div>
+
 <script>
 var S=[
 {c:"Antes de começar",t:"Separe o que você vai usar",h:'<ul class="chk"><li>Cabo console ligado do notebook ao switch</li><li>Programa de terminal aberto (PuTTY)</li><li>Usuário e senha de administrador do switch</li></ul><div class="note">Depois do reset o switch reinicia e a conexão cai por um tempo.</div>'},
@@ -241,13 +282,18 @@ bk.onclick=function(){if(i>0){i--;show()}};
 nx.onclick=function(){if(i<S.length-1){i++;show()}else closeSheet()};
 ov.onclick=function(e){if(e.target==ov)closeSheet()};
 document.addEventListener("keydown",function(e){if(e.key=="Escape")closeSheet()});
-var ND=[{id:'onu',l:['ONU'],x:127.5,r:0,ok:1},{id:'mk',l:['Mikrotik'],x:127.5,r:1,ok:1},{id:'fw',l:['Firewall'],x:0,r:1,ok:1},{id:'sw8',l:['Switch 8 portas','(Aluno Presente)'],x:0,r:2,ok:1},{id:'cam1',l:['Câmeras','(Aluno Presente)'],x:0,r:3},{id:'swc',l:['Switch CFTV'],x:127.5,r:2,ok:1},{id:'nvr',l:['NVR Gravador'],x:127.5,r:3,ok:1},{id:'cam2',l:['Câmeras'],x:127.5,r:4},{id:'al',l:['Alarme'],x:255,r:2},{id:'wf',l:['Wi-Fi','(Unidades em VG)'],x:255,r:3}];
-var LN=[[180,62,180,100],[127.5,126,105,126],[52.5,152,52.5,190],[52.5,242,52.5,280],[180,152,180,190],[232.5,216,255,216],[307.5,242,307.5,280],[180,242,180,280],[180,332,180,370]];
+var ND=[{id:'onu',l:['ONU'],x:127.5,r:0,ok:1},{id:'mk',l:['Mikrotik'],x:127.5,r:1,ok:1},{id:'fw',l:['Firewall'],x:0,r:1,ok:1},{id:'sw8',l:['Switch 8 portas','(Aluno Presente)'],x:0,r:2,ok:1},{id:'cam1',l:['Câmeras','(Aluno Presente)'],x:0,r:3},{id:'swc',l:['Switch CFTV'],x:127.5,r:2,ok:1},{id:'nvr',l:['NVR Gravador'],x:127.5,r:3,ok:1},{id:'cam2',l:['Câmeras'],x:127.5,r:4},{id:'al',l:['Alarme'],x:255,r:2}];
+var LN=[[180,62,180,100],[127.5,126,105,126],[52.5,152,52.5,190],[52.5,242,52.5,280],[180,152,180,190],[232.5,216,255,216],[180,242,180,280],[180,332,180,370]];
 function E(i){return document.getElementById(i)}
-function flow(){var s=`<svg class='fl' viewBox='0 0 360 430' role='img' aria-label='Fluxograma da rede unificada'><defs><marker id='ar' viewBox='0 0 8 8' refX='7' refY='4' markerWidth='8' markerHeight='8' markerUnits='userSpaceOnUse' orient='auto'><path d='M0 0L8 4L0 8z' fill='currentColor'/></marker></defs>`;
-LN.forEach(function(l){s+=`<line x1='${l[0]}' y1='${l[1]}' x2='${l[2]}' y2='${l[3]}' stroke='currentColor' stroke-width='2' marker-end='url(#ar)'/>`});
-ND.forEach(function(n){var y=10+90*n.r,t=n.l.length>1;s+=`<g class='nd${n.ok?' ok':''}'${n.ok?` tabindex='0' role='button'`:''} data-id='${n.id}' aria-label='${n.l.join(' ')}'><rect x='${n.x}' y='${y}' width='105' height='52' rx='10'/><text x='${n.x+52.5}' y='${y+(t?23:31)}'>${n.l[0]}</text>${t?`<text class='s' x='${n.x+52.5}' y='${y+40}'>${n.l[1]}</text>`:''}</g>`});
+var EG=[['onu','mk','v'],['mk','fw','l'],['fw','sw8','v'],['sw8','cam1','v'],['mk','swc','v'],['swc','al','r'],['swc','nvr','v'],['nvr','cam2','v']];
+function flow(W,H){var g=Math.max(18,W*.06),nw=(W-2*g)/3,nh=Math.max(44,Math.min(90,H*.11)),vg=(H-5*nh)/4,fs=Math.max(12,Math.min(22,nw*.115)),sf=Math.max(10,fs*.78),P={};
+ND.forEach(function(n){P[n.id]={x:Math.round(n.x/127.5)*(nw+g),y:n.r*(nh+vg)}});
+var s=`<svg viewBox='0 0 ${W} ${H}' role='img' aria-label='Fluxograma das conexões'><defs><marker id='ar' viewBox='0 0 8 8' refX='7' refY='4' markerWidth='8' markerHeight='8' markerUnits='userSpaceOnUse' orient='auto'><path d='M0 0L8 4L0 8z' fill='currentColor'/></marker></defs>`;
+EG.forEach(function(e){var a=P[e[0]],b=P[e[1]],x1,y1,x2,y2;if(e[2]=='v'){x1=x2=a.x+nw/2;y1=a.y+nh;y2=b.y}else if(e[2]=='l'){x1=a.x;x2=b.x+nw;y1=y2=a.y+nh/2}else{x1=a.x+nw;x2=b.x;y1=y2=a.y+nh/2}s+=`<line x1='${x1}' y1='${y1}' x2='${x2}' y2='${y2}' stroke='currentColor' stroke-width='2' marker-end='url(#ar)'/>`});
+ND.forEach(function(n){var p=P[n.id],t=n.l.length>1,cx=p.x+nw/2,cy=p.y+nh/2;s+=`<g class='nd${n.ok?' ok':''}'${n.ok?` tabindex='0' role='button'`:''} data-id='${n.id}' aria-label='${n.l.join(' ')}'><rect x='${p.x}' y='${p.y}' width='${nw}' height='${nh}' rx='${Math.min(14,nh/4)}'/><text style='font-size:${fs}px' x='${cx}' y='${t?cy-fs*.1:cy+fs*.35}'>${n.l[0]}</text>${t?`<text class='s' style='font-size:${sf}px' x='${cx}' y='${cy+sf*1.2}'>${n.l[1]}</text>`:''}</g>`});
 return s+'</svg>'}
+function fcr(){var c=E('fc');if(!c)return;var W=c.clientWidth,H=c.clientHeight;if(W>0&&H>0)c.innerHTML=flow(W,H)}
+window.addEventListener('resize',function(){if(E('ovf').classList.contains('on'))fcr()});
 function mk(){var P=[['Internet','(PoE IN)'],['LAN 2'],['LAN 3'],['LAN 4'],['LAN 5']],C=['Firewall','Switch CFTV','ONU'];
 var s=`<svg class='fl' viewBox='0 0 360 195' role='img' aria-label='Portas do Mikrotik'><rect x='10' y='62' width='340' height='88' rx='12' fill='var(--bg)' stroke='var(--ink)' stroke-width='2'/><text x='22' y='80' font-size='11' fill='var(--mute)'>MikroTik hEX</text>`;
 P.forEach(function(p,k){var x=28+k*62,c=x+26,on=k>1;s+=`<g class='pt${on?' on':''}'><rect x='${x}' y='88' width='52' height='42' rx='6'/><text x='${c}' y='116'>${k+1}</text></g><text x='${c}' y='170' text-anchor='middle' font-size='11.5' fill='var(--mute)'>${p[0]}</text>`+(p[1]?`<text x='${c}' y='183' text-anchor='middle' font-size='11.5' fill='var(--mute)'>${p[1]}</text>`:'');
@@ -269,7 +315,7 @@ nvr:function(){var s=bx(44,126),k;s+=pt(14,92,44,40,'LAN','on');for(k=0;k<16;k++
 function det(id){var n=ND.filter(function(d){return d.id==id})[0];E('ttd').textContent=n.l.join(' ');
 E('bdd').innerHTML=(id=='mk'?mk():DV[id]?DV[id]():`<span class='chip'>Em breve</span><p>As conexões deste equipamento ainda não foram preenchidas.</p>`)+`<button class='btn y' id='bkd' style='width:100%;margin-top:16px'>Voltar ao fluxograma</button>`;
 E('bkd').onclick=function(){E('ovd').classList.remove('on')};E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
-E('bdf').innerHTML=`<p style='margin:0 0 12px;color:var(--mute)'>Toque em um equipamento para ver onde ligar os cabos.</p>`+flow()+`<div class='lg'>Esse fluxograma só é válido para as unidades de Cuiabá</div>`;
+E('bdf').innerHTML=`<p style='margin:0 0 12px;color:var(--mute)'>Toque em um equipamento para ver onde ligar os cabos.</p>`+`<div id='fc'></div>`+`<div class='lg'>Esse fluxograma só é válido para as unidades de Cuiabá</div>`;
 E('bdf').onclick=function(e){var g=e.target.closest('.nd.ok');if(g)det(g.dataset.id)};
 E('bdf').onkeydown=function(e){var g=e.target.closest('.nd.ok');if(g&&(e.key=='Enter'||e.key==' ')){e.preventDefault();det(g.dataset.id)}};
 var NV=[
@@ -282,7 +328,7 @@ var NETH=`<p style='margin:0 0 4px;color:var(--mute)'>Toque em cada campo para e
 function netClick(e){var b=e.target.closest('.fld');if(b){var f=NV.filter(function(d){return d.k==b.dataset.k})[0];dlg(f.l+' '+f.v,`<span class='chip'>Explicação</span>`+f.h,'Entendi')}else if(e.target.closest('#ipb'))dlg('Como descobrir o IP da rede',`<span class='chip'>Passo a passo</span><p>1. No notebook conectado à rede do local, tecle <b>Windows</b>, digite <b>cmd</b> e aperte Enter.</p><p>2. Na janela preta, digite o comando abaixo e aperte Enter:</p><pre style='margin-top:8px'>ipconfig</pre><p>3. Na resposta, veja os campos <b>Endereço IPv4</b>, <b>Máscara de Sub-rede</b> e <b>Gateway Padrão</b>. Eles mostram a rede do local, que o NVR deve seguir.</p>`,'Entendi')};
 function bn(t,b,back){E('ttn').textContent=t;E('bdn').innerHTML=(back?`<button class='bk' data-go='menu'>← Manutenção do NVR</button>`:'')+b;E('bdn').scrollTop=0}
 function menuN(){bn('Manutenção do NVR',`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-go='net'><span class='ico'>🌐</span><span>Configuração de Rede<small>IP, máscara, gateway e DNS</small></span></button><button class='big' data-go='bat'><span class='ico'>🔋</span><span>Problemas na Bateria<small>Principais sintomas</small></span></button><button class='big' data-go='rst'><span class='ico'>♻️</span><span>Como resetar o NVR<small>Restauração simples e de fábrica</small></span></button><button class='big' data-go='hdmi'><span class='ico'>🖥️</span><span>HDMI sem Vídeo<small>Sem imagem na tela do NVR</small></span></button>`,0)}
-function closeAll(){['ove','ovd','ovc','ovm','ovp','ovg','ovv','ovn','ovf'].forEach(function(i){E(i).classList.remove('on')})}
+function closeAll(){['ove','ovs','ovd','ovc','ovm','ovp','ovg','ovv','ova','ovn','ovf'].forEach(function(i){E(i).classList.remove('on')})}
 function dlgc(t,h,b,cb){E('ttd').textContent=t;E('bdd').innerHTML=h+`<button class='btn y' id='bkd' style='width:100%;margin-top:16px'>${b}</button>`;E('bkd').onclick=function(){E('ovd').classList.remove('on');if(cb)cb()};E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
 var SY=[['1. Data e hora ficam erradas','O gravador perde a data ou volta para uma data antiga após ser desligado.'],['2. Perda de configurações da BIOS','Podem ocorrer avisos durante a inicialização ou perda de ajustes.']],SI=0;
 function bats(){var n=SY.length,s=SY[SI];bn('Problemas na Bateria',`<h2 style='margin-bottom:16px'>Principais sintomas de bateria fraca ou descarregada</h2><button class='syc' data-sy='1'><span class='chip'>Sintoma ${SI+1} de ${n}</span><h3>${s[0]}</h3><p>${s[1]}</p><span class='hint'>${SI==n-1?'Toque no cartão para voltar ao primeiro':'Toque no cartão para ver o próximo ›'}</span></button><div class='dots'>${SY.map(function(_,k){return `<i class='${k==SI?'on':''}'></i>`}).join('')}</div>`,1)}
@@ -294,7 +340,7 @@ var s=L[RS.i];bn('Como resetar o NVR',`<div class='bar' style='padding:0 0 14px'
 function rsAct(a){if(a=='next'){RS.i++;rsr()}else if(a=='prev'){RS.i--;rsr()}else if(a=='fact'){RS={m:'f',i:0};rsr()}else if(a=='ok'){dlgc('Procedimento concluído',`<p class='say'>Que bom que funcionou!</p>`+(RS.m=='f'?`<p>Depois do padrão de fábrica, o NVR volta inativo: ative com uma nova senha e refaça a Configuração de Rede.</p>`:''),'Ok',closeAll)}else if(a=='fail'){closeAll();dlgc('Aviso',`<p class='say'>Relate ao suporte.</p>`,'Ok')}}
 function hd(){bn('HDMI sem Vídeo',`<span class='chip'>Passo a passo</span><div class='st'><span class='n'>1</span><span>Abra as configurações do NVR.</span></div><div class='st'><span class='n'>2</span><span>Clique em <b>Configurações da visualização em direto</b>.</span></div><div class='st'><span class='n'>3</span><span>Em <b>Porta de Saída</b>, selecione a opção <b>HDMI 2</b>.</span></div><div class='st'><span class='n'>4</span><span>Clique em <b>Salvar</b>.</span></div><button class='btn y' data-hd='1' style='width:100%;margin-top:18px'>Pronto!</button>`,1)}
 function ask(){E('ttd').textContent='Funcionou?';E('bdd').innerHTML=`<p>O vídeo voltou a aparecer na tela?</p><div style='display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px'><button class='btn y' id='yes'>Sim</button><button class='btn' id='no'>Não</button></div>`;E('yes').onclick=function(){dlgc('Tudo certo!',`<p class='say'>Que ótimo! O vídeo voltou a aparecer. 🎉</p>`,'Ok',closeAll)};E('no').onclick=function(){dlgc('Aviso',`<p class='say'>Comunique o suporte!</p>`,'Ok',closeAll)};E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
-E('bdn').onclick=function(e){var g=e.target.closest('[data-go]');if(g){var v=g.dataset.go;if(v=='menu')menuN();else if(v=='net')bn('Configuração de Rede',NETH,1);else if(v=='bat'){SI=0;bats()}else if(v=='hdmi')hd();else if(v=='rst')dlgc('Como resetar o NVR',`<p class='say'>Vamos fazer uma restauração simples, assim não precisaremos configurar o IP e senha novamente.</p>`,'Ok!',function(){RS={m:'s',i:0};rsr()});return}if(e.target.closest('[data-hd]')){ask();return}var r=e.target.closest('[data-rs]');if(r){rsAct(r.dataset.rs);return}if(e.target.closest('[data-sy]')){SI=(SI+1)%SY.length;bats();return}netClick(e)};
+E('bdn').onclick=function(e){var g=e.target.closest('[data-go]');if(g){var v=g.dataset.go;if(v=='menu')menuN();else if(v=='net')bn('Configuração de Rede',NETH,1);else if(v=='bat'){SI=0;bats()}else if(v=='hdmi')hd();else if(v=='rst')gs('reset');return}if(e.target.closest('[data-hd]')){ask();return}var r=e.target.closest('[data-rs]');if(r){rsAct(r.dataset.rs);return}if(e.target.closest('[data-sy]')){SI=(SI+1)%SY.length;bats();return}netClick(e)};
 var CM=[
 {t:'Offline ou desconectando sozinha',i:'📶',sh:'Possíveis soluções',c:['Conector RJ45 mal crimpado, oxidado ou com umidade.','Cabo de rede danificado.','Porta PoE do NVR ou switch com defeito.','Alimentação insuficiente.','Conflito de IP ou endereço alterado.','Falha na própria câmera.'],s:['Verifique no NVR a mensagem de erro do canal, quando disponível.','Confira os LEDs da porta PoE e se a câmera está recebendo alimentação.','Teste outro cabo de rede ou faça um teste de continuidade.','Troque a câmera de porta PoE para verificar se o problema acompanha a porta ou a câmera.','Utilize o SADP para verificar se ela continua sendo detectada e se o endereço IP está correto.','Se o problema persistir, teste a câmera diretamente em uma rede de bancada, com alimentação compatível.']},
 {t:'Não acessa pela rede ou pelo NVR',i:'🔎',sh:'Solução',c:['Computador e câmera em sub-redes diferentes.','Gateway ou máscara de sub-rede incorretos.','Endereço IP duplicado.','Senha incorreta no cadastro do NVR.','Porta de serviço ou protocolo incompatível.','Configuração de rede incorreta no próprio NVR.'],s:['Abra o SADP e identifique o IP atual da câmera.','Confira o IP e a máscara do computador com ipconfig, no Windows.','Compare os endereços e confirme se computador e câmera estão na mesma rede, quando essa for a topologia esperada.','Verifique se o IP já está sendo utilizado por outro dispositivo.','Confira as credenciais cadastradas no NVR e atualize-as, se necessário.','Se a câmera funcionar diretamente, mas não no NVR, investigue a configuração do canal, a rede interna do gravador e a compatibilidade.']},
@@ -324,7 +370,7 @@ if(MS==2)f=`<p style='margin:20px 0 8px;font-weight:600'>Funcionou?</p><div styl
 else f=`<div style='display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:18px'><button class='btn' data-mk='prev' ${MS?'':'disabled'}>Voltar</button><button class='btn y' data-mk='${MS==n-1?'conf':'next'}'>${MS==n-1?'Confirmar':'Próximo'}</button></div>`;
 bm('Mikrotik sem acesso remoto',`<div class='bar' style='padding:0 0 14px'>${MST.map(function(_,k){return `<i class='${k<=MS?'on':''}'></i>`}).join('')}</div><span class='chip'>Passo ${MS+1} de ${n}</span><h2>${s[0]}</h2><p>${s[1]}</p>${s[2]?`<p style='color:var(--mute);font-size:15px'>${s[2]}</p>`:''}${f}`,1)}
 E('bdm').onclick=function(e){var b=e.target.closest('[data-mk]');if(!b)return;var a=b.dataset.mk;
-if(a=='menu')mm();else if(a=='bkp')bkp();else if(a=='gpon'){GS=0;gsr()}else if(a=='acc')dlgc('Aviso',`<p class='say'>É recomendado que a configuração do Mikrotik seja feita em conjunto com o suporte.</p>`,'Entendi',function(){MS=0;msr()});
+if(a=='menu')mm();else if(a=='bkp')bkp();else if(a=='gpon'){GS=0;gsr()}else if(a=='acc')gs('mkacc');
 else if(a=='next'){if(MS==1)atn();else{MS++;msr()}}else if(a=='prev'){MS--;msr()}else if(a=='yes')closeAll();else if(a=='no'){MS=3;msr()}else if(a=='conf')mm();else if(a=='gnext'){GS++;gsr()}else if(a=='gprev'){GS--;gsr()}else if(a=='gend')mm()};
 E('openmk').onclick=function(){mm();E('ovm').classList.add('on');E('clm').focus()};
 E('clm').onclick=function(){E('ovm').classList.remove('on')};
@@ -379,15 +425,194 @@ E('clv').onclick=function(){E('ovv').classList.remove('on')};
 E('ovv').onclick=function(e){if(e.target==E('ovv'))E('ovv').classList.remove('on')};
 function cola(){dlgc('Atenção',`<p class='say'>Atenção! É estritamente proibido o compartilhamento das imagens.</p>`,'Entendi',function(){E('ttd').textContent='Como fazer a coleta de imagens das câmeras';E('bdd').innerHTML=`<span class='chip'>Passo a passo</span>`+stp([`Abra a página web do NVR e clique em <b>Reprodução</b>.`,`No calendário, escolha a data do ocorrido e clique em <b>Pesquisar</b>.`,`Nas opções embaixo do player, clique no ícone de <b>download</b>.`,`Na página que abrir, preencha corretamente os campos <b>Hora de Início</b> e <b>Hora de fim</b> com os horários solicitados.`,`Selecione os arquivos de gravação que correspondem ao horário requerido e clique em <b>Baixar para PC</b>.`,`Assim que o download dos arquivos completar, vai aparecer a mensagem <b>Copiado</b> e você poderá ver as gravações na pasta que está configurada no NVR.`])+`<button class='btn y' data-col='1' style='width:100%;margin-top:18px'>Como descobrir a pasta onde está a gravação</button>`;E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()})}
 function colaPasta(){E('tte').textContent='Onde está a gravação';E('bde').innerHTML=`<span class='chip'>Passo a passo</span>`+stp([`Vá em <b>Configuração</b> › <b>Local</b>.`,`Arraste para baixo até <b>Configurações do arquivo de gravação</b>.`,`Lá você poderá ver o caminho da pasta onde foram salvas as gravações.`]);E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
+var V1=[['Funcionou','done'],['O problema continua','next']],V2=[['Funcionou','done'],['O problema continua','fail']],GS2=[];
+var TB=`<table class='tb'><tr><th>Campo</th><th>Informação</th></tr><tr><td>Endereço IP</td><td>IP da câmera</td></tr><tr><td>Protocolo</td><td><b>HIKVISION</b> (se for uma câmera da Hikvision) e <b>ONVIF</b> (se for uma câmera Intelbras)</td></tr><tr><td>Porta</td><td><span class='cd'>8000</span></td></tr><tr><td>Usuário</td><td><span class='cd'>admin</span></td></tr><tr><td>Senha</td><td>Senha da câmera</td></tr></table>`;
+var G={
+reset:{n:'Como resetar o NVR',w:'Vamos fazer uma restauração simples, assim não precisaremos configurar o IP e senha novamente.',wb:'Ok!',ok:'Que bom que funcionou!',ok2:'Que bom que funcionou! Depois do padrão de fábrica, o NVR volta inativo: ative com uma nova senha e refaça a Configuração de Rede.',no:'Relate ao suporte.',s:[
+{t:'Abra Configuração',d:'Na página web do NVR, clique em <b>Configuração</b>, na barra de cima.',p:['Configuração']},
+{t:'Vá em Sistema e Manutenção',d:'No menu da esquerda, abra estas opções.',p:['Sistema','Manutenção'],m:'Em firmwares mais novos o caminho pode ser Sistema e Manutenção › Manutenção › Backup e Redefinição.',ml:'Não achou o menu?'},
+{t:'Abra a tela Padrão',d:'Dentro de Manutenção, clique em <b>Padrão</b>. Os botões de restauração ficam nessa tela.'},
+{t:'Clique em Restaurar',d:'É a restauração simples: mantém o IP e a senha. Confirme em <b>OK</b> e aguarde o NVR reiniciar sozinho.',q:[['Funcionou','done'],['Tentar Restauração de Fábrica','f1']]},
+{id:'f1',t:'Se não funcionou: restauração de fábrica',n:'Atenção: o NVR perde o IP e a senha. Anote os dados de rede antes de continuar.',d:'É o padrão de fábrica: apaga todas as configurações, inclusive IP e senha. Confirme em <b>OK</b> e aguarde o NVR reiniciar.',q:[['Funcionou','done2'],['Não funcionou','fail']]}]},
+hdmi:{n:'HDMI sem Vídeo',ok:'Que ótimo! O vídeo voltou a aparecer. 🎉',no:'Comunique o suporte!',s:[
+{t:'Abra as configurações do NVR',d:'Abra as configurações do NVR.'},
+{t:'Abra a visualização em direto',d:'Clique em <b>Configurações da visualização em direto</b>.'},
+{t:'Escolha a porta de saída',d:'Em <b>Porta de Saída</b>, selecione a opção <b>HDMI 2</b>.'},
+{t:'Salve',d:'Clique em <b>Salvar</b>.',q:[['O vídeo voltou','done'],['Continua sem vídeo','fail']]}]},
+mkacc:{n:'Mikrotik sem acesso remoto',w:'É recomendado que a configuração do Mikrotik seja feita em conjunto com o suporte.',s:[
+{t:'Conecte o notebook',d:'Conecte seu notebook ao Mikrotik.'},
+{t:'Entre no WinBox',d:'Abra o WinBox e faça o login na opção com o nome da unidade.',n:'Consulte com o suporte o login e a senha.'},
+{t:'Faça o backup antes',n:'Atenção: antes de fazer qualquer mudança, faça o Backup para recuperar as configurações, se necessário.',d:`Tenha o backup salvo antes de continuar.<button class='btn gb' data-gx='opt' data-t='@backup'>Como fazer o Backup</button>`},
+{t:'Confira o loopback',p:['IP','Address List'],d:'Em <b>loopback</b>, confira com o suporte se o IP que aparece é o mesmo configurado no sistema. Por último, faça um ping nesse IP no terminal.',q:[['Funcionou','done'],['Não funcionou','next']]},
+{t:'Confira o OSPF',p:['Routing','OSPF','Instances'],d:'Confira se o IP que aparece é o endereço loopback correto passado pelo suporte. Em seguida, ao lado, vá em <b>Networks</b> e confira se o último IP confere com o loopback correto.',q:[['Confirmar','done']]}]},
+backup:{n:'Como fazer Backup',ok:'Backup concluído!',s:[
+{t:'Abra o New Terminal',d:'No WinBox, vá em <b>New Terminal</b>.'},
+{t:'Digite export',d:'Digite o comando abaixo e tecle Enter.',c:'export'},
+{t:'Copie o texto',d:'Aperte <b>Ctrl + A</b> e depois <b>Ctrl + C</b>.'},
+{t:'Cole no Bloco de Notas',d:'Abra o <b>Bloco de Notas</b> e aperte <b>Ctrl + V</b>.'},
+{t:'Salve o arquivo',d:'Depois que todo o texto for colado, vá em <b>Salvar como</b> e confirme o salvamento do arquivo.'}]},
+gpon:{n:'Planilha de GPON',ok:'Configuração concluída!',s:GP.map(function(x){return{t:x.t,d:x.h}})},
+app:{n:'Aplicativo de Monitoramento',ok:'Pronto! Você já está monitorando em tempo real.',s:[
+{t:'Baixe o aplicativo',d:'Na loja de aplicativos do smartphone (<b>Google Play Store</b> no Android ou <b>App Store</b> no iOS), pesquise e baixe o <b>Moni Mobile</b>.'},
+{t:'Cadastre o endereço',d:'Abra o aplicativo e toque no <b>+</b> no canto inferior da tela para realizar o <b>Cadastro de Endereço</b>.'},
+{t:'Preencha o servidor',d:'Insira os dados exatamente como abaixo e toque no <b>Check (✓)</b> no topo para salvar.',kv:[['Digite o IP','monitor.stelseg.com.br'],['Digite a porta','5784']]},
+{t:'Faça o login',d:'Volte à tela inicial e entre com as credenciais. Depois, toque em <b>Login</b>.',kv:[['Usuário','Número de telefone da Diretora'],['Senha padrão','123456']]},
+{t:'Troque a senha',d:'No primeiro acesso o aplicativo pede a troca da senha. Peça a diretora para digitar uma nova senha pessoal, confirme no campo abaixo e toque em <b>Alterar</b>.'},
+{t:'Veja as câmeras',d:'Toque em <b>Selecione um DVR</b> (ou NVR). O sistema mostra <b>02 (duas) opções</b>: câmeras <b>Internas</b> e <b>Externas</b>. Selecione a desejada.',n:'Dúvidas? Suporte técnico: 3051-5720.'}]},
+vigia:{n:'Vigia Mais',s:[
+{t:'Abra Adicionar rápida',n:'<b>Lembrete:</b> Para que as câmeras IP sejam adicionadas corretamente é necessário deixar as portas PoE disponíveis.',d:'Entre na página web do NVR e vá em:',p:['Configurações','Gerenciamento de câmera','Canal IP','Adicionar rápida']},
+{t:'Selecione as câmeras',d:'Vai começar uma busca de câmeras IP na rede. Selecione as câmeras que aparecerem e clique em <b>Ok</b>.'},
+{t:'Se aparecer erro',d:`Toque no erro que apareceu para ver o que fazer.<details class='dt'><summary>Usuário e senha incorreto</summary><div style='margin-top:8px'>Selecione a câmera com o erro e clique em <b>Editar</b>. Preencha o formulário com a senha e depois confirme. Com a senha corrigida, clique em <b>Ok</b>.<br><span style='color:var(--mute);font-size:15px'>As câmeras do Vigia têm senha diferente das câmeras do Escola Segura.</span></div></details><details class='dt'><summary>Rede anormal</summary><div style='margin-top:8px'>Pode haver conflito de IP, máscara de sub-rede incorreta ou incompatibilidade entre a faixa de rede da câmera e a rede do NVR. <button class='lk2' data-gx='opt' data-t='@ipconf'>Como resolver conflito de IP</button></div></details><details class='dt'><summary>Offline (Câmera IP não existe)</summary><div style='margin-top:8px'>Geralmente indica que o gravador está tentando localizar uma câmera em um endereço IP no qual não consegue encontrá-la.<details class='dt'><summary>Ver mais possíveis causas</summary><ol class='cl'><li><b>Falha na alimentação elétrica (PoE ou fonte)</b> — a câmera está sem energia, o cabo PoE não fornece alimentação ou a porta PoE do NVR está com defeito.</li><li><b>Problema no cabo de rede ou nos conectores RJ45</b> — cabo rompido, mau contato, oxidação ou crimpagem incorreta impedem a comunicação.</li><li><b>Falha na porta PoE do NVR ou no switch</b> — a porta pode estar defeituosa, desativada ou sem fornecer energia suficiente.</li><li><b>Câmera travada ou com defeito</b> — falha de hardware, firmware travado ou problema interno que impede a inicialização ou a comunicação.</li></ol></details></div></details><button class='btn gb' data-gx='opt' data-t='@vman' style='margin-top:16px'>Adicionar Manualmente</button>`}]},
+vman:{n:'Adicionar manualmente',ok:'Câmera adicionada!',no:'Relate ao suporte.',s:[
+{t:'Acesse o menu',n:'Para descobrir o IP das câmeras Intelbras é necessário fazer uma busca usando o IP Utility.',d:'Selecione um canal vazio e clique em <b>Adicionar manualmente</b> (Manual Add).',p:['Menu','Câmera','Câmera IP']},
+{t:'Preencha os dados',d:TB},
+{t:'Adicione a câmera',d:'Clique em <b>Adicionar</b> (Add) ou <b>OK</b>.',v:2}]},
+coleta:{n:'Coleta de imagens',w:'Atenção! É estritamente proibido o compartilhamento das imagens.',ok:'Coleta concluída!',s:[
+{t:'Abra Reprodução',d:'Abra a página web do NVR e clique em <b>Reprodução</b>.',p:['Reprodução']},
+{t:'Escolha a data',d:'No calendário, escolha a data do ocorrido e clique em <b>Pesquisar</b>.'},
+{t:'Abra o download',d:'Nas opções embaixo do player, clique no ícone de <b>download</b>.'},
+{t:'Preencha os horários',d:'Na página que abrir, preencha corretamente os campos <b>Hora de Início</b> e <b>Hora de fim</b> com os horários solicitados.'},
+{t:'Baixe os arquivos',d:'Selecione os arquivos de gravação que correspondem ao horário requerido e clique em <b>Baixar para PC</b>.'},
+{t:'Encontre as gravações',d:`Você poderá ver as gravações na pasta que está configurada no NVR.<button class='btn gb' data-gx='opt' data-t='@pasta'>Como descobrir a pasta onde está a gravação</button>`}]},
+pasta:{n:'Pasta das gravações',ok:'Pronto!',s:[
+{t:'Abra as configurações locais',d:'Vá em estas opções.',p:['Configuração','Local']},
+{t:'Role até o arquivo de gravação',d:'Arraste para baixo até <b>Configurações do arquivo de gravação</b>.'}]},
+camoff:{n:'Câmera offline',s:[
+{t:'Descubra o que o NVR informa',d:'Veja qual erro o NVR mostra para a câmera que está sem imagem.',h:`<ol class='cl'><li>Abra a página web do NVR e faça o login (ou use o monitor ligado ao NVR).</li><li>Vá em <b>Menu</b> › <b>Câmera</b> › <b>Câmera IP</b>.</li><li>Na lista, ache o canal da câmera com problema. A coluna <b>Status</b> mostra se ela está <b>Online</b> ou <b>Offline</b>.</li><li>Clique no ícone de <b>Status</b> dessa câmera. Vai aparecer uma mensagem, como <span class='cd'>Offline (Rede anormal)</span> ou <span class='cd'>Offline (A câmera IP não existe)</span>. Anote a mensagem.</li></ol>`},
+{t:'Confira se a câmera recebe energia',d:'Veja se a porta onde a câmera está ligada tem luz acesa.',h:`<ol class='cl'><li>Vá até o NVR (ou o switch PoE) e ache o cabo que sai da câmera com problema.</li><li>Olhe a luz (LED) da porta onde esse cabo está encaixado.</li><li><b>Luz acesa ou piscando:</b> há conexão com a câmera. Siga para a próxima etapa.</li><li><b>Luz apagada:</b> não há conexão ou energia. Reencaixe o cabo nas duas pontas, até ouvir um clique, e olhe a luz de novo.</li></ol>`},
+{t:'Teste o cabo de rede',d:'Troque o cabo por outro que funcione ou teste o cabo com um testador.',h:`<ol class='cl'><li><b>Troca de cabo:</b> pegue um cabo que você sabe que funciona e use no lugar do atual, ligando nos mesmos pontos (câmera e porta PoE). Se o cabo for muito longo, teste também um mais curto. Se a câmera voltar, o cabo antigo estava com defeito.</li><li><b>Com testador de cabo:</b> encaixe uma ponta do cabo no testador e a outra no receptor pequeno. Ligue o testador e veja as 8 luzes: elas devem acender em sequência, de 1 a 8.</li><li>Se alguma luz pular ou não acender, há um fio rompido ou o conector RJ45 está mal crimpado. Troque o cabo ou refaça o conector.</li></ol>`},
+{t:'Troque a porta PoE',d:'Ligue a câmera em outra porta PoE para descobrir se o problema é da porta ou da câmera.',h:`<ol class='cl'><li>Anote em qual porta a câmera estava ligada.</li><li>Tire o cabo dessa porta e encaixe em outra porta PoE livre do NVR ou do switch. No NVR, a câmera pode aparecer em outro canal, o da porta nova.</li><li>Espere cerca de 1 minuto e olhe o status em <b>Menu</b> › <b>Câmera</b> › <b>Câmera IP</b>.</li><li>Funcionou na porta nova? Então a porta antiga está com defeito. Continuou offline? O problema acompanha a câmera (ou o cabo).</li></ol>`},
+{t:'Procure a câmera no SADP',d:'Use o programa SADP para ver se a câmera aparece na rede e qual é o IP dela.',h:`<ol class='cl'><li>No notebook, abra o <b>SADP</b> (programa gratuito da Hikvision). Se não tiver, baixe no site da Hikvision e instale. Para câmeras Intelbras, use o <b>IP Utility</b>.</li><li>Ligue o notebook na mesma rede da câmera, por cabo, em uma porta do switch ou em uma porta PoE livre do NVR.</li><li>O programa faz a busca e lista os equipamentos, com IP, MAC e status. Se a lista estiver vazia, clique em <b>Atualizar</b> (Refresh).</li><li>Ache a câmera pelo MAC, que está na etiqueta dela, e veja se o IP está na mesma faixa dos outros equipamentos (os três primeiros números iguais).</li></ol>`},
+{t:'Teste a câmera em bancada',d:'Se nada resolveu, teste a câmera fora da instalação, ligada em um notebook.',h:`<ol class='cl'><li>Leve a câmera para uma bancada.</li><li>Alimente a câmera como indica a etiqueta dela (fonte de 12 V ou PoE). Se for PoE, use um injetor PoE ou um switch PoE.</li><li>Ligue a câmera ao notebook (direto ou pelo injetor ou switch), usando um cabo de rede que você sabe que funciona.</li><li>Abra o SADP e veja se a câmera aparece.</li><li>Se aparecer, a câmera está boa e o problema está no local (cabo, porta ou rede). Se não aparecer nem na bancada, a câmera está com defeito.</li></ol>`}]},
+camnet:{n:'Câmera sem acesso',s:[
+{t:'Descubra o IP da câmera',d:'Use o SADP para ver qual IP a câmera está usando agora.',h:`<ol class='cl'><li>No notebook, ligado na mesma rede da câmera, abra o <b>SADP</b>. Para câmeras Intelbras, use o <b>IP Utility</b>.</li><li>Espere a lista de equipamentos aparecer. Se estiver vazia, clique em <b>Atualizar</b> (Refresh).</li><li>Ache a câmera pelo MAC, que está na etiqueta dela, e anote o <b>IP</b> que aparece na linha.</li></ol>`},
+{t:'Veja o IP do computador',d:'Descubra o IP e a máscara do computador que você está usando.',h:`<ol class='cl'><li>Aperte as teclas <b>Windows + R</b>, digite <span class='cd'>cmd</span> e tecle Enter.</li><li>Na janela preta que abrir, digite <span class='cd'>ipconfig</span> e tecle Enter.</li><li>Ache o bloco da conexão que você usa (<b>Ethernet</b> ou <b>Wi-Fi</b>) e anote o <b>Endereço IPv4</b> e a <b>Máscara de Sub-rede</b>.</li></ol>`},
+{t:'Compare as redes',d:'Veja se o computador e a câmera estão na mesma rede.',h:`<ol class='cl'><li>Escreva o IP do computador e o IP da câmera, um embaixo do outro.</li><li>Com a máscara <span class='cd'>255.255.255.0</span>, os três primeiros números devem ser iguais. Exemplo: <span class='cd'>192.168.1.50</span> e <span class='cd'>192.168.1.100</span> estão na mesma rede; <span class='cd'>192.168.1.50</span> e <span class='cd'>192.168.2.100</span> não estão.</li><li>Se forem diferentes, o computador e a câmera não se enxergam.</li></ol>`,n:'Em algumas unidades a câmera fica em uma rede separada de propósito (por exemplo, as câmeras ligadas direto nas portas PoE do NVR). Se for o caso, confirme com o suporte antes de mudar qualquer IP.'},
+{t:'Procure IP duplicado',d:'Veja se outro equipamento está usando o mesmo IP da câmera.',h:`<ol class='cl'><li>No cmd, digite <span class='cd'>ping</span> seguido do IP da câmera (exemplo: <span class='cd'>ping 192.168.1.100</span>) e tecle Enter.</li><li>Depois digite <span class='cd'>arp -a</span> e tecle Enter. Procure na lista a linha com o IP da câmera.</li><li>Compare o endereço físico dessa linha com o MAC da câmera (na etiqueta ou no SADP). Se forem diferentes, outro equipamento está usando aquele IP.</li></ol>`},
+{t:'Confira a senha no NVR',d:'Veja se a senha cadastrada no NVR para essa câmera está certa.',h:`<ol class='cl'><li>Na página web do NVR, vá em <b>Configuração</b> › <b>Câmera</b> › <b>Câmera IP</b>.</li><li>Selecione o canal da câmera e clique no ícone de lápis (<b>Editar</b>).</li><li>Confira o IP e digite o usuário (normalmente <span class='cd'>admin</span>) e a senha da câmera. Depois clique em <b>Ok</b>.</li><li>Atenção: é a senha da câmera, que pode ser diferente da senha do NVR.</li></ol>`},
+{t:'Teste a câmera direto no navegador',d:'Veja se a câmera abre sozinha, sem passar pelo NVR.',h:`<ol class='cl'><li>No notebook, ligado na mesma rede da câmera, abra o navegador (Chrome, Edge ou outro).</li><li>Digite o IP da câmera na barra de endereço, como <span class='cd'>http://192.168.1.100</span>, e tecle Enter.</li><li>Entre com o usuário e a senha da câmera.</li><li>Se a imagem abrir aqui mas não no NVR, o problema está no cadastro do canal ou na rede interna do NVR. Revise a etapa da senha e avise o suporte.</li></ol>`}]},
+ipconf:{n:'Conflito de IP',s:[
+{t:'Descubra o IP real da câmera',d:'Ligue o notebook na mesma rede e abra o SADP (Hikvision) ou o IP Utility (Intelbras). Ele lista o IP e o MAC de cada equipamento.',h:`<ol class='cl'><li>Ligue o notebook na mesma rede da câmera, por cabo.</li><li>Abra o <b>SADP</b> ou o <b>IP Utility</b> e espere a lista aparecer. Se estiver vazia, clique em <b>Atualizar</b> (Refresh).</li><li>Ache a câmera pelo MAC (na etiqueta dela) e anote o IP da linha.</li></ol>`,m:'Conflito de IP acontece quando dois equipamentos usam o mesmo endereço. Já o “endereço alterado” é quando a câmera mudou de IP e o NVR continua procurando no antigo. Nos dois casos, o canal fica <b>Offline</b> no NVR. A solução é descobrir quem está com qual IP, corrigir e atualizar o canal.',ml:'O que é conflito de IP?'},
+{t:'Confirme o conflito',d:'Veja se dois equipamentos usam o mesmo IP ou se a câmera mudou de IP.',h:`<ol class='cl'><li>No SADP, veja se dois equipamentos aparecem com o mesmo IP.</li><li>Veja também se o IP da câmera no SADP é diferente do IP cadastrado no canal do NVR (em <b>Câmera</b> › <b>Câmera IP</b>).</li><li>Para conferir, abra o cmd (<b>Windows + R</b>, digite <span class='cd'>cmd</span>, Enter) e digite <span class='cd'>ping</span> e o IP, depois <span class='cd'>arp -a</span>.</li><li>Procure o IP na lista e compare o endereço físico com o MAC da câmera. Se forem diferentes, outro aparelho está usando aquele IP.</li></ol>`},
+{t:'Corrija o IP',d:'Mude o IP da câmera para um IP livre, usando o SADP.',h:`<ol class='cl'><li>No SADP, marque a câmera na lista (quadradinho à esquerda).</li><li>No painel <b>Modificar parâmetros de rede</b>, que aparece à direita, digite um IP livre da mesma faixa: os três primeiros números iguais aos dos outros equipamentos e um final que ninguém use. Dê ping nesse IP: se não houver resposta, provavelmente ele está livre.</li><li>Mantenha a máscara de sub-rede e o gateway iguais aos da rede (veja no <span class='cd'>ipconfig</span>).</li><li>Digite a senha da câmera e clique em <b>Modificar</b> (Modify).</li></ol>`,m:'Use um IP fixo que esteja fora da faixa do DHCP.',ml:'Dica sobre o IP'},
+{t:'Atualize o canal no NVR',d:'Edite o canal (ícone de lápis), coloque o IP novo, o protocolo e a senha e confirme.',p:['Câmera','Canal IP'],h:`<ol class='cl'><li>Selecione o canal da câmera e clique no lápis (<b>Editar</b>).</li><li>Em <b>Protocolo</b>, escolha <b>HIKVISION</b> (câmera Hikvision) ou <b>ONVIF</b> (câmera Intelbras).</li><li>Digite o IP novo, o usuário e a senha da câmera e confirme em <b>Ok</b>. Depois olhe o status: deve ficar <b>Online</b>.</li></ol>`}]}};
+G.alcfg={n:'Configuração da central',s:[
+{t:'Ligue a central e ache no SADP',n:'Antes de começar: a central e o computador precisam estar na mesma rede local (LAN).',d:'Ao ligar a central, ela vai aparecer no <b>SADP</b> como <b>inativa</b>. Use o SADP (ou o cliente para PC) para localizar a central na rede e ver o IP dela.'},
+{t:'Abra a página da central',d:'Abra um navegador web e digite o endereço IP da central.'},
+{t:'Ative a central',d:'A página vai pedir uma senha de acesso à central. Crie e confirme a senha da conta de administrador e clique em <b>OK</b> para concluir a ativação.'},
+{t:'Abra a lista de zonas',d:'Depois de entrar, vá até a lista de zonas.',p:['Device Management','Mount Device','Zone'],m:'Em alguns menus o caminho aparece como Device › Zone.',ml:'Não achou o menu?'},
+{t:'Adicione a zona',d:'Clique em <b>Add</b> (ou <b>Enroll</b>) para adicionar uma zona. Em <b>Relate Mode</b>, escolha <b>Wired</b> e clique em <b>Next</b>.'},
+{t:'Escolha o tipo de zona',d:'Selecione a zona e clique no símbolo de lápis para abrir <b>Zone Settings</b>. Depois, selecione o tipo de zona desejado.'},
+{t:'Ajuste o Entry Delay',d:'Em <b>Zone Parameter</b>, coloque <b>Delay</b> (Instant Zone › Entry Delay) apenas no sensor de entrada da unidade. Nos outros sensores, deixe em branco.',m:'O Entry Delay dá um tempo para o usuário entrar no ambiente protegido e desarmar o sistema sem que o alarme dispare.'},
+{t:'Ative o Dual Zone',d:'Ative o <b>Dual Zone</b> e clique em <b>OK</b>. Essa opção ativa os sensores que foram colocados juntos no borne.',m:'Quando ativado, se o multi-transmissor detectar que todo o circuito da zona local e da zona estendida está em circuito aberto, as duas zonas geram alarmes de tampa aberta. É essencial para que todos os sensores funcionem normalmente.'},
+{t:'Adicione os demais sensores',d:'O primeiro sensor foi adicionado. Clique em <b>Add</b> de novo para adicionar o restante, sempre com o <b>Delay</b> ativado apenas no sensor de entrada da unidade.'},
+{t:'Adicione a sirene',d:'Clique em <b>Enroll</b> para adicionar uma sirene. Depois, clique no ícone de ferramenta para abrir <b>Sounder Settings</b>.',p:['Device','Sounder']},
+{t:'Ajuste a sirene',d:`<ol class='cl'><li>Defina o nome da sirene e a duração do alarme (<b>Alarm Duration</b>).</li><li>Selecione a área vinculada (<b>Linked Area</b>).</li><li>Selecione o evento de vinculação (<b>Link Event</b>).</li><li>Habilite <b>Sounder Tamper Alarm</b>.</li><li>Clique em <b>OK</b> para salvar.</li></ol>`},
+{t:'Configure o teclado',d:`Clique no ícone de ferramenta para abrir <b>Keypad Settings</b>. Defina o nome do teclado (<b>Keypad Name</b>), selecione as áreas vinculadas (<b>Linked Areas</b>) e clique em <b>OK</b> para salvar.`,p:['Device','Keypad']},
+{t:'Abra o cadastro de usuários',d:'No menu principal, clique em <b>User Management</b> e depois em <b>+ Add</b> para adicionar um novo usuário.',p:['User Management'],m:'O cadastro cria senhas individuais, para que pessoas diferentes possam operar o sistema de alarme.',ml:'Para que serve?'},
+{t:'Preencha os dados do usuário',d:`<ol class='cl'><li><b>User Name:</b> nome do novo usuário.</li><li><b>User Type / Disposable User:</b> tipo de usuário e validade.</li><li><b>Operation Passcode:</b> senha numérica que será usada no teclado para operar o sistema.</li><li>Clique em <b>Save</b> para adicionar o usuário.</li></ol>`}]};
+function pth(a){return `<div class='pth'>${a.map(function(x){return `<span>${x}</span>`}).join('<i>›</i>')}</div>`}
+function gtop(){return GS2[GS2.length-1]}
+function gnew(id){return {g:id,i:0,h:[],w:!!G[id].w,e:0,q:0}}
+function gs(id){GS2=[gnew(id)];E('ovs').classList.add('on');gr();E('cls').focus()}
+function gr(){var s=gtop(),g=G[s.g],st=g.s,n=st.length,h;E('tts').textContent='Guia • '+g.n;
+if(s.w)h=`<p class='say'>${g.w}</p><button class='btn y gb' data-gx='go'>${g.wb||'Entendi'}</button>`;
+else if(s.e)h=`<span class='chip'>Resultado</span><h2>${g[s.e]||'Tudo certo!'}</h2><button class='btn y gb' data-gx='end'>${GS2.length>1?'Voltar ao guia':'Concluir'}</button>`;
+else if(s.q)h=`<p class='lbl2' style='margin-top:0'>Todas as etapas</p><ol class='cl'>${st.map(function(t,k){return `<li><button class='lk2' data-gx='jump' data-i='${k}'>${t.t}</button></li>`}).join('')}</ol><button class='btn y gb' data-gx='quick'>Voltar ao passo a passo</button>`;
+else{var t=st[s.i],o=t.q||(t.v==1?V1:t.v==2?V2:null),l=s.i==n-1;
+h=`<div class='bar' style='padding:0 0 12px'>${st.map(function(_,k){return `<i class='${k<=s.i?'on':''}'></i>`}).join('')}</div><div class='gm'><span>Etapa ${s.i+1} de ${n}</span></div><h2>${t.t}</h2>`+(t.n?`<div class='note'>${t.n}</div>`:'')+(t.d?`<p class='lbl2'>O que fazer</p><div>${t.d}</div>`:'')+(t.h?`<p class='lbl2'>Como fazer</p>${t.h}`:'')+(t.p?pth(t.p):'')+(t.kv?t.kv.map(function(x){return `<div class='kv'><small>${x[0]}</small><b>${x[1]}</b></div>`}).join(''):'')+(t.c?`<pre style='margin-top:10px'>${t.c}</pre>`:'')+(t.m?`<details class='dt'><summary>${t.ml||'Entenda este passo'}</summary><div style='margin-top:8px'>${t.m}</div></details>`:'')+`<button class='btn y gb' data-gx='${l?'close':'next'}'>${l?'Fechar':'Próximo'}</button>`+((s.h.length||GS2.length>1)?`<button class='bk' data-gx='back' style='margin-top:6px'>← Voltar</button>`:'')}
+E('bds').innerHTML=h;E('bds').scrollTop=0}
+function gGo(tg){var s=gtop(),g=G[s.g],st=g.s,t=st[s.i];
+if(tg=='fail'){closeAll();GS2=[];dlgc('Aviso',`<p class='say'>${g.no||'Relate ao suporte.'}</p>`,'Ok');return}
+if(tg=='done'||tg=='done2')s.e=tg=='done'?'ok':'ok2';
+else if(tg=='next'){if(s.i>=st.length-1){if(t.q||t.v){gGo('fail');return}s.e='ok'}else{s.h.push(s.i);s.i++}}
+else if(tg[0]=='@')GS2.push(gnew(tg.slice(1)));
+else{s.h.push(s.i);s.i=st.findIndex(function(x){return x.id==tg})}
+gr()}
+E('bds').onclick=function(e){var b=e.target.closest('[data-gx]');if(!b)return;var s=gtop(),a=b.dataset.gx;
+if(a=='go'){s.w=0;gr()}else if(a=='opt')gGo(b.dataset.t);else if(a=='next')gGo('next');else if(a=='close'){closeAll();GS2=[]}else if(a=='quick'){s.q=!s.q;gr()}else if(a=='jump'){s.q=0;s.h.push(s.i);s.i=+b.dataset.i;gr()}
+else if(a=='back'){if(s.h.length){s.i=s.h.pop();gr()}else if(GS2.length>1){GS2.pop();gr()}}
+else if(a=='end'){if(GS2.length>1){GS2.pop();gr()}else{E('ovs').classList.remove('on');GS2=[]}}};
+E('cls').onclick=function(){E('ovs').classList.remove('on');GS2=[]};
+E('ovs').onclick=function(e){if(e.target==E('ovs')){E('ovs').classList.remove('on');GS2=[]}};
+E('openapp').onclick=function(){gs('app')};
+E('openvg').onclick=function(){gs('vigia')};
+function hd(){gs('hdmi')}
+function bkp(){gs('backup')}
+function gsr(){gs('gpon')}
+function cola(){gs('coleta')}
+function cmSol(k){gs(k?'camnet':'camoff')}
+function ipConf(){gs('ipconf')}
+E('bda').innerHTML=`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-al='ins'><span class='ico'>🔌</span><span>Instalação<small>Alarme por dentro e bornes de ligação</small></span></button><button class='big' data-al='cfg'><span class='ico'>⚙️</span><span>Configuração<small>Passo a passo da central</small></span></button>`;
+E('bda').onclick=function(e){var b=e.target.closest('[data-al]');if(b)dlgc(b.dataset.al=='ins'?'Instalação':'Configuração',`<span class='chip'>Em breve</span><p>Esta opção ainda não foi preenchida.</p>`,'Ok')};
+E('openal').onclick=function(){E('bda').scrollTop=0;E('ova').classList.add('on');E('cla').focus()};
+E('cla').onclick=function(){E('ova').classList.remove('on')};
+E('ova').onclick=function(e){if(e.target==E('ova'))E('ova').classList.remove('on')};
+var AI={fonte:['Fonte (módulo preto)','Região arredondada no canto superior esquerdo da placa. Na central, é o bloco preto.'],sd:['Slot SD CARD','Entrada de cartão SD, identificada na placa.'],rj45:['Porta de rede (RJ45)','Conexão de rede da central. O cabo azul entra aqui.'],btn:['Botão POWER','Botão no canto inferior esquerdo da placa, perto dos bornes.'],blE:['Bornes do lado esquerdo',''],blP:['Bornes principais','']};
+var TE=['BELL-','BELL+','COM','AUX','D-','D+'],TP=['AUX-','AUX+','Z1','COM','Z2','Z3','COM','Z4','Z5','COM','Z6','Z7','COM','Z8','AUX-','AUX+','PGM1','PGM2','NC3','C3','NO3','NC4','C4','NO4'];
+function HS(k,x,y,w,h,i){return `<g class='hs' data-hs='${k}' tabindex='0' role='button' aria-label='${AI[k][0]}'>${i}<rect class='hl' x='${x}' y='${y}' width='${w}' height='${h}' rx='6'/></g>`}
+function tick(x0,n,pw,y){var s='';for(var i=0;i<n;i++)s+=`<rect x='${x0+i*pw+1}' y='${y}' width='${pw-2}' height='26' rx='2' fill='#1f2c40' stroke='#3a5478'/>`;return s}
+function alSvg(){var s=`<svg class='alm' viewBox='0 0 422 279' role='img' aria-label='Placa da central AX Hybrid Pro'><rect x='12' y='10' width='404' height='266' rx='10' fill='#0B1626' stroke='#8FBCFF' stroke-width='1.5'/>`;
+[[193,100],[197,150],[352,98],[352,160]].forEach(function(c){s+=`<circle cx='${c[0]}' cy='${c[1]}' r='4' fill='none' stroke='#5F9BE0'/>`});
+s+=`<rect x='232' y='36' width='26' height='10' fill='none' stroke='#5F9BE0'/><rect x='374' y='92' width='26' height='34' fill='none' stroke='#5F9BE0'/><rect x='374' y='134' width='26' height='34' fill='none' stroke='#5F9BE0'/><rect x='258' y='206' width='14' height='14' fill='none' stroke='#5F9BE0'/>`;
+s+=HS('fonte',28,26,108,140,`<rect x='28' y='26' width='108' height='140' rx='22' fill='#101E33' stroke='#8FBCFF'/><rect x='38' y='36' width='88' height='120' rx='14' fill='none' stroke='#5F9BE0'/><text x='82' y='100' text-anchor='middle' font-size='11' fill='#9FB0C6'>FONTE</text>`);
+s+=`<rect x='189' y='45' width='99' height='150' rx='6' fill='#101E33' stroke='#8FBCFF' stroke-dasharray='5 3'/>`;
+s+=`<rect x='292' y='72' width='76' height='117' rx='6' fill='#101E33' stroke='#8FBCFF' stroke-dasharray='5 3'/>`;
+s+=HS('sd',138,176,38,48,`<rect x='140' y='178' width='34' height='30' rx='3' fill='#101E33' stroke='#8FBCFF'/><text x='157' y='220' text-anchor='middle' font-size='8' fill='#9FB0C6'>SD CARD</text>`);
+s+=HS('rj45',366,212,44,50,`<rect x='368' y='214' width='40' height='46' rx='4' fill='#101E33' stroke='#8FBCFF'/><rect x='376' y='224' width='24' height='26' rx='2' fill='none' stroke='#5F9BE0'/>`);
+s+=HS('btn',30,184,36,44,`<text x='48' y='192' text-anchor='middle' font-size='8' fill='#9FB0C6'>POWER</text><circle cx='48' cy='212' r='9' fill='#222C3B' stroke='#8FBCFF'/><rect x='33' y='198' width='30' height='28' fill='none' stroke='var(--rd)' stroke-width='2.5'/>`);
+s+=HS('blE',28,240,64,34,`<rect x='28' y='240' width='64' height='34' rx='3' fill='#0A111D'/>`+tick(28,6,10.6,244));
+s+=HS('blP',122,240,250,34,`<rect x='122' y='240' width='250' height='34' rx='3' fill='#0A111D'/>`+tick(122,24,250/24,244));
+return s+'</svg>'}
+function tmn(it,x0,pw,y,tw,th,pre,fs){var s='';it.forEach(function(a,i){var x=x0+i*pw,c=a[1];AI[pre+i]=['Borne '+(i+1)+' ('+a[0]+')',c?`<span class='dot' style='background:${CK[c]}'></span><b>1 cabo ${c}</b> ${a[2]}`:'Nenhum cabo neste borne.'];
+s+=HS(pre+i,x-2,y-2,tw+4,th+26,`<rect x='${x}' y='${y}' width='${tw}' height='${th}' rx='4' fill='${c?CK[c]:'#1f2c40'}' stroke='${c?'#2E7CFF':'#3a5478'}' stroke-width='2'${c?'':" opacity='.55'"}/><circle cx='${x+tw/2}' cy='${y+th*.36}' r='${tw*.27}' fill='#5b6e8a'/><path d='M${x+tw*.27} ${y+th*.36}h${tw*.46}' stroke='#1b2430' stroke-width='2'/><text x='${x+tw/2}' y='${y+th+14}' text-anchor='middle' font-size='${fs}' font-weight='600' fill='#E6EEFB'>${a[0]}</text>`)});return s}
+AI.res=['Resistor 2K / 8K','Ajuste a peça de ligação do resistor no <b>2K</b> ou no <b>8K</b>, sempre intercalando em sequência: um sensor no 2K, o seguinte no 8K.'];
+function senSvg(){var s=`<svg class='alm' viewBox='0 0 360 400' role='img' aria-label='Sensor de alarme por dentro'><rect x='10' y='10' width='340' height='380' rx='50' fill='#0B1626' stroke='#8FBCFF' stroke-width='1.5'/><rect x='28' y='50' width='304' height='320' rx='12' fill='#101E33' stroke='#26405F'/><text x='88' y='72' text-anchor='middle' font-size='11' font-weight='700' fill='#9FB0C6'>TAMPER</text><text x='180' y='72' text-anchor='middle' font-size='11' font-weight='700' fill='#9FB0C6'>ALARM</text><rect x='36' y='80' width='288' height='90' rx='6' fill='#0A111D' stroke='#3a5478'/>`;
+s+=tmn([['TAMPER',null],['TAMPER',null],['N','verde','no N'],['C','amarelo','no C'],['+','vermelho','no positivo (+)'],['−','preto','no negativo (−)']],46,46,92,38,56,'s',11);
+s+=`<circle cx='110' cy='272' r='46' fill='#08284B' stroke='#8FBCFF'/><circle cx='110' cy='272' r='30' fill='#0C3F75' stroke='#5F9BE0'/>`;
+s+=HS('res',236,224,96,100,`<rect x='246' y='232' width='22' height='84' rx='4' fill='#1f2c40' stroke='#3a5478'/><circle cx='257' cy='244' r='4' fill='#C9D3DF'/><circle cx='257' cy='274' r='4' fill='#C9D3DF'/><circle cx='257' cy='304' r='4' fill='#C9D3DF'/><rect x='243' y='236' width='28' height='44' rx='4' fill='#2D6BFF' opacity='.85'/><text x='282' y='258' font-size='13' font-weight='700' fill='#E6EEFB'>2K</text><text x='282' y='308' font-size='13' font-weight='700' fill='#E6EEFB'>8K</text>`);
+return s+'</svg>'}
+function tecSvg(){var s=`<svg class='alm' viewBox='0 0 360 250' role='img' aria-label='Teclado por trás'><rect x='10' y='10' width='340' height='230' rx='16' fill='#0B1626' stroke='#8FBCFF' stroke-width='1.5'/><rect x='20' y='28' width='320' height='108' rx='8' fill='#0A111D' stroke='#3a5478'/>`;
+s+=tmn([['Z1',null],['GND',null],['Z2',null],['D-','amarelo','no D-'],['D+','verde','no D+'],['12V_IN','vermelho','no 12V_IN'],['GND','preto','no GND (o que fica ao lado do 12V_IN)'],['NO/NC',null],['COM',null]],30,34,44,30,52,'k',9.5);
+s+=`<rect x='120' y='160' width='120' height='64' rx='8' fill='none' stroke='#5F9BE0' stroke-dasharray='5 3'/><text x='180' y='196' text-anchor='middle' font-size='10' fill='#9FB0C6'>passagem dos cabos</text></svg>`;return s}
+function alSen(){bal('Sensor',`<span class='chip'>Sensor de alarme · ligação</span><p style='margin:0 0 10px;color:var(--mute)'>Toque em um borne para ver o cabo que se liga nele. Confira os nomes impressos na placa do sensor.</p>`+senSvg()+`<div class='bxs' id='alinfo' aria-live='polite'>Toque em um borne ou no resistor.</div>`,2)}
+function alTec(){bal('Teclado',`<span class='chip'>Teclado · ligação</span><p style='margin:0 0 10px;color:var(--mute)'>Toque em um borne para ver o cabo que se liga nele. Os nomes ficam impressos abaixo dos bornes.</p>`+tecSvg()+`<div class='bxs' id='alinfo' aria-live='polite'>Toque em um borne.</div>`,2)}
+function alCen(){bal('Central',`<span class='chip'>Hikvision AX Hybrid Pro · vista da placa</span><p style='margin:0 0 10px;color:var(--mute)'>Toque em uma parte da placa para ver o que é. Toque nos bornes para ampliar.</p>`+alSvg()+`<div class='bxs' id='alinfo' aria-live='polite'>Toque em uma parte da placa.</div>`,2)}
+function alIns(){bal('Instalação',`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você vai instalar.</p><button class='big' data-al='cen'><span class='ico'>🔌</span><span>Central<small>Placa por dentro e bornes de ligação</small></span></button><button class='big' data-al='alr'><span class='ico'>🚨</span><span>Sensor<small>Bornes de ligação do sensor</small></span></button><button class='big' data-al='tec'><span class='ico'>⌨️</span><span>Teclado<small>Bornes de ligação do teclado</small></span></button>`,1)}
+function bal(t,h,b){E('tta').textContent=t;E('bda').innerHTML=(b==1?`<button class='bk' data-al='menu'>← Alarme</button>`:b==2?`<button class='bk' data-al='ins'>← Instalação</button>`:'')+h;E('bda').scrollTop=0}
+function alm(){bal('Alarme',`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-al='ins'><span class='ico'>🔌</span><span>Instalação<small>Alarme por dentro e bornes de ligação</small></span></button><button class='big' data-al='cfg'><span class='ico'>⚙️</span><span>Configuração<small>Passo a passo da central</small></span></button>`,0)}
+var WG={s:'Sirene',t:'Teclado do alarme',e:'Energia dos alarmes',c:'Comando dos alarmes'},CK={preto:'#111827',vermelho:'#E5484D',amarelo:'#F2C230',verde:'#2FB36B'};
+function wi(p){var c16='Lembrete: todas as ligações de cabos devem ser feitas seguindo uma intercalação entre sensores 2K e 8K. Exemplo: junte um cabo verde de sensor 2K com outro cabo verde de sensor 8K.';
+if(p<=2)return ['s',p==1?'preto':'vermelho',p==1?'no negativo':'no positivo','',1];
+if(p<=6)return ['t',['preto','vermelho','amarelo','verde'][p-3],'no '+TE[p-1],'',1];
+if(p<=8)return ['e',p==7?'preto':'vermelho',p==7?'no negativo (−)':'no positivo (+)','',6];
+if(p<=20){var z=TP[p-7]=='COM';return ['c',z?'amarelo':'verde',z?'no comum':'na Zona',c16,z?4:2]}
+if(p<=22)return ['e',p==21?'preto':'vermelho',p==21?'no negativo (−)':'no positivo (+)','',6];return null}
+var CPL={preto:'pretos',vermelho:'vermelhos',amarelo:'amarelos',verde:'verdes'};
+function zoom(k){var P=k=='P',L=P?TP:TE,off=P?6:0,GP=P?[2,5,8,11,14,16,18]:[2],ZG=P?[[2,4],[5,7],[8,10],[11,13]]:[],CP=P?[[0,1,'Energia dos alarmes'],[2,13,'Comando dos alarmes'],[14,15,'Energia extra']]:[[0,1,'Sirene'],[2,5,'Teclado']],X=[],x=6;
+L.forEach(function(_,i){if(GP.indexOf(i)>-1)x+=10;X.push(x);x+=42});var w=x+6;E('tte').textContent=P?'Bornes principais':'Bornes do lado esquerdo';
+var s=`<svg width='${w}' height='134' viewBox='0 0 ${w} 134' role='img' aria-label='Bornes ampliados'>`;
+CP.forEach(function(c){var a=X[c[0]],b=X[c[1]]+36;s+=`<text x='${(a+b)/2}' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='var(--acc)'>${c[2]}</text><path d='M${a} 20H${b}' stroke='var(--acc)' stroke-width='2'/>`});
+ZG.forEach(function(g){s+=`<rect x='${X[g[0]]-5}' y='26' width='${X[g[1]]-X[g[0]]+46}' height='72' rx='6' fill='none' stroke='#5F9BE0' stroke-dasharray='4 3'/>`});
+L.forEach(function(nm,i){var p=off+i+1,w0=wi(p),u=w0?' use':'',f=w0?`style='fill:${CK[w0[1]]}'`:'';s+=`<g class='tm${u}' data-t='${nm}' data-p='${p}' tabindex='0' role='button' aria-label='Borne ${p}, ${nm}' transform='translate(${X[i]} 34)'><rect class='b' ${f} width='36' height='56' rx='5'/><circle cx='18' cy='18' r='9' fill='#5b6e8a'/><path d='M12 18h12' stroke='#1b2430' stroke-width='2'/><text x='18' y='86' text-anchor='middle' font-size='12' font-weight='600' fill='var(--ink)'>${nm}</text></g>`});
+E('bde').innerHTML=`<span class='chip'>Toque em um borne</span><p style='margin:0 0 6px;color:var(--mute)'>Os bornes estão na ordem da placa, da esquerda para a direita. Cada borne tem a cor do cabo que se liga nele. Os bornes apagados não recebem ligação.</p><div class='zw'>${s}</svg></div><div class='bxs' id='zi' aria-live='polite'>Toque em um borne para ver a ligação.</div>`;E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
+E('bde').onclick=function(e){var g=e.target.closest('.tm');if(!g)return;[].forEach.call(E('bde').querySelectorAll('.tm.sel'),function(x){x.classList.remove('sel')});g.classList.add('sel');var p=+g.dataset.p,w=wi(p);
+E('zi').innerHTML=`<b>Borne ${p} (${g.dataset.t})</b>`+(w?`<p style='margin:8px 0 0'><span class='chip'>${WG[w[0]]}</span></p><p style='margin:6px 0 0'><span class='dot' style='background:${CK[w[1]]}'></span><b>${w[4]} ${w[4]==1?'cabo '+w[1]:'cabos '+CPL[w[1]]}</b> ${w[2]}</p>`+(w[3]?`<div class='note'>${w[3]}</div>`:''):`<p style='margin:8px 0 0'>Não se liga nenhum cabo neste borne.</p>`)};
+E('bda').onclick=function(e){var b=e.target.closest('[data-al]');if(b){var a=b.dataset.al;if(a=='menu')alm();else if(a=='ins')alIns();else if(a=='cen')alCen();else if(a=='alr')alSen();else if(a=='tec')alTec();else gs('alcfg');return}
+var h=e.target.closest('.hs');if(!h)return;var k=h.dataset.hs;if(k=='blP'){zoom('P');return}if(k=='blE'){zoom('E');return}
+[].forEach.call(E('bda').querySelectorAll('.hs.sel'),function(x){x.classList.remove('sel')});h.classList.add('sel');E('alinfo').innerHTML=`<b>${AI[k][0]}</b><p style='margin:6px 0 0'>${AI[k][1]}</p>`};
+E('bda').onkeydown=function(e){var h=e.target.closest&&e.target.closest('.hs');if(h&&(e.key=='Enter'||e.key==' ')){e.preventDefault();h.dispatchEvent(new MouseEvent('click',{bubbles:true}))}};
+E('bde').onkeydown=function(e){var h=e.target.closest&&e.target.closest('.tm');if(h&&(e.key=='Enter'||e.key==' ')){e.preventDefault();h.dispatchEvent(new MouseEvent('click',{bubbles:true}))}};
+E('openal').onclick=function(){alm();E('ova').classList.add('on');E('cla').focus()};
 E('opennvr').onclick=function(){menuN();E('bdn').scrollTop=0;E('ovn').classList.add('on');E('cln').focus()};
 E('cln').onclick=function(){E('ovn').classList.remove('on')};
 E('ovn').onclick=function(e){if(e.target==E('ovn'))E('ovn').classList.remove('on')};
-E('openf').onclick=function(){E('bdf').scrollTop=0;E('ovf').classList.add('on');E('clf').focus()};
+E('openf').onclick=function(){E('bdf').scrollTop=0;E('ovf').classList.add('on');fcr();E('clf').focus()};
 E('clf').onclick=function(){E('ovf').classList.remove('on')};
 E('cld').onclick=function(){E('ovd').classList.remove('on')};
 E('ovf').onclick=function(e){if(e.target==E('ovf'))E('ovf').classList.remove('on')};
 E('ovd').onclick=function(e){if(e.target==E('ovd'))E('ovd').classList.remove('on')};
-document.addEventListener('keydown',function(e){if(e.key=='Escape'){var o=['ove','ovd','ovc','ovm','ovp','ovg','ovv','ovn','ovf'].filter(function(i){return E(i).classList.contains('on')})[0];if(o)E(o).classList.remove('on')}});
+document.addEventListener('keydown',function(e){if(e.key=='Escape'){var o=['ove','ovs','ovd','ovc','ovm','ovp','ovg','ovv','ova','ovn','ovf'].filter(function(i){return E(i).classList.contains('on')})[0];if(o)E(o).classList.remove('on')}});
 </script>
 </body>
 </html>
