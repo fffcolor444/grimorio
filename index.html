@@ -205,7 +205,7 @@ main{padding-top:0}
 .tm.use rect.b{stroke:var(--acc)}
 .tm:not(.use){opacity:.5}
 .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:-1px;border:1px solid rgba(255,255,255,.55)}
-:root{--g:.45}
+:root{--g:.5}
 body{background:radial-gradient(70% 38% at 15% -5%,rgba(46,124,255,.5),transparent 70%),radial-gradient(55% 36% at 100% 32%,rgba(0,200,255,.22),transparent 70%),radial-gradient(70% 45% at 0% 100%,rgba(130,90,255,.28),transparent 70%),#050D1C;background-attachment:fixed}
 .ov{background:rgba(3,10,24,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .sheet{background:rgba(8,20,44,calc(.5 + var(--g)*.42));-webkit-backdrop-filter:blur(calc(10px + (1 - var(--g))*22px)) saturate(170%);backdrop-filter:blur(calc(10px + (1 - var(--g))*22px)) saturate(170%);border:1px solid rgba(255,255,255,.18);border-radius:28px;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 30px 80px rgba(0,0,0,.55)}
@@ -222,7 +222,7 @@ body{background:radial-gradient(70% 38% at 15% -5%,rgba(46,124,255,.5),transpare
 .big{border:1px solid rgba(255,255,255,.16);border-left:1px solid rgba(255,255,255,.16);border-radius:20px;background:rgba(255,255,255,calc(.05 + var(--g)*.08));box-shadow:inset 0 1px 0 rgba(255,255,255,.2);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);transition:transform .25s cubic-bezier(.2,.9,.3,1.3),box-shadow .2s}
 .big:not(:disabled):hover,.big:not(:disabled):active{box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 0 0 3px rgba(46,124,255,.22)}
 .big:active{transform:scale(.97)}
-.big .ico{width:46px;height:46px;border-radius:14px;background:linear-gradient(160deg,rgba(255,255,255,.4),rgba(255,255,255,0) 55%),linear-gradient(160deg,var(--c1,#4C9BFF),var(--c2,#1F5BFF));box-shadow:inset 0 1px 1px rgba(255,255,255,.7),0 6px 16px rgba(20,60,200,.45)}
+.big .ico{width:50px;height:50px;border-radius:50%;font-size:26px;background:linear-gradient(160deg,var(--c1,#4C9BFF),var(--c2,#1F5BFF));background:radial-gradient(120% 120% at 30% 12%,rgba(255,255,255,.55),rgba(255,255,255,0) 45%),linear-gradient(160deg,color-mix(in srgb,var(--c1,#4C9BFF) 80%,transparent),color-mix(in srgb,var(--c2,#1F5BFF) 80%,transparent));border:1px solid rgba(255,255,255,.55);box-shadow:inset 0 1px 2px rgba(255,255,255,.8),inset 0 -6px 12px rgba(0,0,40,.25),0 8px 18px rgba(20,60,200,.4);-webkit-backdrop-filter:blur(10px) saturate(180%);backdrop-filter:blur(10px) saturate(180%)}
 .hero{border-radius:0 0 30px 30px;margin-bottom:18px}
 .sb{position:sticky;top:8px;z-index:6;display:flex;align-items:center;gap:8px;height:46px;padding:0 16px;margin:0 0 20px;border-radius:23px;background:rgba(14,30,60,.62);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);box-shadow:0 8px 24px rgba(0,0,0,.3)}
 .sb input{flex:1;min-width:0;background:none;border:0;outline:none;color:var(--ink);font:500 16px Barlow,sans-serif}
@@ -231,16 +231,12 @@ body{background:radial-gradient(70% 38% at 15% -5%,rgba(46,124,255,.5),transpare
 .grid{grid-template-columns:1fr 1fr}
 .grp.one .tile{grid-column:span 2}
 .tile{flex-direction:column;align-items:flex-start;justify-content:space-between;gap:14px;min-height:120px;padding:14px;text-align:left}
-.tile>span:last-child{font:600 17px/1.15 Barlow Semi Condensed,Barlow,sans-serif}
+.tile>span:last-child{font:600 21px/1.12 Barlow Semi Condensed,Barlow,sans-serif}
 .tile small{font:400 12.5px Barlow,sans-serif;margin-top:4px}
 .g-net{--c1:#5AA2FF;--c2:#2A5BEA}
 .g-cam{--c1:#35D6CC;--c2:#0B8FA6}
 .g-alm{--c1:#FF8A5C;--c2:#E2402F}
 .g-app{--c1:#A98BFF;--c2:#5E3FE0}
-.gl{margin-top:8px;padding:14px 16px;border-radius:22px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
-.gl b{display:block;font:600 15px Barlow,sans-serif}
-.gl div{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:13px;color:var(--mute)}
-.gl input{flex:1;accent-color:#2E7CFF}
 #nf{color:var(--mute);text-align:center;margin:30px 0}
 @media (min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}.grp.one .tile{grid-column:span 1}}
 </style>
@@ -257,13 +253,12 @@ body{background:radial-gradient(70% 38% at 15% -5%,rgba(46,124,255,.5),transpare
   </div></header>
 <main>
   <div class='sb'><span aria-hidden='true'>🔍</span><input id='q' type='search' placeholder='Buscar procedimento' aria-label='Buscar procedimento' autocomplete='off'></div>
-  <section class='grp g-net'><h3 class='sec'>Rede</h3><nav class='grid'><button class='big tile' id='open' data-k='switch reset console putty link virada'><span class="ico">🔁</span><span>Virada de Link<small>Resetar o switch via console</small></span></button><button class='big tile' id='openf' data-k='fluxograma conexões rede cuiabá portas'><span class='ico'>🌐</span><span>Guia de Conexões<small>Fluxograma e conexões</small></span></button><button class='big tile' id='openmk' data-k='mikrotik winbox backup gpon planilha acesso remoto loopback'><span class='ico'>📡</span><span>Mikrotik<small>Acesso remoto e backup</small></span></button></nav></section>
-  <section class='grp g-cam'><h3 class='sec'>Câmeras e gravador</h3><nav class='grid'><button class='big tile' id='opencam' data-k='câmera offline sem acesso senha ip coleta imagem gravação'><span class='ico'>📷</span><span>Câmeras<small>Problemas mais comuns</small></span></button><button class='big tile' id='opennvr' data-k='nvr gravador hdmi sem vídeo bateria reset rede ip dns tcp'><span class='ico'>⚙️</span><span>Manutenção do NVR<small>Rede, bateria e reset</small></span></button><button class='big tile' id='openvg' data-k='vigia mais adicionar câmeras nvr automático manual'><span class='ico'>🛡️</span><span>Vigia Mais<small>Adicionar câmeras no NVR</small></span></button><button class='big tile' id='openap' data-k='aluno presente planta câmeras posição ip'><span class='ico'>🏫</span><span>Aluno Presente<small>Planta e posição das câmeras</small></span></button></nav></section>
-  <section class='grp g-alm one'><h3 class='sec'>Alarme</h3><nav class='grid'><button class='big tile' id='openal' data-k='alarme central sensor teclado bornes configuração hikvision ax'><span class='ico'>🚨</span><span>Instalação e Configuração de Alarme<small>Instalação e configuração</small></span></button></nav></section>
-  <section class='grp g-app one'><h3 class='sec'>Aplicativos</h3><nav class='grid'><button class='big tile' id='openapp' data-k='moni mobile aplicativo monitoramento celular'><span class='ico'>📲</span><span>Aplicativo de Monitoramento<small>Instalar e configurar o Moni Mobile</small></span></button></nav></section>
+  <section class='grp g-net'><h3 class='sec'>Rede</h3><nav class='grid'><button class='big tile' id='open' data-k='switch reset resetar console putty link virada'><span class="ico">🔁</span><span>Virada de Link</span></button><button class='big tile' id='openf' data-k='fluxograma conexões rede cuiabá portas'><span class='ico'>🌐</span><span>Guia de Conexões</span></button><button class='big tile' id='openmk' data-k='mikrotik winbox backup gpon planilha acesso remoto loopback'><span class='ico'>📡</span><span>Mikrotik</span></button></nav></section>
+  <section class='grp g-cam'><h3 class='sec'>Câmeras e gravador</h3><nav class='grid'><button class='big tile' id='opencam' data-k='câmera offline sem acesso senha ip coleta imagem gravação problemas'><span class='ico'>📷</span><span>Câmeras</span></button><button class='big tile' id='opennvr' data-k='nvr gravador hdmi sem vídeo bateria reset rede ip dns tcp'><span class='ico'>⚙️</span><span>Manutenção do NVR</span></button><button class='big tile' id='openvg' data-k='vigia mais adicionar câmeras nvr automático manual'><span class='ico'>🛡️</span><span>Vigia Mais</span></button><button class='big tile' id='openap' data-k='aluno presente planta câmeras posição ip'><span class='ico'>🏫</span><span>Aluno Presente</span></button></nav></section>
+  <section class='grp g-alm one'><h3 class='sec'>Alarme</h3><nav class='grid'><button class='big tile' id='openal' data-k='alarme central sensor teclado bornes configuração hikvision ax'><span class='ico'>🚨</span><span>Instalação e Configuração de Alarme</span></button></nav></section>
+  <section class='grp g-app one'><h3 class='sec'>Aplicativos</h3><nav class='grid'><button class='big tile' id='openapp' data-k='moni mobile aplicativo monitoramento celular instalar configurar'><span class='ico'>📲</span><span>Aplicativo de Monitoramento</span></button></nav></section>
   <p id='nf' hidden>Nenhum procedimento encontrado.</p>
-  <div class='gl'><b>Transparência do vidro</b><div><span>Claro</span><input id='gs' type='range' min='0' max='100' value='45' aria-label='Transparência do vidro'><span>Opaco</span></div></div>
-</main>
+  </main>
 
 <div class="ov" id="ov" role="dialog" aria-modal="true" aria-labelledby="ttl">
   <div class="sheet">
@@ -637,10 +632,8 @@ var h=e.target.closest('.hs');if(!h)return;var k=h.dataset.hs;if(k=='blP'){zoom(
 E('bda').onkeydown=function(e){var h=e.target.closest&&e.target.closest('.hs');if(h&&(e.key=='Enter'||e.key==' ')){e.preventDefault();h.dispatchEvent(new MouseEvent('click',{bubbles:true}))}};
 E('bde').onkeydown=function(e){var h=e.target.closest&&e.target.closest('.tm');if(h&&(e.key=='Enter'||e.key==' ')){e.preventDefault();h.dispatchEvent(new MouseEvent('click',{bubbles:true}))}};
 E('openal').onclick=function(){alm();E('ova').classList.add('on');E('cla').focus()};
-(function(){var q=E('q'),r=document.documentElement;function ap(v){r.style.setProperty('--g',v/100)}
-try{var sv=localStorage.getItem('socg');if(sv!==null)E('gs').value=sv}catch(x){}
-ap(E('gs').value||45);E('gs').oninput=function(){ap(this.value);try{localStorage.setItem('socg',this.value)}catch(x){}};
-q.oninput=function(){var v=q.value.trim().toLowerCase(),n=0;[].forEach.call(document.querySelectorAll('.tile'),function(t){var m=!v||(t.textContent+' '+(t.dataset.k||'')).toLowerCase().indexOf(v)>-1;t.style.display=m?'':'none';if(m)n++});[].forEach.call(document.querySelectorAll('.grp'),function(g){g.style.display=[].some.call(g.querySelectorAll('.tile'),function(t){return t.style.display!='none'})?'':'none'});E('nf').hidden=n>0}})();
+(function(){var q=E('q');function nz(s){return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
+q.oninput=function(){var w=nz(q.value).split(/\s+/).filter(Boolean),n=0;[].forEach.call(document.querySelectorAll('.tile'),function(t){var h=nz(t.textContent+' '+(t.dataset.k||'')),m=w.every(function(x){return h.indexOf(x)>-1});t.style.display=m?'':'none';if(m)n++});[].forEach.call(document.querySelectorAll('.grp'),function(g){g.style.display=[].some.call(g.querySelectorAll('.tile'),function(t){return t.style.display!='none'})?'':'none'});E('nf').hidden=n>0}})();
 E('opennvr').onclick=function(){menuN();E('bdn').scrollTop=0;E('ovn').classList.add('on');E('cln').focus()};
 E('cln').onclick=function(){E('ovn').classList.remove('on')};
 E('ovn').onclick=function(e){if(e.target==E('ovn'))E('ovn').classList.remove('on')};
