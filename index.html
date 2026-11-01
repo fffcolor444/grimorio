@@ -11,14 +11,13 @@ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:en
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1822;--card:#172433;--ink:#EAF0F5;--mute:#9FB0BF;--line:#2A3B4C;--ok:#3DCB7B;--warn:#3A3216}}
 :root[data-theme="dark"]{--bg:#0F1822;--card:#172433;--ink:#EAF0F5;--mute:#9FB0BF;--line:#2A3B4C;--ok:#3DCB7B;--warn:#3A3216}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.45 Barlow,system-ui,sans-serif}
 main{max-width:480px;margin:0 auto;padding:16px}
 h1,h2{font-family:"Barlow Semi Condensed",Barlow,sans-serif;margin:0;line-height:1.1}
 h1{font-size:34px}
 h2{font-size:26px}
-.brand{display:inline-block;font:700 15px "Barlow Semi Condensed",sans-serif;background:var(--ink);color:var(--bg);padding:5px 10px;border-radius:6px;margin-bottom:18px}
-p.sub{color:var(--mute);margin:8px 0 22px}
 .big{display:flex;width:100%;align-items:center;gap:14px;text-align:left;min-height:68px;padding:14px 16px;background:var(--card);border:2px solid var(--line);border-radius:12px;color:var(--ink);font:600 20px "Barlow Semi Condensed",sans-serif;cursor:pointer}
 .big small{display:block;font:400 14px Barlow,sans-serif;color:var(--mute)}
 .big:active,.big:hover{border-color:var(--acc)}
@@ -79,8 +78,6 @@ ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
 .bxs{border:2px solid var(--line);border-radius:12px;padding:14px;margin-top:12px}
 .bxs.ok{border-color:var(--ok)}
 .bxs p{margin:8px 0 0}
-.ta{width:100%;margin-top:10px;padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:inherit}
-.dgo{display:none;white-space:pre-wrap;margin-top:14px;padding:12px;background:var(--bg);border-radius:10px;font-size:16px}
 .syc{display:block;width:100%;min-height:200px;text-align:left;padding:20px;margin-bottom:24px;border:2px solid var(--ink);border-radius:16px;background:var(--card);color:var(--ink);font:inherit;cursor:pointer;box-shadow:0 7px 0 -2px var(--line),0 14px 0 -5px var(--line)}
 .syc h3{font:700 25px/1.15 Barlow Semi Condensed,Barlow,sans-serif;margin:6px 0 0}
 .syc p{margin:10px 0 0}
@@ -92,7 +89,7 @@ ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
 .st{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
 .st .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--acc);color:var(--accInk);display:grid;place-items:center;font:700 16px Barlow Semi Condensed,sans-serif}
 .ov{align-items:center;padding:16px}
-.sheet{border-radius:18px;border-bottom:2px solid var(--ink);max-height:90%;box-shadow:0 24px 70px rgba(0,0,0,.4)}
+.sheet{max-height:90%}
 #ove{z-index:40}
 .cl{margin:12px 0 0;padding-left:22px}
 .cl li{margin-bottom:10px}
@@ -107,7 +104,7 @@ ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
 .cc{fill:var(--rd);stroke:var(--card);stroke-width:2}
 .pl{fill:none;stroke:var(--rd);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:pl 2.4s ease-out infinite}
 @keyframes pl{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.3);opacity:0}}
-@media (prefers-reduced-motion:reduce){.pl{animation:none;opacity:0}}
+@media (prefers-reduced-motion:reduce),(hover:none){.pl{animation:none;opacity:0}}
 .ip{fill:var(--rd)}
 .ipt,.cpt,.lt,.pn{font-family:Barlow Semi Condensed,Barlow,sans-serif}
 .ipt{fill:var(--onrd);font-size:11px;font-weight:700;text-anchor:middle}
@@ -128,7 +125,7 @@ ul.chk li:before{content:"✓";color:var(--ok);font-weight:700}
 main{max-width:640px;padding:56px 24px}
 h1{font-size:42px}
 .ov{align-items:center;padding:24px}
-.sheet{max-width:620px;max-height:88%;border-radius:18px;border-bottom:2px solid var(--ink);box-shadow:0 24px 70px rgba(0,0,0,.4)}
+.sheet{max-width:620px;max-height:88%}
 .hd{padding:18px 24px 8px}
 .bd{padding:8px 24px 24px}
 .fl{max-width:460px;margin-left:auto;margin-right:auto}
@@ -138,11 +135,9 @@ h1{font-size:42px}
 :root[data-theme='dark']{--bg:#050D1C;--card:#0C1A33;--ink:#E6EEFB;--mute:#8EA3C2;--line:#1C3358;--acc:#2E7CFF;--accInk:#FFFFFF;--warn:#122A52;--tile:#12305E}
 body{background:var(--bg)}
 .ov{background:rgba(3,10,24,.72)}
-.sheet{border:1px solid var(--acc);box-shadow:0 24px 70px rgba(0,0,0,.5),0 0 0 4px rgba(46,124,255,.12)}
 .btn:not(.y){border-color:var(--acc)}
 .big{border:1px solid var(--line);border-left:4px solid var(--acc)}
-.big:not(:disabled):hover,.big:not(:disabled):active{border-color:var(--acc);box-shadow:0 0 0 3px rgba(46,124,255,.18)}
-.big .ico{flex:none;width:46px;height:46px;display:grid;place-items:center;border-radius:12px;background:var(--tile);font-size:24px}
+.big .ico{flex:none;display:grid;place-items:center}
 .tag{display:inline-flex;align-items:center;gap:8px;font:600 12px Barlow,sans-serif;letter-spacing:.16em;color:#9CC4FF}
 .tag i{width:8px;height:8px;border-radius:50%;background:#3DA0FF;box-shadow:0 0 10px #3DA0FF;animation:bl 1.8s ease-in-out infinite}
 @keyframes bl{50%{opacity:.3}}
@@ -160,9 +155,6 @@ body{background:var(--bg)}
 .tag{font-size:14px;letter-spacing:.1em}
 main{padding-top:0}
 @media (min-width:700px){main{max-width:780px;padding-top:0}.hero{padding:48px 0 40px}.hi{max-width:780px;padding:0 24px}.soc{font-size:140px}.dc-art{max-width:300px}.hs{font-size:22px}.hd2{font-size:17px}}
-.opt{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;padding:14px 16px;margin-top:10px;border:1px solid var(--line);border-left:4px solid var(--acc);border-radius:12px;background:var(--card);color:var(--ink);font:600 18px Barlow Semi Condensed,sans-serif;cursor:pointer}
-.opt:after{content:'›';color:var(--acc);font-size:26px;line-height:1}
-.opt:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 .tb{width:100%;border-collapse:collapse;margin-top:10px;font-size:15px}
 .tb th,.tb td{text-align:left;padding:8px 10px;border:1px solid var(--line);vertical-align:top}
 .tb th{background:var(--tile);font-weight:600}
@@ -173,16 +165,14 @@ main{padding-top:0}
 #tts{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
 #bds{padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
 .gm{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--mute);margin-bottom:6px}
-.lnk3{background:none;border:0;color:var(--acc);font:500 14px Barlow,sans-serif;cursor:pointer;text-decoration:underline;padding:6px 0}
 .lbl2{margin:18px 0 6px;font:600 13px Barlow Semi Condensed,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
 .pth{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px;padding:12px;background:var(--bg);border:1px dashed var(--acc);border-radius:10px}
 .pth span{padding:4px 10px;border-radius:8px;background:var(--tile);color:var(--ink);border:1px solid var(--acc);font:600 15px Barlow Semi Condensed,sans-serif}
 .pth i{color:var(--acc);font-style:normal;font-weight:700}
 .dt{margin-top:14px;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
 .dt summary{cursor:pointer;color:var(--acc);font-weight:600}
-.gk{margin:0;padding:10px 12px;border-left:4px solid var(--ok);background:var(--bg);border-radius:0 8px 8px 0}
 .gb{width:100%;margin-top:10px}
-.gb:focus-visible,.lnk3:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.gb:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 #ovf .sheet{height:100%;max-height:none}
 #bdf{flex:1}
 #bdf{display:flex;flex-direction:column;min-height:0}
@@ -193,9 +183,7 @@ main{padding-top:0}
 .hs:focus{outline:none}
 .hs .hl{fill:transparent;stroke:transparent;stroke-width:3}
 .hs:hover .hl,.hs:focus-visible .hl,.hs.sel .hl{stroke:var(--acc);fill:rgba(46,124,255,.2)}
-.led{animation:bk 1.4s ease-in-out infinite}
 @keyframes bk{50%{opacity:.25}}
-@media (prefers-reduced-motion:reduce){.led{animation:none}}
 .zw{overflow-x:auto;padding:8px 0}
 .tm{cursor:pointer}
 .tm:focus{outline:none}
@@ -205,26 +193,27 @@ main{padding-top:0}
 .tm.use rect.b{stroke:var(--acc)}
 .tm:not(.use){opacity:.5}
 .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:8px;vertical-align:-1px;border:1px solid rgba(255,255,255,.55)}
-:root{--g:.5}
-body{background:radial-gradient(70% 38% at 15% -5%,rgba(46,124,255,.5),transparent 70%),radial-gradient(55% 36% at 100% 32%,rgba(0,200,255,.22),transparent 70%),radial-gradient(70% 45% at 0% 100%,rgba(130,90,255,.28),transparent 70%),#050D1C;background-attachment:fixed}
-.ov{background:rgba(3,10,24,.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-.sheet{background:rgba(8,20,44,calc(.5 + var(--g)*.42));-webkit-backdrop-filter:blur(calc(10px + (1 - var(--g))*22px)) saturate(170%);backdrop-filter:blur(calc(10px + (1 - var(--g))*22px)) saturate(170%);border:1px solid rgba(255,255,255,.18);border-radius:28px;box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 30px 80px rgba(0,0,0,.55)}
+body{background:#050D1C}
+body:before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(70% 38% at 15% -5%,rgba(46,124,255,.5),transparent 70%),radial-gradient(55% 36% at 100% 32%,rgba(0,200,255,.22),transparent 70%),radial-gradient(70% 45% at 0% 100%,rgba(130,90,255,.28),transparent 70%)}
+.ov{background:rgba(3,10,24,.6)}
+.sheet{background:rgba(8,20,44,.97);border:1px solid rgba(255,255,255,.18);border-radius:28px;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 12px 32px rgba(0,0,0,.4)}
+@media (min-width:700px) and (hover:hover){.sheet{background:rgba(8,20,44,.74);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}}
+@media (prefers-reduced-transparency:reduce){.sheet{background:rgba(8,20,44,.97);-webkit-backdrop-filter:none;backdrop-filter:none}}
 .sheet:before{content:'';display:block;flex:none;width:40px;height:5px;margin:8px auto 0;border-radius:3px;background:rgba(255,255,255,.35)}
-.ov.on .sheet{animation:sup .38s cubic-bezier(.2,.9,.3,1)}
+.ov.on .sheet{animation:sup .28s cubic-bezier(.2,.9,.3,1)}
 @keyframes sup{from{transform:translateY(26px) scale(.97);opacity:0}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){.ov.on .sheet{animation:none}}
 .x{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:var(--ink)}
 .bxs,.kv,.dt,.pth,.lg2,.syc,.opt,.tb th{border-radius:18px}
-.bxs,.dt,.lg2,.syc,.opt{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.bxs,.dt,.lg2,.syc{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15)}
 .note,.say{background:rgba(46,124,255,.18);border:1px solid rgba(120,170,255,.28);border-radius:16px}
 .btn{border-radius:16px}
 .btn:not(.y){background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.2)}
-.big{border:1px solid rgba(255,255,255,.16);border-left:1px solid rgba(255,255,255,.16);border-radius:20px;background:rgba(255,255,255,calc(.05 + var(--g)*.08));box-shadow:inset 0 1px 0 rgba(255,255,255,.2);-webkit-backdrop-filter:blur(16px) saturate(160%);backdrop-filter:blur(16px) saturate(160%);transition:transform .25s cubic-bezier(.2,.9,.3,1.3),box-shadow .2s}
-.big:not(:disabled):hover,.big:not(:disabled):active{box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 0 0 3px rgba(46,124,255,.22)}
+.big{border:1px solid rgba(255,255,255,.16);border-radius:20px;background:rgba(255,255,255,.09);box-shadow:inset 0 1px 0 rgba(255,255,255,.2);transition:transform .18s ease-out}
 .big:active{transform:scale(.97)}
-.big .ico{width:50px;height:50px;border-radius:50%;font-size:26px;background:linear-gradient(160deg,var(--c1,#4C9BFF),var(--c2,#1F5BFF));background:radial-gradient(120% 120% at 30% 12%,rgba(255,255,255,.55),rgba(255,255,255,0) 45%),linear-gradient(160deg,color-mix(in srgb,var(--c1,#4C9BFF) 80%,transparent),color-mix(in srgb,var(--c2,#1F5BFF) 80%,transparent));border:1px solid rgba(255,255,255,.55);box-shadow:inset 0 1px 2px rgba(255,255,255,.8),inset 0 -6px 12px rgba(0,0,40,.25),0 8px 18px rgba(20,60,200,.4);-webkit-backdrop-filter:blur(10px) saturate(180%);backdrop-filter:blur(10px) saturate(180%)}
+.big .ico{width:50px;height:50px;border-radius:50%;font-size:26px;background:linear-gradient(160deg,var(--c1,#4C9BFF),var(--c2,#1F5BFF));background:radial-gradient(120% 120% at 30% 12%,rgba(255,255,255,.5),rgba(255,255,255,0) 45%),linear-gradient(160deg,color-mix(in srgb,var(--c1,#4C9BFF) 80%,transparent),color-mix(in srgb,var(--c2,#1F5BFF) 80%,transparent));border:1px solid rgba(255,255,255,.5);box-shadow:inset 0 1px 2px rgba(255,255,255,.7),0 3px 8px rgba(20,60,200,.35)}
 .hero{border-radius:0 0 30px 30px;margin-bottom:18px}
-.sb{position:sticky;top:8px;z-index:6;display:flex;align-items:center;gap:8px;height:46px;padding:0 16px;margin:0 0 20px;border-radius:23px;background:rgba(14,30,60,.62);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(18px) saturate(170%);backdrop-filter:blur(18px) saturate(170%);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.sb{position:sticky;top:8px;z-index:6;display:flex;align-items:center;gap:8px;height:46px;padding:0 16px;margin:0 0 20px;border-radius:23px;background:rgba(14,30,60,.94);border:1px solid rgba(255,255,255,.2);box-shadow:0 4px 12px rgba(0,0,0,.25)}
 .sb input{flex:1;min-width:0;background:none;border:0;outline:none;color:var(--ink);font:500 16px Barlow,sans-serif}
 .sb input::placeholder{color:var(--mute)}
 .grp{margin-bottom:22px}
@@ -239,6 +228,7 @@ body{background:radial-gradient(70% 38% at 15% -5%,rgba(46,124,255,.5),transpare
 .g-app{--c1:#A98BFF;--c2:#5E3FE0}
 #nf{color:var(--mute);text-align:center;margin:30px 0}
 @media (min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}.grp.one .tile{grid-column:span 1}}
+@media (hover:hover){.big:not(:disabled):hover{box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 0 0 3px rgba(46,124,255,.22)}}
 </style>
 </head>
 <body>
@@ -280,9 +270,7 @@ body{background:radial-gradient(70% 38% at 15% -5%,rgba(46,124,255,.5),transpare
 
 <div class='ov' id='ovp' role='dialog' aria-modal='true' aria-labelledby='ttp'><div class='sheet'><div class='hd'><h2 id='ttp'>Aluno Presente</h2><button class='x' id='clp' aria-label='Fechar'>✕</button></div><div class='bd' id='bdp'></div></div></div>
 
-<div class='ov' id='ovg' role='dialog' aria-modal='true' aria-labelledby='ttg'><div class='sheet'><div class='hd'><h2 id='ttg'>Aplicativo de Monitoramento</h2><button class='x' id='clg' aria-label='Fechar'>✕</button></div><div class='bd' id='bdg'></div></div></div>
 
-<div class='ov' id='ovv' role='dialog' aria-modal='true' aria-labelledby='ttv'><div class='sheet'><div class='hd'><h2 id='ttv'>Vigia Mais</h2><button class='x' id='clv' aria-label='Fechar'>✕</button></div><div class='bd' id='bdv'></div></div></div>
 
 <div class='ov' id='ovs' role='dialog' aria-modal='true' aria-labelledby='tts'><div class='sheet'><div class='hd'><h2 id='tts'>Guia</h2><button class='x' id='cls' aria-label='Fechar'>✕</button></div><div class='bd' id='bds'></div></div></div>
 
@@ -311,11 +299,10 @@ nx.onclick=function(){if(i<S.length-1){i++;show()}else closeSheet()};
 ov.onclick=function(e){if(e.target==ov)closeSheet()};
 document.addEventListener("keydown",function(e){if(e.key=="Escape")closeSheet()});
 var ND=[{id:'onu',l:['ONU'],x:127.5,r:0,ok:1},{id:'mk',l:['Mikrotik'],x:127.5,r:1,ok:1},{id:'fw',l:['Firewall'],x:0,r:1,ok:1},{id:'sw8',l:['Switch 8 portas','(Aluno Presente)'],x:0,r:2,ok:1},{id:'cam1',l:['Câmeras','(Aluno Presente)'],x:0,r:3},{id:'swc',l:['Switch CFTV'],x:127.5,r:2,ok:1},{id:'nvr',l:['NVR Gravador'],x:127.5,r:3,ok:1},{id:'cam2',l:['Câmeras'],x:127.5,r:4},{id:'al',l:['Alarme'],x:255,r:2}];
-var LN=[[180,62,180,100],[127.5,126,105,126],[52.5,152,52.5,190],[52.5,242,52.5,280],[180,152,180,190],[232.5,216,255,216],[180,242,180,280],[180,332,180,370]];
 function E(i){return document.getElementById(i)}
 var EG=[['onu','mk','v'],['mk','fw','l'],['fw','sw8','v'],['sw8','cam1','v'],['mk','swc','v'],['swc','al','r'],['swc','nvr','v'],['nvr','cam2','v']];
-function flow(W,H){var g=Math.max(18,W*.06),nw=(W-2*g)/3,nh=Math.max(44,Math.min(90,H*.11)),vg=(H-5*nh)/4,fs=Math.max(12,Math.min(22,nw*.115)),sf=Math.max(10,fs*.78),P={};
-ND.forEach(function(n){P[n.id]={x:Math.round(n.x/127.5)*(nw+g),y:n.r*(nh+vg)}});
+function flow(W,H){var g=Math.max(18,W*.06),nw=(W-6-2*g)/3,nh=Math.max(44,Math.min(90,H*.11)),vg=(H-6-5*nh)/4,fs=Math.max(12,Math.min(22,nw*.115)),sf=Math.max(10,fs*.78),P={};
+ND.forEach(function(n){P[n.id]={x:3+Math.round(n.x/127.5)*(nw+g),y:3+n.r*(nh+vg)}});
 var s=`<svg viewBox='0 0 ${W} ${H}' role='img' aria-label='Fluxograma das conexões'><defs><marker id='ar' viewBox='0 0 8 8' refX='7' refY='4' markerWidth='8' markerHeight='8' markerUnits='userSpaceOnUse' orient='auto'><path d='M0 0L8 4L0 8z' fill='currentColor'/></marker></defs>`;
 EG.forEach(function(e){var a=P[e[0]],b=P[e[1]],x1,y1,x2,y2;if(e[2]=='v'){x1=x2=a.x+nw/2;y1=a.y+nh;y2=b.y}else if(e[2]=='l'){x1=a.x;x2=b.x+nw;y1=y2=a.y+nh/2}else{x1=a.x+nw;x2=b.x;y1=y2=a.y+nh/2}s+=`<line x1='${x1}' y1='${y1}' x2='${x2}' y2='${y2}' stroke='currentColor' stroke-width='2' marker-end='url(#ar)'/>`});
 ND.forEach(function(n){var p=P[n.id],t=n.l.length>1,cx=p.x+nw/2,cy=p.y+nh/2;s+=`<g class='nd${n.ok?' ok':''}'${n.ok?` tabindex='0' role='button'`:''} data-id='${n.id}' aria-label='${n.l.join(' ')}'><rect x='${p.x}' y='${p.y}' width='${nw}' height='${nh}' rx='${Math.min(14,nh/4)}'/><text style='font-size:${fs}px' x='${cx}' y='${t?cy-fs*.1:cy+fs*.35}'>${n.l[0]}</text>${t?`<text class='s' style='font-size:${sf}px' x='${cx}' y='${cy+sf*1.2}'>${n.l[1]}</text>`:''}</g>`});
@@ -356,19 +343,11 @@ var NETH=`<p style='margin:0 0 4px;color:var(--mute)'>Toque em cada campo para e
 function netClick(e){var b=e.target.closest('.fld');if(b){var f=NV.filter(function(d){return d.k==b.dataset.k})[0];dlg(f.l+' '+f.v,`<span class='chip'>Explicação</span>`+f.h,'Entendi')}else if(e.target.closest('#ipb'))dlg('Como descobrir o IP da rede',`<span class='chip'>Passo a passo</span><p>1. No notebook conectado à rede do local, tecle <b>Windows</b>, digite <b>cmd</b> e aperte Enter.</p><p>2. Na janela preta, digite o comando abaixo e aperte Enter:</p><pre style='margin-top:8px'>ipconfig</pre><p>3. Na resposta, veja os campos <b>Endereço IPv4</b>, <b>Máscara de Sub-rede</b> e <b>Gateway Padrão</b>. Eles mostram a rede do local, que o NVR deve seguir.</p>`,'Entendi')};
 function bn(t,b,back){E('ttn').textContent=t;E('bdn').innerHTML=(back?`<button class='bk' data-go='menu'>← Manutenção do NVR</button>`:'')+b;E('bdn').scrollTop=0}
 function menuN(){bn('Manutenção do NVR',`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-go='net'><span class='ico'>🌐</span><span>Configuração de Rede<small>IP, máscara, gateway e DNS</small></span></button><button class='big' data-go='bat'><span class='ico'>🔋</span><span>Problemas na Bateria<small>Principais sintomas</small></span></button><button class='big' data-go='rst'><span class='ico'>♻️</span><span>Como resetar o NVR<small>Restauração simples e de fábrica</small></span></button><button class='big' data-go='hdmi'><span class='ico'>🖥️</span><span>HDMI sem Vídeo<small>Sem imagem na tela do NVR</small></span></button>`,0)}
-function closeAll(){['ove','ovs','ovd','ovc','ovm','ovp','ovg','ovv','ova','ovn','ovf'].forEach(function(i){E(i).classList.remove('on')})}
+function closeAll(){['ove','ovs','ovd','ovc','ovm','ovp','ova','ovn','ovf'].forEach(function(i){E(i).classList.remove('on')})}
 function dlgc(t,h,b,cb){E('ttd').textContent=t;E('bdd').innerHTML=h+`<button class='btn y' id='bkd' style='width:100%;margin-top:16px'>${b}</button>`;E('bkd').onclick=function(){E('ovd').classList.remove('on');if(cb)cb()};E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
 var SY=[['1. Data e hora ficam erradas','O gravador perde a data ou volta para uma data antiga após ser desligado.'],['2. Perda de configurações da BIOS','Podem ocorrer avisos durante a inicialização ou perda de ajustes.']],SI=0;
 function bats(){var n=SY.length,s=SY[SI];bn('Problemas na Bateria',`<h2 style='margin-bottom:16px'>Principais sintomas de bateria fraca ou descarregada</h2><button class='syc' data-sy='1'><span class='chip'>Sintoma ${SI+1} de ${n}</span><h3>${s[0]}</h3><p>${s[1]}</p><span class='hint'>${SI==n-1?'Toque no cartão para voltar ao primeiro':'Toque no cartão para ver o próximo ›'}</span></button><div class='dots'>${SY.map(function(_,k){return `<i class='${k==SI?'on':''}'></i>`}).join('')}</div>`,1)}
-var RC=[['Clique em Configuração','Fica na barra de cima da página do NVR.'],['Abra Sistema e Manutenção','No menu da esquerda, clique em Sistema e depois em Manutenção.','Em firmwares mais novos o caminho pode ser Sistema e Manutenção &gt; Manutenção &gt; Backup e Redefinição.'],['Abra a tela Padrão','Dentro de Manutenção, clique em Padrão. Os botões de restauração ficam nessa tela.']],RS={m:'s',i:0};
-function rsl(){var L=RC.slice();L.push(RS.m=='f'?['Clique no botão Padrão','É o padrão de fábrica: apaga todas as configurações, inclusive IP e senha. Confirme em OK.','Atenção: o NVR perde o IP e a senha. Anote os dados de rede antes de continuar.']:['Clique em Restaurar','É a restauração simples: mantém o IP e a senha. Confirme em OK.']);L.push(['Aguarde o reinício','O NVR reinicia sozinho. Espere ele ligar por completo antes de testar.']);return L}
-function rsr(){var L=rsl(),f=RS.m=='f',n=L.length,t=f?'Restauração de fábrica':'Restauração simples';
-if(RS.i>=n){bn('Como resetar o NVR',`<span class='chip'>${t}</span><h2>O NVR voltou ao normal?</h2><p>Teste o NVR e confirme o resultado.</p><div style='display:grid;gap:10px;margin-top:16px'><button class='btn y' data-rs='ok'>Funcionou</button><button class='btn' data-rs='${f?'fail':'fact'}'>${f?'Não funcionou':'Tentar Restauração de Fábrica'}</button></div>`,1);return}
-var s=L[RS.i];bn('Como resetar o NVR',`<div class='bar' style='padding:0 0 14px'>${L.map(function(_,k){return `<i class='${k<=RS.i?'on':''}'></i>`}).join('')}</div><span class='chip'>${t} · Passo ${RS.i+1} de ${n}</span><h2>${s[0]}</h2><p>${s[1]}</p>${s[2]?`<div class='note'>${s[2]}</div>`:''}<div style='display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:18px'><button class='btn' data-rs='prev' ${RS.i?'':'disabled'}>Voltar</button><button class='btn y' data-rs='next'>${RS.i==n-1?'Concluir':'Próximo'}</button></div>`,1)}
-function rsAct(a){if(a=='next'){RS.i++;rsr()}else if(a=='prev'){RS.i--;rsr()}else if(a=='fact'){RS={m:'f',i:0};rsr()}else if(a=='ok'){dlgc('Procedimento concluído',`<p class='say'>Que bom que funcionou!</p>`+(RS.m=='f'?`<p>Depois do padrão de fábrica, o NVR volta inativo: ative com uma nova senha e refaça a Configuração de Rede.</p>`:''),'Ok',closeAll)}else if(a=='fail'){closeAll();dlgc('Aviso',`<p class='say'>Relate ao suporte.</p>`,'Ok')}}
-function hd(){bn('HDMI sem Vídeo',`<span class='chip'>Passo a passo</span><div class='st'><span class='n'>1</span><span>Abra as configurações do NVR.</span></div><div class='st'><span class='n'>2</span><span>Clique em <b>Configurações da visualização em direto</b>.</span></div><div class='st'><span class='n'>3</span><span>Em <b>Porta de Saída</b>, selecione a opção <b>HDMI 2</b>.</span></div><div class='st'><span class='n'>4</span><span>Clique em <b>Salvar</b>.</span></div><button class='btn y' data-hd='1' style='width:100%;margin-top:18px'>Pronto!</button>`,1)}
-function ask(){E('ttd').textContent='Funcionou?';E('bdd').innerHTML=`<p>O vídeo voltou a aparecer na tela?</p><div style='display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px'><button class='btn y' id='yes'>Sim</button><button class='btn' id='no'>Não</button></div>`;E('yes').onclick=function(){dlgc('Tudo certo!',`<p class='say'>Que ótimo! O vídeo voltou a aparecer. 🎉</p>`,'Ok',closeAll)};E('no').onclick=function(){dlgc('Aviso',`<p class='say'>Comunique o suporte!</p>`,'Ok',closeAll)};E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
-E('bdn').onclick=function(e){var g=e.target.closest('[data-go]');if(g){var v=g.dataset.go;if(v=='menu')menuN();else if(v=='net')bn('Configuração de Rede',NETH,1);else if(v=='bat'){SI=0;bats()}else if(v=='hdmi')hd();else if(v=='rst')gs('reset');return}if(e.target.closest('[data-hd]')){ask();return}var r=e.target.closest('[data-rs]');if(r){rsAct(r.dataset.rs);return}if(e.target.closest('[data-sy]')){SI=(SI+1)%SY.length;bats();return}netClick(e)};
+E('bdn').onclick=function(e){var g=e.target.closest('[data-go]');if(g){var v=g.dataset.go;if(v=='menu')menuN();else if(v=='net')bn('Configuração de Rede',NETH,1);else if(v=='bat'){SI=0;bats()}else if(v=='hdmi')hd();else if(v=='rst')gs('reset');return}if(e.target.closest('[data-sy]')){SI=(SI+1)%SY.length;bats();return}netClick(e)};
 var CM=[
 {t:'Offline ou desconectando sozinha',i:'📶',sh:'Possíveis soluções',c:['Conector RJ45 mal crimpado, oxidado ou com umidade.','Cabo de rede danificado.','Porta PoE do NVR ou switch com defeito.','Alimentação insuficiente.','Conflito de IP ou endereço alterado.','Falha na própria câmera.'],s:['Verifique no NVR a mensagem de erro do canal, quando disponível.','Confira os LEDs da porta PoE e se a câmera está recebendo alimentação.','Teste outro cabo de rede ou faça um teste de continuidade.','Troque a câmera de porta PoE para verificar se o problema acompanha a porta ou a câmera.','Utilize o SADP para verificar se ela continua sendo detectada e se o endereço IP está correto.','Se o problema persistir, teste a câmera diretamente em uma rede de bancada, com alimentação compatível.']},
 {t:'Não acessa pela rede ou pelo NVR',i:'🔎',sh:'Solução',c:['Computador e câmera em sub-redes diferentes.','Gateway ou máscara de sub-rede incorretos.','Endereço IP duplicado.','Senha incorreta no cadastro do NVR.','Porta de serviço ou protocolo incompatível.','Configuração de rede incorreta no próprio NVR.'],s:['Abra o SADP e identifique o IP atual da câmera.','Confira o IP e a máscara do computador com ipconfig, no Windows.','Compare os endereços e confirme se computador e câmera estão na mesma rede, quando essa for a topologia esperada.','Verifique se o IP já está sendo utilizado por outro dispositivo.','Confira as credenciais cadastradas no NVR e atualize-as, se necessário.','Se a câmera funcionar diretamente, mas não no NVR, investigue a configuração do canal, a rede interna do gravador e a compatibilidade.']},
@@ -380,26 +359,17 @@ function cmOpen(k){var c=CM[k],h;if(c.col){cola();return}E('ttd').textContent=c.
 if(c.c)h=`<span class='chip'>Causas prováveis</span><ul class='cl'>${lis(c.c.map(function(x){return x.indexOf('Conflito de IP')==0?`<button class='lk2' data-ip='1'>${x}</button>`:x}))}</ul><button class='btn y' data-cs='${k}' style='width:100%;margin-top:18px'>Como resolver</button>`;
 else h=`<span class='chip'>${c.sh}</span><ul class='cl'>${lis(c.b)}</ul><a class='btn y lk' href='${c.link}' target='_blank' rel='noopener noreferrer' style='margin-top:18px'>Como Redefinir Senha</a>`;
 E('bdd').innerHTML=h;E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
-function cmSol(k){var c=CM[k];E('tte').textContent=c.t;E('bde').innerHTML=`<span class='chip'>${c.sh}</span><ol class='cl'>${lis(c.s)}</ol>`;E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
 E('bdc').onclick=function(e){var b=e.target.closest('[data-cm]');if(b)cmOpen(+b.dataset.cm)};
-E('bdd').onclick=function(e){var b=e.target.closest('[data-cs]');if(b)cmSol(+b.dataset.cs);if(e.target.closest('[data-col]'))colaPasta();if(e.target.closest('[data-more]'))vgMais();if(e.target.closest('[data-ip]'))ipConf()};
+E('bdd').onclick=function(e){var b=e.target.closest('[data-cs]');if(b)cmSol(+b.dataset.cs);if(e.target.closest('[data-ip]'))ipConf()};
 E('opencam').onclick=function(){E('bdc').scrollTop=0;E('ovc').classList.add('on');E('clc').focus()};
 E('clc').onclick=function(){E('ovc').classList.remove('on')};
 E('cle').onclick=function(){E('ove').classList.remove('on')};
 E('ovc').onclick=function(e){if(e.target==E('ovc'))E('ovc').classList.remove('on')};
 E('ove').onclick=function(e){if(e.target==E('ove'))E('ove').classList.remove('on')};
-var MS=0,MST=[['Conecte o notebook','Conecte seu notebook ao Mikrotik.'],['Entre no WinBox','Abra o WinBox e faça o login na opção com o nome da unidade.','Consulte com o suporte o login e a senha.'],['Confira o loopback','Vá até <b>IP</b> › <b>Address List</b>. Em <b>loopback</b>, confira com o suporte se o IP que aparece é o mesmo configurado no sistema. Por último, faça um ping nesse IP no terminal e veja se recebe resposta.'],['Confira o OSPF','Clique em <b>Routing</b> e selecione <b>OSPF</b>. Em <b>Instances</b>, confira se o IP que aparece é o endereço loopback correto passado pelo suporte. Em seguida, ao lado, vá em <b>Networks</b> e confira se o último IP confere com o loopback correto passado pelo suporte.']];
 function bm(t,b,back){E('ttm').textContent=t;E('bdm').innerHTML=(back?`<button class='bk' data-mk='menu'>← Mikrotik</button>`:'')+b;E('bdm').scrollTop=0}
 function mm(){bm('Mikrotik',`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-mk='gpon'><span class='ico'>📊</span><span>Configuração na Planilha de GPON<small>Passo a passo em 10 etapas</small></span></button><button class='big' data-mk='acc'><span class='ico'>📡</span><span>Mikrotik sem acesso remoto<small>Conferir loopback e OSPF</small></span></button><button class='big' data-mk='bkp'><span class='ico'>💾</span><span>Como fazer Backup<small>Exportar a configuração</small></span></button>`,0)}
-function bkp(){E('tte').textContent='Como fazer Backup';E('bde').innerHTML=`<span class='chip'>Passo a passo</span><div class='st'><span class='n'>1</span><span>Vá em <b>New Terminal</b>.</span></div><div class='st'><span class='n'>2</span><span>Digite <b>export</b> e tecle Enter.</span></div><div class='st'><span class='n'>3</span><span>Aperte <b>Ctrl + A</b> e depois <b>Ctrl + C</b>.</span></div><div class='st'><span class='n'>4</span><span>Abra o <b>Bloco de Notas</b> e aperte <b>Ctrl + V</b>.</span></div><div class='st'><span class='n'>5</span><span>Depois que todo o texto for colado, vá em <b>Salvar como</b> e confirme o salvamento do arquivo.</span></div>`;E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
-function atn(){E('ttd').textContent='Atenção';E('bdd').innerHTML=`<p class='say'>Antes de fazer qualquer mudança, faça o Backup para recuperar as configurações, se necessário.</p><div style='display:grid;gap:10px;margin-top:16px'><button class='btn y' id='ab1'>Já fiz o backup</button><button class='btn' id='ab2'>Como fazer o Backup</button></div>`;E('ab1').onclick=function(){E('ovd').classList.remove('on');MS=2;msr()};E('ab2').onclick=bkp;E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
-function msr(){var n=MST.length,s=MST[MS],f;
-if(MS==2)f=`<p style='margin:20px 0 8px;font-weight:600'>Funcionou?</p><div style='display:grid;grid-template-columns:1fr 1fr;gap:10px'><button class='btn y' data-mk='yes'>Sim</button><button class='btn' data-mk='no'>Não</button></div><button class='btn' data-mk='prev' style='width:100%;margin-top:10px'>Voltar</button>`;
-else f=`<div style='display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:18px'><button class='btn' data-mk='prev' ${MS?'':'disabled'}>Voltar</button><button class='btn y' data-mk='${MS==n-1?'conf':'next'}'>${MS==n-1?'Confirmar':'Próximo'}</button></div>`;
-bm('Mikrotik sem acesso remoto',`<div class='bar' style='padding:0 0 14px'>${MST.map(function(_,k){return `<i class='${k<=MS?'on':''}'></i>`}).join('')}</div><span class='chip'>Passo ${MS+1} de ${n}</span><h2>${s[0]}</h2><p>${s[1]}</p>${s[2]?`<p style='color:var(--mute);font-size:15px'>${s[2]}</p>`:''}${f}`,1)}
 E('bdm').onclick=function(e){var b=e.target.closest('[data-mk]');if(!b)return;var a=b.dataset.mk;
-if(a=='menu')mm();else if(a=='bkp')bkp();else if(a=='gpon'){GS=0;gsr()}else if(a=='acc')gs('mkacc');
-else if(a=='next'){if(MS==1)atn();else{MS++;msr()}}else if(a=='prev'){MS--;msr()}else if(a=='yes')closeAll();else if(a=='no'){MS=3;msr()}else if(a=='conf')mm();else if(a=='gnext'){GS++;gsr()}else if(a=='gprev'){GS--;gsr()}else if(a=='gend')mm()};
+if(a=='menu')mm();else if(a=='bkp')bkp();else if(a=='gpon')gsr();else if(a=='acc')gs('mkacc')};
 E('openmk').onclick=function(){mm();E('ovm').classList.add('on');E('clm').focus()};
 E('clm').onclick=function(){E('ovm').classList.remove('on')};
 E('ovm').onclick=function(e){if(e.target==E('ovm'))E('ovm').classList.remove('on')};
@@ -414,18 +384,6 @@ E('bdp').onkeydown=function(e){var c=e.target.closest('.cam');if(c&&(e.key=='Ent
 E('openap').onclick=function(){E('bdp').scrollTop=0;E('ovp').classList.add('on');E('clp').focus()};
 E('clp').onclick=function(){E('ovp').classList.remove('on')};
 E('ovp').onclick=function(e){if(e.target==E('ovp'))E('ovp').classList.remove('on')};
-var AS=0,AP=[
-{i:'📲',t:'Download do Aplicativo',h:`<p style='color:var(--mute)'>Este guia detalha o processo de configuração do sistema de monitoramento <b>Stelseg</b> em seu dispositivo móvel.</p><p>Acesse a loja de aplicativos do seu smartphone: <b>Google Play Store</b> (Android) ou <b>App Store</b> (iOS).</p><p>Pesquise e realize o download do aplicativo <b>Moni Mobile</b>.</p>`},
-{i:'⚙️',t:'Configuração do Servidor',h:`<p>Após concluir a instalação, abra o aplicativo e toque no ícone de <b>+</b> no canto inferior da tela para realizar o <b>Cadastro de Endereço</b>.</p><p>No formulário que aparecer, insira os dados técnicos exatamente como descritos abaixo:</p><div class='kv'><small>Digite o IP</small><b>monitor.stelseg.com.br</b></div><div class='kv'><small>Digite a porta</small><b>5784</b></div><p>Toque no ícone de <b>Check (✓)</b> no topo para salvar.</p>`},
-{i:'🔐',t:'Acesso ao Sistema (Login)',h:`<p>Retorne à tela inicial do aplicativo e realize o seu login com as seguintes credenciais:</p><div class='kv'><small>Usuário</small><b>Número de telefone da Diretora</b></div><div class='kv'><small>Senha padrão</small><b>123456</b></div><p>Toque no botão <b>Login</b>.</p>`},
-{i:'🔑',t:'Segurança e Troca de Senha',h:`<p>Por medidas de segurança, após o primeiro acesso, o aplicativo solicitará obrigatoriamente a troca da senha.</p><ol class='cl'><li>Peça a diretora para digitar uma nova senha pessoal.</li><li>Confirme a nova senha no campo abaixo.</li><li>Toque em <b>Alterar</b>.</li></ol>`},
-{i:'📹',t:'Visualização das Câmeras',h:`<p>Com o login concluído, siga as etapas finais para visualizar as imagens:</p><ol class='cl'><li>Toque na opção <b>Selecione um DVR</b> (ou NVR).</li><li>O sistema apresentará <b>02 (duas) opções</b>, que representam as câmeras <b>Internas</b> e as câmeras <b>Externas</b>.</li><li>Selecione a opção desejada.</li></ol>`},
-{i:'✅',t:'Monitoramento Ativo',h:`<p>Após a seleção, as imagens serão carregadas e você já estará monitorando o local em tempo real.</p><div class='note'>Qualquer dúvida estamos à disposição em nosso suporte técnico através do número <b>3051-5720</b>.</div>`}];
-function asr(){var n=AP.length,s=AP[AS];E('bdg').innerHTML=`<div class='bar' style='padding:0 0 14px'>${AP.map(function(_,k){return `<i class='${k<=AS?'on':''}'></i>`}).join('')}</div><span class='chip'>Passo ${AS+1} de ${n}</span><h2>${s.i} ${s.t}</h2>${s.h}<div style='display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:18px'><button class='btn' data-ag='prev' ${AS?'':'disabled'}>Voltar</button><button class='btn y' data-ag='next'>${AS==n-1?'Concluir':'Próximo'}</button></div>`;E('bdg').scrollTop=0}
-E('bdg').onclick=function(e){var b=e.target.closest('[data-ag]');if(!b)return;if(b.dataset.ag=='prev'){AS--;asr()}else if(AS==AP.length-1)E('ovg').classList.remove('on');else{AS++;asr()}};
-E('openapp').onclick=function(){AS=0;asr();E('ovg').classList.add('on');E('clg').focus()};
-E('clg').onclick=function(){E('ovg').classList.remove('on')};
-E('ovg').onclick=function(e){if(e.target==E('ovg'))E('ovg').classList.remove('on')};
 function P(){return [].slice.call(arguments).map(function(x){return `<b>${x}</b>`}).join(' › ')}
 var GS=0,GP=[
 {c:'Etapa 1',t:'Abrir o aplicativo WinBox',h:`<p style='color:var(--mute)'>Mikrotik configurado na mesma planilha de GPON.</p><p>Abra o aplicativo <b>WinBox</b>.</p>`},
@@ -439,20 +397,7 @@ var GS=0,GP=[
 {c:'Etapa 8',t:'Colocar o nome do arquivo',h:`<p>Vá em ${P('System','Identity')} e coloque o nome da planilha:</p><p><span class='cd'>CE_nome escola</span></p><p>Depois, salve.</p>`},
 {c:'Etapa 9',t:'Exportar o arquivo',h:`<ol class='cl'><li>Abra o <b>New Terminal</b>.</li><li>Escreva <span class='cd'>export file=</span> e copie o nome da escola, tirando os espaços e colocando <b>_</b> no lugar.</li><li>Aperte <b>Enter</b>.</li></ol><div class='note'>Exemplo: <span class='cd'>export file=CE_nome_escola</span></div>`},
 {c:'Etapa 10',t:'Colocar o arquivo salvo na pasta',h:`<p>Abra <b>Files</b> e arraste o arquivo para a pasta.</p>`}];
-function gsr(){var n=GP.length,s=GP[GS];bm('Configuração na Planilha de GPON',`<div class='bar' style='padding:0 0 14px'>${GP.map(function(_,k){return `<i class='${k<=GS?'on':''}'></i>`}).join('')}</div><span class='chip'>${s.c}</span><h2>${s.t}</h2>${s.h}<div style='display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:18px'><button class='btn' data-mk='gprev' ${GS?'':'disabled'}>Voltar</button><button class='btn y' data-mk='${GS==n-1?'gend':'gnext'}'>${GS==n-1?'Concluir':'Próximo'}</button></div>`,1)}
 function stp(a){return a.map(function(x,k){return `<div class='st'><span class='n'>${k+1}</span><span>${x}</span></div>`}).join('')}
-var VO=[['Usuário e senha incorreto',`<p>Selecione a câmera com o erro e clique em <b>Editar</b>. Preencha o formulário com a senha e depois confirme. Com a senha corrigida, clique em <b>Ok</b>.</p>`],['Rede anormal',`<p>Pode haver conflito de IP, máscara de sub-rede incorreta ou incompatibilidade entre a faixa de rede da câmera e a rede do NVR.</p>`],['Offline (Câmera IP não existe)',`<p>Geralmente indica que o gravador está tentando localizar uma câmera em um endereço IP no qual não consegue encontrá-la.</p><button class='btn y' data-more='1' style='width:100%;margin-top:16px'>Ver mais possíveis causas</button>`]];
-E('bdv').innerHTML=`<h2 style='margin-bottom:12px'>Como adicionar as câmeras do Vigia Mais no NVR</h2><div class='note' style='margin:0 0 6px'><b>Lembrete:</b> Para que as câmeras IP sejam adicionadas corretamente é necessário deixar as portas PoE disponíveis.</div>`+stp([`Entre na página web do NVR e vá em <b>Configurações</b> › <b>Gerenciamento de câmera</b> › <b>Canal IP</b> › <b>Adicionar automaticamente</b>.`,`Vai começar uma busca de câmeras IP na rede. Selecione as câmeras que aparecerem e clique em <b>Ok</b>.`])+`<p style='margin:16px 0 0;font-weight:600'>Se a câmera aparecer com erro:</p>`+VO.map(function(o,k){return `<button class='opt' data-vo='${k}'>${o[0]}</button>`}).join('')+`<div style='display:grid;grid-template-columns:3fr 2fr;gap:10px;margin-top:18px'><button class='btn y' data-vg='man'>Adicionar Manualmente</button><button class='btn' data-vg='close'>Fechar</button></div>`;
-function vgOpt(i){E('ttd').textContent=VO[i][0];E('bdd').innerHTML=VO[i][1];E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()}
-function ipConf(){E('tte').textContent='Conflito de IP ou endereço alterado';E('bde').innerHTML=`<p style='margin:0'>Conflito de IP acontece quando dois equipamentos usam o mesmo endereço. Já o “endereço alterado” é quando a câmera mudou de IP e o NVR continua procurando no antigo. Nos dois casos, o canal fica <b>Offline</b> no NVR. A solução é descobrir quem está com qual IP, corrigir e atualizar o canal.</p><span class='chip' style='margin-top:16px'>Passo a passo</span>`+stp([`<b>Descobrir o IP real da câmera:</b> ligue o notebook na mesma rede e abra o <b>SADP</b> (Hikvision) ou o <b>IP Utility</b> (Intelbras). Ele lista o IP e o MAC de cada equipamento.`,`<b>Confirmar o conflito:</b> veja se dois equipamentos aparecem com o mesmo IP, ou se o IP da câmera no SADP é diferente do que está cadastrado no canal do NVR. Outra forma é dar <span class='cd'>ping</span> no IP e depois <span class='cd'>arp -a</span> no cmd. Se o MAC que responde não for o da câmera, outro aparelho está usando aquele IP.`,`<b>Corrigir o IP:</b> no SADP, selecione a câmera e use a edição dos parâmetros de rede. Coloque um IP livre na mesma faixa, com a mesma máscara e o mesmo gateway da rede, digite a senha da câmera e salve. Use um IP fixo que esteja fora da faixa do DHCP.`,`<b>Atualizar o NVR:</b> vá em <b>Câmera</b> › <b>Canal IP</b>, edite o canal (ícone de lápis), coloque o IP novo, o protocolo e a senha e confirme. Veja se o status muda para <b>Online</b> e confira a imagem ao vivo.`]);E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
-function vgMais(){E('tte').textContent='Possíveis causas';E('bde').innerHTML=stp([`<b>Falha na alimentação elétrica (PoE ou fonte)</b> — a câmera está sem energia, o cabo PoE não fornece alimentação ou a porta PoE do NVR está com defeito.`,`<b>Problema no cabo de rede ou nos conectores RJ45</b> — cabo rompido, mau contato, oxidação ou crimpagem incorreta impedem a comunicação.`,`<b>Falha na porta PoE do NVR ou no switch</b> — a porta pode estar defeituosa, desativada ou sem fornecer energia suficiente.`,`<b>Câmera travada ou com defeito</b> — falha de hardware, firmware travado ou problema interno que impede a inicialização ou a comunicação.`]);E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
-function vgMan(){E('tte').textContent='Adicionar manualmente';E('bde').innerHTML=`<div class='st'><span class='n'>1</span><span style='flex:1;min-width:0'><b>Acesse o menu</b><ul class='cl' style='margin-top:6px'><li>Entre em <b>Menu</b> → <b>Câmera</b> → <b>Câmera IP</b>.</li><li>Selecione um canal vazio.</li><li>Clique em <b>Adicionar manualmente</b> (Manual Add).</li></ul></span></div><div class='st'><span class='n'>2</span><span style='flex:1;min-width:0'><b>Preencha os dados</b><div style='overflow-x:auto'><table class='tb'><tr><th>Campo</th><th>Informação</th></tr><tr><td>Endereço IP</td><td>IP da câmera</td></tr><tr><td>Protocolo</td><td><b>HIKVISION</b> (se for uma câmera da Hikvision) e <b>ONVIF</b> (se for uma câmera Intelbras)</td></tr><tr><td>Porta</td><td><span class='cd'>8000</span></td></tr><tr><td>Usuário</td><td><span class='cd'>admin</span></td></tr><tr><td>Senha</td><td>Senha da câmera</td></tr></table></div></span></div><div class='st'><span class='n'>3</span><span style='flex:1;min-width:0'><b>Adicione a câmera</b><ul class='cl' style='margin-top:6px'><li>Clique em <b>Adicionar</b> (Add) ou <b>OK</b>.</li><li>Aguarde e verifique se o status muda para <b>Online</b>.</li><li>Abra a visualização ao vivo para confirmar a imagem.</li></ul></span></div>`;E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
-E('bdv').onclick=function(e){var o=e.target.closest('[data-vo]');if(o){vgOpt(+o.dataset.vo);return}var b=e.target.closest('[data-vg]');if(!b)return;if(b.dataset.vg=='man')vgMan();else E('ovv').classList.remove('on')};
-E('openvg').onclick=function(){E('bdv').scrollTop=0;E('ovv').classList.add('on');E('clv').focus()};
-E('clv').onclick=function(){E('ovv').classList.remove('on')};
-E('ovv').onclick=function(e){if(e.target==E('ovv'))E('ovv').classList.remove('on')};
-function cola(){dlgc('Atenção',`<p class='say'>Atenção! É estritamente proibido o compartilhamento das imagens.</p>`,'Entendi',function(){E('ttd').textContent='Como fazer a coleta de imagens das câmeras';E('bdd').innerHTML=`<span class='chip'>Passo a passo</span>`+stp([`Abra a página web do NVR e clique em <b>Reprodução</b>.`,`No calendário, escolha a data do ocorrido e clique em <b>Pesquisar</b>.`,`Nas opções embaixo do player, clique no ícone de <b>download</b>.`,`Na página que abrir, preencha corretamente os campos <b>Hora de Início</b> e <b>Hora de fim</b> com os horários solicitados.`,`Selecione os arquivos de gravação que correspondem ao horário requerido e clique em <b>Baixar para PC</b>.`,`Assim que o download dos arquivos completar, vai aparecer a mensagem <b>Copiado</b> e você poderá ver as gravações na pasta que está configurada no NVR.`])+`<button class='btn y' data-col='1' style='width:100%;margin-top:18px'>Como descobrir a pasta onde está a gravação</button>`;E('bdd').scrollTop=0;E('ovd').classList.add('on');E('cld').focus()})}
-function colaPasta(){E('tte').textContent='Onde está a gravação';E('bde').innerHTML=`<span class='chip'>Passo a passo</span>`+stp([`Vá em <b>Configuração</b> › <b>Local</b>.`,`Arraste para baixo até <b>Configurações do arquivo de gravação</b>.`,`Lá você poderá ver o caminho da pasta onde foram salvas as gravações.`]);E('bde').scrollTop=0;E('ove').classList.add('on');E('cle').focus()}
 var V1=[['Funcionou','done'],['O problema continua','next']],V2=[['Funcionou','done'],['O problema continua','fail']],GS2=[];
 var TB=`<table class='tb'><tr><th>Campo</th><th>Informação</th></tr><tr><td>Endereço IP</td><td>IP da câmera</td></tr><tr><td>Protocolo</td><td><b>HIKVISION</b> (se for uma câmera da Hikvision) e <b>ONVIF</b> (se for uma câmera Intelbras)</td></tr><tr><td>Porta</td><td><span class='cd'>8000</span></td></tr><tr><td>Usuário</td><td><span class='cd'>admin</span></td></tr><tr><td>Senha</td><td>Senha da câmera</td></tr></table>`;
 var G={
@@ -571,9 +516,6 @@ function gsr(){gs('gpon')}
 function cola(){gs('coleta')}
 function cmSol(k){gs(k?'camnet':'camoff')}
 function ipConf(){gs('ipconf')}
-E('bda').innerHTML=`<p style='margin:0 0 14px;color:var(--mute)'>Escolha o que você precisa fazer.</p><button class='big' data-al='ins'><span class='ico'>🔌</span><span>Instalação<small>Alarme por dentro e bornes de ligação</small></span></button><button class='big' data-al='cfg'><span class='ico'>⚙️</span><span>Configuração<small>Passo a passo da central</small></span></button>`;
-E('bda').onclick=function(e){var b=e.target.closest('[data-al]');if(b)dlgc(b.dataset.al=='ins'?'Instalação':'Configuração',`<span class='chip'>Em breve</span><p>Esta opção ainda não foi preenchida.</p>`,'Ok')};
-E('openal').onclick=function(){E('bda').scrollTop=0;E('ova').classList.add('on');E('cla').focus()};
 E('cla').onclick=function(){E('ova').classList.remove('on')};
 E('ova').onclick=function(e){if(e.target==E('ova'))E('ova').classList.remove('on')};
 var AI={fonte:['Fonte (módulo preto)','Região arredondada no canto superior esquerdo da placa. Na central, é o bloco preto.'],sd:['Slot SD CARD','Entrada de cartão SD, identificada na placa.'],rj45:['Porta de rede (RJ45)','Conexão de rede da central. O cabo azul entra aqui.'],btn:['Botão POWER','Botão no canto inferior esquerdo da placa, perto dos bornes.'],blE:['Bornes do lado esquerdo',''],blP:['Bornes principais','']};
@@ -642,7 +584,7 @@ E('clf').onclick=function(){E('ovf').classList.remove('on')};
 E('cld').onclick=function(){E('ovd').classList.remove('on')};
 E('ovf').onclick=function(e){if(e.target==E('ovf'))E('ovf').classList.remove('on')};
 E('ovd').onclick=function(e){if(e.target==E('ovd'))E('ovd').classList.remove('on')};
-document.addEventListener('keydown',function(e){if(e.key=='Escape'){var o=['ove','ovs','ovd','ovc','ovm','ovp','ovg','ovv','ova','ovn','ovf'].filter(function(i){return E(i).classList.contains('on')})[0];if(o)E(o).classList.remove('on')}});
+document.addEventListener('keydown',function(e){if(e.key=='Escape'){var o=['ove','ovs','ovd','ovc','ovm','ovp','ova','ovn','ovf'].filter(function(i){return E(i).classList.contains('on')})[0];if(o)E(o).classList.remove('on')}});
 </script>
 </body>
 </html>
